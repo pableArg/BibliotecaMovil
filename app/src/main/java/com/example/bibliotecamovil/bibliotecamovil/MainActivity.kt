@@ -1,4 +1,4 @@
-package com.example.bibliotecamovil.Activity
+package com.example.bibliotecamovil.bibliotecamovil
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
