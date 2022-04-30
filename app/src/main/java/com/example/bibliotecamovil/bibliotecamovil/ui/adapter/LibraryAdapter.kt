@@ -1,60 +1,49 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.adapter
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LibraryAdapter.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LibraryAdapter : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class LibraryAdapter(private val list: Array<String>) :
+    RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
+    class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        val image: ImageView = item.findViewById(R.id.image)
+        val title: TextView = item.findViewById(R.id.book_title)
+        val description: TextView = item.findViewById(R.id.book_description)
+        val card: CardView = item.findViewById(R.id.cv)
+        val context: Context = item.context
+
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        val layout = LayoutInflater.from(parent.context).inflate(R.layout.item_card, parent, false)
+
+        return ViewHolder(layout)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        holder.title.text = "Titulo de ${list[position]}"
+        holder.description.text = "Descripcion de ${list[position]}"
+
+        holder.card.setOnClickListener {
+
+            Toast.makeText(holder.context, "Este es el ${list[position]}", Toast.LENGTH_SHORT).show()
         }
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_library_adapter, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LibraryAdapter.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LibraryAdapter().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+    override fun getItemCount(): Int = list.size
 }
