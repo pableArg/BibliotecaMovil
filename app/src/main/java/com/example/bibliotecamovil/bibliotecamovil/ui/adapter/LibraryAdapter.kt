@@ -17,7 +17,7 @@ class LibraryAdapter(private val list: Array<String>) :
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
 
-        val image: ImageView = item.findViewById(R.id.image)
+        val image: ImageView = item.findViewById(R.id.image_book)
         val title: TextView = item.findViewById(R.id.book_title)
         val description: TextView = item.findViewById(R.id.book_description)
         val card: CardView = item.findViewById(R.id.cv)
@@ -36,7 +36,7 @@ class LibraryAdapter(private val list: Array<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.title.text = "Titulo de ${list[position]}"
-        holder.description.text = "Descripcion de ${list[position]}"
+        holder.description.text = "Autor de ${list[position]}"
 
         holder.card.setOnClickListener {
 
