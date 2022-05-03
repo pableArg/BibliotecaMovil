@@ -10,10 +10,15 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
+import com.squareup.picasso.Picasso
 
 
-class LibraryAdapter(private val list: Array<String>) :
+class LibraryAdapter(private val list: BookResponse) :
     RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
+
+
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
 
@@ -35,15 +40,21 @@ class LibraryAdapter(private val list: Array<String>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.title.text = "Titulo de ${list[position]}"
-        holder.description.text = "Autor de ${list[position]}"
+        holder.title.text = list.items[position].volumeInfo.title
+        holder.description.text = list.items[position].volumeInfo.authors[0]
 
+/*
+        if(list.items[position].volumeInfo.imageLinks.thumbnail != null) {
+            Picasso.get()
+                .load(list.items[position].volumeInfo.imageLinks.thumbnail)
+                .into(holder.image)
+        }*/
         holder.card.setOnClickListener {
 
-            Toast.makeText(holder.context, "Este es el ${list[position]}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.context, "Este es el ${list.items[position].volumeInfo.title}", Toast.LENGTH_SHORT).show()
         }
 
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = list.items.size
 }

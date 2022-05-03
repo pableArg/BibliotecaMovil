@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookByAPI
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.LibraryAdapter
 import com.example.bibliotecamovil.databinding.FragmentRecyclerCardsBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class RecyclerCardsFragment : Fragment() {
@@ -35,15 +41,29 @@ class RecyclerCardsFragment : Fragment() {
         )
 
         val rv = binding.rv
-        val adapter = LibraryAdapter(list)
 
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(activity)
+        BookByAPI().getLibros("Rayuela", object: Callback<BookResponse> {
+            override fun onFailure(call: Call<BookResponse>, t: Throwable) {
+            }
+            override fun onResponse(call: Call<BookResponse>, response: Response<BookResponse>) {
+                if (response.isSuccessful) {
+                    val received = response.body()
+                    if (received != null) {
+                        val adapter = LibraryAdapter(received)
+                        rv.adapter = adapter
+                        rv.layoutManager = LinearLayoutManager(activity)
+                    }
+
+                }
+            }})
+
+
+
 
         return inflater.inflate(R.layout.fragment_recycler_cards, container, false)
     }
 
-
+/*
     companion object{
 
         val list = arrayOf(
@@ -52,5 +72,5 @@ class RecyclerCardsFragment : Fragment() {
             "Libro10", "Libro11", "Libro12"
 
         )
-    }
+    }*/
 }
