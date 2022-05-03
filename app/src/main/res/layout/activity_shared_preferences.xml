@@ -12,21 +12,23 @@
             android:id="@+id/ivLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="70dp"
-          android:minWidth="70dp"
-         app:layout_constraintBottom_toTopOf="@id/etName"
-          app:layout_constraintLeft_toLeftOf="parent"
-          app:layout_constraintRight_toRightOf="parent"
-         app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_marginTop="75dp"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            app:layout_constraintBottom_toTopOf="@id/etName"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="212dp"
             android:hint="@string/etName"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintLeft_toLeftOf="@id/ivLogo"
             app:layout_constraintRight_toRightOf="@id/ivLogo"
             app:layout_constraintTop_toBottomOf="@id/ivLogo" />
@@ -34,12 +36,14 @@
         <Button
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintLeft_toLeftOf="@id/etName"
-            app:layout_constraintRight_toRightOf="@id/etName"
-            app:layout_constraintTop_toBottomOf="@id/etName"
-            android:text="@string/btnNext"/>
-
+            android:layout_height="wrap_content"
+            android:text="@string/btnNext"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etName"
+            app:layout_constraintVertical_bias="0.191" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
