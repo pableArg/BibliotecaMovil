@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +20,7 @@ class RecyclerCardsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
     override fun onCreateView(
@@ -32,6 +31,7 @@ class RecyclerCardsFragment : Fragment() {
         binding = setContentView(
             this.context as Activity,
             R.layout.fragment_recycler_cards
+
         )
 
         val rv = binding.rv
@@ -40,15 +40,21 @@ class RecyclerCardsFragment : Fragment() {
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(activity)
 
+        val sv = binding.sv
+
+        sv.queryHint = "Buscar libro"
+
+
+
         return inflater.inflate(R.layout.fragment_recycler_cards, container, false)
     }
 
 
-    companion object{
+    companion object {
 
         val list = arrayOf(
             "Libro1", "Libro2", "Libro3", "Libro4",
-            "Libro5", "Libro6","Libro7","Libro8","Libro9",
+            "Libro5", "Libro6", "Libro7", "Libro8", "Libro9",
             "Libro10", "Libro11", "Libro12"
 
         )
