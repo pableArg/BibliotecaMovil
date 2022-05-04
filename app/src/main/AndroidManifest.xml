@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BibliotecaMovil">
         <activity
-            android:name=".bibliotecamovil.ui.activities.MainActivity"
+            android:name=".bibliotecamovil.ui.activities.SharedPreferencesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

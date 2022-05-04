@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BibliotecaMovil</string>
+    <string name="etName">Name</string>
+    <string name="btnNext">Next</string>
 </resources>
