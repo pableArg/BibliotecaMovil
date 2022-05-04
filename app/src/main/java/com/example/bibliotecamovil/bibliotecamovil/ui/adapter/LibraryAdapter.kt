@@ -15,10 +15,10 @@ import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import com.squareup.picasso.Picasso
 
 
-class LibraryAdapter(private val list: BookResponse) :
+class LibraryAdapter() :
     RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
 
-
+    var list = BookResponse(ArrayList<Book>())
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
 
@@ -42,13 +42,12 @@ class LibraryAdapter(private val list: BookResponse) :
 
         holder.title.text = list.items[position].volumeInfo.title
         holder.description.text = list.items[position].volumeInfo.authors[0]
+        val idLibro = list.items[position].id
 
-/*
-        if(list.items[position].volumeInfo.imageLinks.thumbnail != null) {
             Picasso.get()
-                .load(list.items[position].volumeInfo.imageLinks.thumbnail)
+                .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
                 .into(holder.image)
-        }*/
+
         holder.card.setOnClickListener {
 
             Toast.makeText(holder.context, "Este es el ${list.items[position].volumeInfo.title}", Toast.LENGTH_SHORT).show()
@@ -57,4 +56,6 @@ class LibraryAdapter(private val list: BookResponse) :
     }
 
     override fun getItemCount(): Int = list.items.size
+
 }
+

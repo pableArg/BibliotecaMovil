@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookByAPI
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.LibraryAdapter
@@ -39,38 +40,33 @@ class RecyclerCardsFragment : Fragment() {
             this.context as Activity,
             R.layout.fragment_recycler_cards
         )
-
+        val adapter =  LibraryAdapter()
         val rv = binding.rv
+        val sv = binding.sv
 
-        BookByAPI().getLibros("Rayuela", object: Callback<BookResponse> {
+        rv.adapter = adapter
+        rv.layoutManager = LinearLayoutManager(activity)
+
+
+
+            BookByAPI().getLibros("Rayuela", object: Callback<BookResponse> {
+
             override fun onFailure(call: Call<BookResponse>, t: Throwable) {
             }
             override fun onResponse(call: Call<BookResponse>, response: Response<BookResponse>) {
                 if (response.isSuccessful) {
+
                     val received = response.body()
                     if (received != null) {
-                        val adapter = LibraryAdapter(received)
-                        rv.adapter = adapter
-                        rv.layoutManager = LinearLayoutManager(activity)
+                        adapter.list = received
+                        adapter.notifyDataSetChanged()
+
                     }
 
                 }
             }})
 
-
-
-
         return inflater.inflate(R.layout.fragment_recycler_cards, container, false)
     }
 
-/*
-    companion object{
-
-        val list = arrayOf(
-            "Libro1", "Libro2", "Libro3", "Libro4",
-            "Libro5", "Libro6","Libro7","Libro8","Libro9",
-            "Libro10", "Libro11", "Libro12"
-
-        )
-    }*/
 }
