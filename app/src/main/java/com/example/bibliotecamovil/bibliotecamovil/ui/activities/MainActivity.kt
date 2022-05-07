@@ -9,7 +9,6 @@ import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Bo
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookByAPI
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.ArticleResponse
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
-import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.LibraryAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

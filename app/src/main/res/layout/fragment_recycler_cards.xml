@@ -16,14 +16,9 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:defaultQueryHint="Buscar libro"
-
-
         app:iconifiedByDefault="false"
-
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-
         android:background="@drawable/super_background"
         />
 
