@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
+import com.example.bibliotecamovil.databinding.FragmentRecyclerCardsBinding
 import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.squareup.picasso.Picasso
 
 
-class BookAdapter ( var bookList:List<Book>) :  RecyclerView.Adapter<BookViewHolder>() {
+class BookAdapter () :  RecyclerView.Adapter<BookViewHolder>() {
 
-
-
+    private val bookList = mutableListOf<Book>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
 
         val layout = ItemCardBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
@@ -40,7 +40,15 @@ class BookAdapter ( var bookList:List<Book>) :  RecyclerView.Adapter<BookViewHol
     }
     override fun getItemCount(): Int = bookList.size
 
+    fun updateBooks(results : List<Book>?){
+        bookList.clear()
+        if(results != null){
+            bookList.addAll(results)
+        }
+    }
 }
-class BookViewHolder(val binding : ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
+
+class BookViewHolder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
+
 
 
