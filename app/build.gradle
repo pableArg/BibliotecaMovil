@@ -35,11 +35,16 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    buildFeatures {
+        viewBinding  true
+
+    }
 
 
 }
 
 dependencies {
+
 
     implementation 'androidx.databinding:databinding-runtime:4.2.2'
     implementation 'androidx.core:core-ktx:1.7.0'

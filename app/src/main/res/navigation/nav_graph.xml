@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recyclerCardsFragment">
-
+    app:startDestination="@id/searchFragment">
     <fragment
-        android:id="@+id/cardFragment"
-        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.CardFragment"
-        android:label="CardFragment" />
-    <fragment
-        android:id="@+id/recyclerCardsFragment"
-        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.RecyclerCardsFragment"
-        android:label="RecyclerCardsFragment" >
+        android:id="@+id/searchFragment"
+        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragment"
+        android:label="SearchFragment" >
         <action
-            android:id="@+id/action_recyclerCardsFragment_to_cardFragment"
-            app:destination="@id/cardFragment" />
+            android:id="@+id/action_searchFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_infoFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
     </fragment>
 </navigation>
+
