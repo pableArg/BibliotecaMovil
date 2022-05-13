@@ -24,7 +24,7 @@ interface BookAPI {
     suspend fun searchLibro(@Path("id") id: String): Response<Book>
 
     //Obtengo el listado de los articulos por nombre
-    @GET("sites/MLA/search")
-    fun getArticulos(@Query("q") nombreArt: String): Call<ArticleResponse>
+    @GET("sites/$SITE_ID/search")
+    suspend fun getArticulos(@Query("q") nombreArt: String): Response<ArticleResponse>
 
 }
