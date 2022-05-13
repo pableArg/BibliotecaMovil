@@ -4,6 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/activity_main.xml" value="0.25104166666666666" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.249" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/drawable/super_background.xml" value="0.249" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/activity_main.xml" value="0.17760416666666667" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_card.xml" value="0.175" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_recycler_cards.xml" value="0.12" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.175" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/menu/options_menu.xml" value="0.25" />
       </map>
     </option>
   </component>
