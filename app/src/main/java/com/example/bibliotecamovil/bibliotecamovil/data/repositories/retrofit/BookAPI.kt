@@ -3,6 +3,7 @@ package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.ArticleResponse
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,14 +17,14 @@ interface BookAPI {
 
     //Obtengo los datos de los libros listados por el nombre
     @GET("volumes")
-    fun getLibros(@Query("q") nombreLibro: String): Call<BookResponse>
+    suspend fun getLibros(@Query("q") nombreLibro: String): Response<BookResponse>
 
     //Obtengo los datos de un solo libro por id
     @GET("volumes/{id}?&key=$API_KEY")
-    fun searchLibro(@Path("id") id: String): Call<Book>
+    suspend fun searchLibro(@Path("id") id: String): Response<Book>
 
     //Obtengo el listado de los articulos por nombre
-    @GET("sites/MLA/search")
-    fun getArticulos(@Query("q") nombreArt: String): Call<ArticleResponse>
+    @GET("sites/$SITE_ID/search")
+    suspend fun getArticulos(@Query("q") nombreArt: String): Response<ArticleResponse>
 
 }
