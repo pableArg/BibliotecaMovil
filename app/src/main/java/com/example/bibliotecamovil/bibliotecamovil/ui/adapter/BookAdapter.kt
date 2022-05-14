@@ -17,8 +17,9 @@ import com.squareup.picasso.Picasso
 
 
 class BookAdapter(val bookList: List<Book>) :
+
     RecyclerView.Adapter<BookViewHolder>() {
-    //private var listBook = mutableListOf<Book>()
+    private var listBook = mutableListOf<Book>()
 
 
     private lateinit var binding: ItemCardBinding

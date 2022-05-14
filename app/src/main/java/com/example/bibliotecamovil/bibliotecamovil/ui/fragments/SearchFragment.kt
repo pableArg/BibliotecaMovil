@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 
 
@@ -17,7 +20,10 @@ class SearchFragment : Fragment() {
     private lateinit var bookAdapter: BookAdapter
     private lateinit var searchBinding: FragmentSearchBinding
     private val bookList = mutableListOf<Book>()
-    //private val vm: SearchViewModel by viewModel()
+
+    private val model : SearchViewModel by activityViewModels()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +40,14 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchBinding = FragmentSearchBinding.bind(view)
+        setSearchViewListener()
         initRecyclerView()
-        //setSearchViewListener()
 
 
+    }
+
+    private fun setupBooks() {
+        model.searchedBooks
     }
 
     private fun initRecyclerView() {
@@ -47,12 +57,12 @@ class SearchFragment : Fragment() {
 
     }
 
-   /* private fun setSearchViewListener() {
+    private fun setSearchViewListener() {
         searchBinding.sv.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run {
-                        vm.getBook  (this)
+                        model.getBooks(this)
                     }
                     return true
                 }
@@ -60,6 +70,13 @@ class SearchFragment : Fragment() {
                     return false
                 }
             })
+    }
+
+    /*private fun setupObservers(){
+        model. .observe(this, Observer {
+            moviesAdapter.updateMovies(it.results)
+            moviesAdapter.notifyDataSetChanged()
+        })
     }*/
 }
 
