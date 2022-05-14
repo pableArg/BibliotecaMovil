@@ -34,9 +34,10 @@ class BookAdapter(val bookList: List<Book>) :
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
 
-        holder.binding.titleBook.text = book.volumeInfo.title
-        holder.binding.author.text = book.volumeInfo.authors[0]
+        holder.binding.titleBook.text = book.libroInfo.titulo
+        holder.binding.author.text = book.libroInfo.autores[0]
         val idLibro = book.id
+
         Picasso.get()
             .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
@@ -47,7 +48,7 @@ class BookAdapter(val bookList: List<Book>) :
             val context: Context = holder.itemView.context
             Toast.makeText(
                 context,
-                "Este es el ${book.volumeInfo.title}",
+                "Este es el ${book.libroInfo.titulo}",
                 Toast.LENGTH_SHORT
             ).show()
         }
