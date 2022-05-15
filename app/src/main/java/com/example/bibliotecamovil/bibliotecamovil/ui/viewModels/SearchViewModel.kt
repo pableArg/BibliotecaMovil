@@ -4,11 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPI
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookByAPI
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import kotlinx.coroutines.*
 
-class SearchViewModel(private val bookList: BookAPI) : ViewModel() {
-     val searchedBooks : MutableLiveData<BookResponse> = TODO()
+class SearchViewModel(private val bookList: BookByAPI) : ViewModel() {
+     val searchedBooks = MutableLiveData<BookResponse>()
     val errorMessage = MutableLiveData<String>()
 
     fun getBooks(query: String) {

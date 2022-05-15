@@ -16,7 +16,7 @@ import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.squareup.picasso.Picasso
 
 
-class BookAdapter(val bookList: List<Book>) :
+class BookAdapter(var bookList: List<Book>) :
 
     RecyclerView.Adapter<BookViewHolder>() {
     private var listBook = mutableListOf<Book>()
