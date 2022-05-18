@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
@@ -21,14 +22,10 @@ class SearchFragment : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
     private val bookList = mutableListOf<Book>()
 
-    private val model : SearchViewModel by activityViewModels()
-
-
-
+    private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -42,8 +39,7 @@ class SearchFragment : Fragment() {
         searchBinding = FragmentSearchBinding.bind(view)
         setSearchViewListener()
         initRecyclerView()
-
-
+        setupBooks()
     }
 
     private fun setupBooks() {
@@ -51,21 +47,27 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-       searchBinding.rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        searchBinding.rv.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         bookAdapter = BookAdapter(bookList)
         searchBinding.rv.adapter = bookAdapter
 
     }
+
 
     private fun setSearchViewListener() {
         searchBinding.sv.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run {
-                        model.getBooks(this)
+                        model.getBooks(this) {
+                            model.searchedBooks.value = it
+                            bookAdapter.bookList = it
+                        }
                     }
                     return true
                 }
+
                 override fun onQueryTextChange(newText: String?): Boolean {
                     return false
                 }

@@ -2,22 +2,32 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPI
-import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import kotlinx.coroutines.*
+import java.util.concurrent.Callable
 
-class SearchViewModel(private val bookList: BookAPI) : ViewModel() {
-     val searchedBooks : MutableLiveData<BookResponse> = TODO()
+class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
+    val searchedBooks = MutableLiveData<List<Book>>()
     val errorMessage = MutableLiveData<String>()
 
-    fun getBooks(query: String) {
+    class Factory() : ViewModelProvider.NewInstanceFactory() {
+        // Disclaimer esto es medio termidor
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return SearchViewModel(BookAPIClient()) as T
+        }
+    }
+
+
+    fun getBooks(query: String, callback: (brolis: MutableList<Book>) -> Unit ) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = bookList.getLibros(query)
             if (response.isSuccessful && response.body() != null) {
                 withContext(Dispatchers.Main) {
-                    val movies = response.body()!!
-                    searchedBooks.value = movies
+                    val books = response.body()!!
+                    searchedBooks.value = books.items
+                    callback(books.items)
                 }
             } else {
                 val error = response.errorBody().toString()
