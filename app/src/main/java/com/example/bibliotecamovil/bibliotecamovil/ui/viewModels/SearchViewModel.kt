@@ -3,14 +3,26 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import kotlinx.coroutines.*
+import java.lang.Exception
 import java.util.concurrent.Callable
 
 class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
-    val searchedBooks = MutableLiveData<List<Book>>()
+    private val searchedBooks = MutableLiveData<MutableList<Book>>()
+
     val errorMessage = MutableLiveData<String>()
+
+    //coroutine en view model
+    fun viewModelScope() {
+        viewModelScope.launch { }
+    }
+
+    fun getSearchedBooks(): MutableLiveData<MutableList<Book>>{
+        return this.searchedBooks
+    }
 
     class Factory() : ViewModelProvider.NewInstanceFactory() {
         // Disclaimer esto es medio termidor
@@ -20,19 +32,25 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
     }
 
 
-    fun getBooks(query: String, callback: (brolis: MutableList<Book>) -> Unit ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = bookList.getLibros(query)
-            if (response.isSuccessful && response.body() != null) {
-                withContext(Dispatchers.Main) {
+    fun getBooks(query: String) {
+        viewModelScope.launch {
+            try {
+                val response = bookList.getLibros(query)
+                if (response.isSuccessful && response.body() != null) {
                     val books = response.body()!!
-                    searchedBooks.value = books.items
-                    callback(books.items)
+                    if(books.items != null) {
+                        searchedBooks.value = books.items
+                    }else{
+                        searchedBooks.value = mutableListOf()
+                    }
+                } else {
+                    val error = response.errorBody().toString()
+                    errorMessage.value = error
                 }
-            } else {
-                val error = response.errorBody().toString()
-                errorMessage.value = error
+            }catch (e:Exception){
+                errorMessage.value = e.message
             }
+
         }
     }
     /*fun getBooks() {
