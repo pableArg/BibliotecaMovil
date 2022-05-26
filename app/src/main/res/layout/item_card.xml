@@ -15,58 +15,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
-        
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="0dp"
-            android:layout_height="135dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintEnd_toStartOf="parent"
-            android:background="@drawable/conteiner_bg"/>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_book"
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             android:src="@drawable/portadabook"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"/>
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:shapeAppearance="@style/appearanceImage"/>
 
 
         <TextView
             android:id="@+id/title_book"
-            android:layout_width="wrap_content"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:autoSizeMaxTextSize="25sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="12sp"
+            android:autoSizeTextType="uniform"
             android:text="La historia de Rondha"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="16dp"
             android:textStyle="bold"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.342"
             card_view:layout_constraintStart_toEndOf="@id/image_book"
-            card_view:layout_constraintTop_toTopOf="@id/image" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/author"
-            android:layout_width="wrap_content"
+            android:layout_width="195dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="16dp"
-            android:text="Carmen Gonzalez"
+            android:layout_marginStart="136dp"
+            android:autoSizeMaxTextSize="25sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="12sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="Carmen Gonzalez "
+
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="16dp"
-            card_view:layout_constraintStart_toEndOf="@id/image_book"
-            card_view:layout_constraintTop_toBottomOf="@id/title_book" />
+
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/image_book"
+            card_view:layout_constraintStart_toStartOf="@+id/image_book"
+            card_view:layout_constraintTop_toBottomOf="@+id/title_book"
+            card_view:layout_constraintVertical_bias="0.287" />
 
         <ImageView
             android:id="@+id/favourite_book"
@@ -79,20 +84,7 @@
             card_view:layout_constraintEnd_toEndOf="parent" />
 
 
-        <TextView
-            android:id="@+id/description_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="84dp"
-            android:text="Descripciòn"
-            android:textColor="@color/blue"
-            android:textSize="14dp"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="1.0"
-            card_view:layout_constraintStart_toEndOf="@id/image_book"
-            card_view:layout_constraintTop_toBottomOf="@+id/author" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,7 @@ class BookAdapter(var bookList: MutableList<Book>) :
             .into(holder.binding.imageBook)
 
 
-        holder.binding.image.setOnClickListener {
+        holder.binding.imageBook.setOnClickListener {
             val context: Context = holder.itemView.context
             Toast.makeText(
                 context,
