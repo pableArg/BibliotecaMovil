@@ -7,7 +7,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BookByAPI {
+class BookAPIClient {
 
     private val serviceGetBookByAPI : BookAPI = Retrofit.Builder()
         .baseUrl("https://www.googleapis.com/books/v1/")

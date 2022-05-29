@@ -18,9 +18,10 @@ import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.squareup.picasso.Picasso
 
 
-class BookAdapter(val bookList: List<Book>) :
+class BookAdapter(var bookList: MutableList<Book>) :
+
     RecyclerView.Adapter<BookViewHolder>() {
-    //private var listBook = mutableListOf<Book>()
+    private var listBook = mutableListOf<Book>()
 
     private lateinit var databse : LibraryFavDatabase
     private lateinit var binding: ItemCardBinding
@@ -35,20 +36,21 @@ class BookAdapter(val bookList: List<Book>) :
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
 
-        holder.binding.titleBook.text = book.volumeInfo.title
-        holder.binding.author.text = book.volumeInfo.authors[0]
+        holder.binding.titleBook.text = book.libroInfo.titulo
+        holder.binding.author.text = book.libroInfo.autores[0]
         val idLibro = book.id
+
         Picasso.get()
             .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
             .into(holder.binding.imageBook)
 
 
-        holder.binding.image.setOnClickListener {
+        holder.binding.imageBook.setOnClickListener {
             val context: Context = holder.itemView.context
             Toast.makeText(
                 context,
-                "Este es el ${book.volumeInfo.title}",
+                "Este es el ${book.libroInfo.titulo}",
                 Toast.LENGTH_SHORT
             ).show()
         }
