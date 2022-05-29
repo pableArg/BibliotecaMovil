@@ -1,7 +1,6 @@
 package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
-import com.google.gson.Gson
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -16,7 +15,7 @@ class BookAPIClient {
         .create(BookAPI::class.java)
 
 
-        suspend fun searchLibro(bookId : String) : Response<Book>{
+        suspend fun searchLibro(bookId: String) : Response<Book>{
             return serviceGetBookByAPI.searchLibro(bookId)
         }
         suspend fun getLibros(nombreLibro : String) : Response<BookResponse>{

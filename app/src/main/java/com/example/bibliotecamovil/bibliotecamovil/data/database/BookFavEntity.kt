@@ -1,4 +1,4 @@
-package com.example.bibliotecamovil.bibliotecamovil.data.repositories.database
+package com.example.bibliotecamovil.bibliotecamovil.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.database.BookFavEntity
+import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 
 
 @Database(
