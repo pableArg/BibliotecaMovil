@@ -1,12 +1,15 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +17,7 @@ import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
+import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 
 
@@ -39,12 +43,9 @@ class SearchFragment : Fragment() {
         searchBinding = FragmentSearchBinding.bind(view)
         setSearchViewListener()
         initRecyclerView()
-        setupBooks()
+        setupObservers()
     }
 
-    private fun setupBooks() {
-        model.searchedBooks
-    }
 
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager =
@@ -60,11 +61,9 @@ class SearchFragment : Fragment() {
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run {
-                        model.getBooks(this) {
-                            model.searchedBooks.value = it
-                            bookAdapter.bookList = it
-                        }
+                        model.getBooks(this)
                     }
+                    hideKeyboard()
                     return true
                 }
 
@@ -74,11 +73,12 @@ class SearchFragment : Fragment() {
             })
     }
 
-    /*private fun setupObservers(){
-        model. .observe(this, Observer {
-            moviesAdapter.updateMovies(it.results)
-            moviesAdapter.notifyDataSetChanged()
-        })
-    }*/
+
+    private fun setupObservers() {
+        model.getSearchedBooks().observe(viewLifecycleOwner) {
+            bookAdapter.bookList = it
+            bookAdapter.notifyDataSetChanged()
+        }
+    }
 }
 
