@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import com.example.bibliotecamovil.databinding.ItemCardBinding
@@ -21,7 +23,7 @@ class BookAdapter(var bookList: MutableList<Book>) :
     RecyclerView.Adapter<BookViewHolder>() {
     private var listBook = mutableListOf<Book>()
 
-
+    private lateinit var databse : LibraryFavDatabase
     private lateinit var binding: ItemCardBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
@@ -51,6 +53,10 @@ class BookAdapter(var bookList: MutableList<Book>) :
                 "Este es el ${book.libroInfo.titulo}",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+        holder.binding.favouriteBook.setOnClickListener{
+            databse.bookFavDao().insert(BookFavEntity(idLibro.toInt()))
         }
 
     }
