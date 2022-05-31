@@ -14,7 +14,7 @@ class BookRepository (private val api: BookAPIClient, private val bookDao: BookF
     /* Hay que ver como hacer xq tenemos que pasar los ids por la API para traer
     los demas datos de cada libro
     */
-    suspend fun getAllBooksFromDatabase():List<Book/*book_model_domain(Podemos usar el mismo que Gson*/>{
+    suspend fun getAllBooksFromDatabase():List<Book>{
         return formatResponse(bookDao.getAllBoksFavs())
     }
 
