@@ -11,10 +11,6 @@ import retrofit2.Response
 
 class BookRepository (private val api: BookAPIClient, private val bookDao: BookFavDAO){
 
-    //Traigo lo que tengo en la Database y lo tranformo al modelo de dominio
-    /* Hay que ver como hacer xq tenemos que pasar los ids por la API para traer
-    los demas datos de cada libro
-    */
     fun getAllBooksFromDatabase():List<String>{
         val idList= mutableListOf<String>()
         for(BookFavEntity in bookDao.getAllBoksFavs()){
@@ -30,14 +26,8 @@ class BookRepository (private val api: BookAPIClient, private val bookDao: BookF
     suspend fun insertBookFav(bookFav: BookFavEntity){
         bookDao.insert(bookFav)
     }
-    /*
-    TRAIGO DE LA API Y LO TRANSFORMO AL MODELO DE DOMAIN
-    suspend fun getAllBooksFromApi(): List<Book/*book_model_domain*/> {
-        val response: List<QuoteModel> = api.getQuotes()
-        return response.map { it.toDomain() }
-    }*/
 
-    fun getBooksById(idBook: String): Response<Book> {
+    suspend fun getBooksById(idBook: String): Response<Book> {
         return api.searchLibro(idBook)
     }
 }
