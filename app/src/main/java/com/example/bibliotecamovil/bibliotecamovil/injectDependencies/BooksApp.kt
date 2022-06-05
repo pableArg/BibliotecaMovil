@@ -17,6 +17,7 @@ class BooksApp : Application() {
         single{ BookFavAdapter }
         single<BookFavDAO>{ LibraryFavDatabase.getInstance(get()).userDAO()}
         single{ BookRepository() }
+        single{ VerificarEnFavoritos(get())}
 
         //VIEWS MODELS
         viewModel { FavViewModel(get(),get()) }
