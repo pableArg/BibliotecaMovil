@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class BookFavEntity (
     @PrimaryKey
     @ColumnInfo(name = "id_book")
-    val id_book: Int
+    val id_book: String
 )

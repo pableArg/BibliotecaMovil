@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
-import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
-import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import kotlin.reflect.KProperty
 
 
 class FavouriteFragment : Fragment() {
@@ -21,8 +21,7 @@ class FavouriteFragment : Fragment() {
     private lateinit var bookFavAdapter: BookFavAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
     private val bookFavList = mutableListOf<Book>()
-
-    //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
+    private val model: FavViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,13 +43,6 @@ class FavouriteFragment : Fragment() {
         setupObservers()
     }
 
-    private fun setupObservers() {
-       /* model.getFavBooks().observe(viewLifecycleOwner) {
-            bookFavAdapter.bookFavList = it
-            bookFavAdapter.notifyDataSetChanged()
-        }*/
-    }
-
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -58,5 +50,27 @@ class FavouriteFragment : Fragment() {
         favBinding.rv.adapter = bookFavAdapter
     }
 
-
+    private fun setupObservers() {
+        model.booksFavLiveData.observe(this, {
+            favBinding.rv.adapter = BookFavAdapter(it)
+            bookFavAdapter.notifyDataSetChanged()
+        })
+    }
+    private fun getBooks() {
+        if (model.getBooksFavIDList().isEmpty()) {
+            /*EN CASO DE QUE ESTE VACIA LA LISTA QUE HACEMOS
+            imgEmptyList.visibility = View.VISIBLE
+            txtEmptyList.visibility = View.VISIBLE
+            */
+        }
+        model.updateBooksLiveData(model.getBooksFavIDList())
+        setupObservers()
+    }
 }
+
+private operator fun Any.getValue(favouriteFragment: FavouriteFragment, property: KProperty<*>): FavViewModel {
+}
+
+
+
+

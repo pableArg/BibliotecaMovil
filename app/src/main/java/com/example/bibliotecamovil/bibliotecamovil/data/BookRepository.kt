@@ -7,6 +7,7 @@ import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Bo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class BookRepository (private val api: BookAPIClient, private val bookDao: BookFavDAO){
 
@@ -14,24 +15,16 @@ class BookRepository (private val api: BookAPIClient, private val bookDao: BookF
     /* Hay que ver como hacer xq tenemos que pasar los ids por la API para traer
     los demas datos de cada libro
     */
-    suspend fun getAllBooksFromDatabase():List<Book>{
-        return formatResponse(bookDao.getAllBoksFavs())
+    fun getAllBooksFromDatabase():List<String>{
+        val idList= mutableListOf<String>()
+        for(BookFavEntity in bookDao.getAllBoksFavs()){
+            idList.add(BookFavEntity.id_book)
+        }
+        return idList
     }
 
     suspend fun deleteBookFromDatabase(book: BookFavEntity){
          bookDao.delete(book)
-    }
-
-    private fun formatResponse(response: List<BookFavEntity>): List<Book> {
-        val books= mutableListOf<Book>()
-        for (bookFavEntity in response) {
-            //corrutina
-            CoroutineScope(Dispatchers.IO).launch {
-                ///CREO QUE FALTA UNA VALIDACION DEL RESPONSE DEL API.SEARCH(...)
-                api.searchLibro((bookFavEntity.id_book.toString())).body()?.let { books.add(it) }
-            }
-        }
-        return books
     }
 
     suspend fun insertBookFav(bookFav: BookFavEntity){
@@ -43,4 +36,8 @@ class BookRepository (private val api: BookAPIClient, private val bookDao: BookF
         val response: List<QuoteModel> = api.getQuotes()
         return response.map { it.toDomain() }
     }*/
+
+    fun getBooksById(idBook: String): Response<Book> {
+        return api.searchLibro(idBook)
+    }
 }

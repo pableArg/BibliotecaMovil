@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 
 
 
-class BookFavAdapter(val bookFavList: List<Book>) :
+class BookFavAdapter(var bookFavList: List<Book>) :
     RecyclerView.Adapter<BookFavViewHolder>() {
 
     private lateinit var binding: ItemCardFavBinding
