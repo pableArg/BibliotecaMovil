@@ -41,6 +41,7 @@ class FavouriteFragment : Fragment() {
         favBinding = FragmentFavouriteBinding.bind(view)
         initRecyclerView()
         setupObservers()
+        getBooks()
     }
 
     private fun initRecyclerView() {
