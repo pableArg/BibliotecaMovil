@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.navArgs
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.databinding.FragmentInfoBinding
 
 class InfoFragment : Fragment() {
-
+    private lateinit var infoBinding : FragmentInfoBinding
+    val args : InfoFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +27,12 @@ class InfoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        infoBinding = FragmentInfoBinding.bind(view)
+
+        val idBook = args.id
+
+        infoBinding.tittleInfo.setText(idBook)
+    }
 
 }

@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity (tableName = "favs_books")
-data class BookFavEntity (
+@Entity(tableName = "libraries")
+data class LibraryEntity(
     @PrimaryKey
-    @ColumnInfo(name = "id_book")
-    val id_book: String
+    @ColumnInfo(name = "name")
+    val name: String
 )

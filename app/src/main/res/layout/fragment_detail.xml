@@ -31,7 +31,7 @@
                 android:layout_height="194dp"
                 android:contentDescription="@string/content_description_media"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/media" />
+                app:srcCompat="@drawable/notfound" />
 
             <LinearLayout
                 android:layout_width="match_parent"

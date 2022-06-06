@@ -6,22 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
-import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
-import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
-import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 class FavouriteFragment : Fragment() {
 
-    private lateinit var bookFavAdapter: BookFavAdapter
+    private lateinit var bookAdapter: BookAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
-    private val bookFavList = mutableListOf<Book>()
-
+    private val bookList = mutableListOf<Book>()
+    private lateinit var database : LibraryFavDatabase
+    val errorMessage = MutableLiveData<String>()
     //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,9 +60,34 @@ class FavouriteFragment : Fragment() {
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookFavAdapter = BookFavAdapter(bookFavList)
-        favBinding.rv.adapter = bookFavAdapter
+        bookAdapter = BookAdapter(bookList)
+        favBinding.rv.adapter = bookAdapter
+
+    }
+
+    private fun mostrarLibros(){
+
+    val books = database.bookFavDao().getAllBoksFavs()
+
+        for(book in books){
+            CoroutineScope(Dispatchers.IO).launch {
+            try {
+                    val response = BookAPIClient().searchLibro(book.id_book)
+                    if(response.isSuccessful && response.body() != null){
+                        bookList.add(response.body()!!)
+                    }
+                    else{
+                        val error = response.errorBody().toString()
+                        errorMessage.value = error
+                    }
+                }
+            catch (e : Exception) {
+                errorMessage.value = e.message
+            }
+            }
+            }
+
+        }
     }
 
 
-}
