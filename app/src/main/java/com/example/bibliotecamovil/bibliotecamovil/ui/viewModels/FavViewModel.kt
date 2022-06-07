@@ -3,9 +3,8 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

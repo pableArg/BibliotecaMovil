@@ -1,4 +1,4 @@
-package com.example.bibliotecamovil.bibliotecamovil.data
+package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
@@ -9,21 +9,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class BookRepository (private val api: BookAPIClient, private val bookDao: BookFavDAO){
+class BookRepository(private val api: BookAPIClient, private val bookDao: BookFavDAO) {
 
-    fun getAllBooksFromDatabase():List<String>{
-        val idList= mutableListOf<String>()
-        for(BookFavEntity in bookDao.getAllBoksFavs()){
+    fun getAllBooksFromDatabase(): List<String> {
+        val idList = mutableListOf<String>()
+        for (BookFavEntity in bookDao.getAllBoksFavs()) {
             idList.add(BookFavEntity.id_book)
         }
         return idList
     }
 
-    suspend fun deleteBookFromDatabase(book: BookFavEntity){
-         bookDao.delete(book)
+    suspend fun deleteBookFromDatabase(book: BookFavEntity) {
+        bookDao.delete(book)
     }
 
-    suspend fun insertBookFav(bookFav: BookFavEntity){
+    suspend fun insertBookFav(bookFav: BookFavEntity) {
         bookDao.insert(bookFav)
     }
 
