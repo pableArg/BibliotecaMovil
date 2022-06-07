@@ -10,8 +10,9 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.database.BookFavEntity
+
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import com.example.bibliotecamovil.databinding.ItemCardBinding
@@ -21,8 +22,6 @@ import com.squareup.picasso.Picasso
 class BookAdapter(var bookList: MutableList<Book>) :
 
     RecyclerView.Adapter<BookViewHolder>() {
-    private var listBook = mutableListOf<Book>()
-
     private lateinit var databse : LibraryFavDatabase
     private lateinit var binding: ItemCardBinding
 
@@ -56,7 +55,7 @@ class BookAdapter(var bookList: MutableList<Book>) :
         }
 
         holder.binding.favouriteBook.setOnClickListener{
-            databse.bookFavDao().insert(BookFavEntity(idLibro.toInt()))
+            databse.bookFavDao().insert(BookFavEntity(idLibro))
         }
 
     }

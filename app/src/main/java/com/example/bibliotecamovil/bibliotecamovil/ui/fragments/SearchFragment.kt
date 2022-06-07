@@ -19,14 +19,17 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class SearchFragment : Fragment() {
-    private lateinit var bookAdapter: BookAdapter
+class SearchFragment (private var bookAdapter: BookAdapter): Fragment() {
+    //private lateinit var bookAdapter: BookAdapter
     private lateinit var searchBinding: FragmentSearchBinding
     private val bookList = mutableListOf<Book>()
 
-    private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
+    //private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
+    private val model : SearchViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

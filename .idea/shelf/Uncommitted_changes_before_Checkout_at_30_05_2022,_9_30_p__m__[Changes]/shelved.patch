@@ -1,0 +1,51 @@
+Index: app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/viewModels/SearchViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels\n\nimport androidx.lifecycle.MutableLiveData\nimport androidx.lifecycle.ViewModel\nimport androidx.lifecycle.ViewModelProvider\nimport androidx.lifecycle.viewModelScope\nimport com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book\nimport com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient\nimport kotlinx.coroutines.*\nimport java.lang.Exception\nimport java.util.concurrent.Callable\n\nclass SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {\n    private val searchedBooks = MutableLiveData<MutableList<Book>>()\n\n    val errorMessage = MutableLiveData<String>()\n\n    //coroutine en view model\n    fun viewModelScope() {\n        viewModelScope.launch { }\n    }\n\n    fun getSearchedBooks(): MutableLiveData<MutableList<Book>>{\n        return this.searchedBooks\n    }\n\n    class Factory() : ViewModelProvider.NewInstanceFactory() {\n        // Disclaimer esto es medio termidor\n        override fun <T : ViewModel?> create(modelClass: Class<T>): T {\n            return SearchViewModel(BookAPIClient()) as T\n        }\n    }\n\n\n    fun getBooks(query: String) {\n        viewModelScope.launch {\n            try {\n                val response = bookList.getLibros(query)\n                if (response.isSuccessful && response.body() != null) {\n                    val books = response.body()!!\n                    if(books.items != null) {\n                        searchedBooks.value = books.items\n                    }else{\n                        searchedBooks.value = mutableListOf()\n                    }\n                } else {\n                    val error = response.errorBody().toString()\n                    errorMessage.value = error\n                }\n            }catch (e:Exception){\n                errorMessage.value = e.message\n            }\n\n        }\n    }\n    /*fun getBooks() {\n        CoroutineScope(Dispatchers.IO).launch {\n            val response = bookList.getLibros()\n            if (response.isSuccessful && response.body() != null) {\n                withContext(Dispatchers.Main) {\n                    searchedBooks.value = response.body()\n                }\n            } else {\n                errorMessage.value = response.errorBody().toString()\n            }\n        }\n    }*/\n\n\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/viewModels/SearchViewModel.kt b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/viewModels/SearchViewModel.kt
+--- a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/viewModels/SearchViewModel.kt	
++++ b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/viewModels/SearchViewModel.kt	
+@@ -12,13 +12,9 @@
+ 
+ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
+     private val searchedBooks = MutableLiveData<MutableList<Book>>()
+-
+     val errorMessage = MutableLiveData<String>()
+ 
+-    //coroutine en view model
+-    fun viewModelScope() {
+-        viewModelScope.launch { }
+-    }
++
+ 
+     fun getSearchedBooks(): MutableLiveData<MutableList<Book>>{
+         return this.searchedBooks
+@@ -47,24 +43,13 @@
+                     val error = response.errorBody().toString()
+                     errorMessage.value = error
+                 }
+-            }catch (e:Exception){
++                }catch (e:Exception){
+                 errorMessage.value = e.message
+             }
+ 
+         }
+     }
+-    /*fun getBooks() {
+-        CoroutineScope(Dispatchers.IO).launch {
+-            val response = bookList.getLibros()
+-            if (response.isSuccessful && response.body() != null) {
+-                withContext(Dispatchers.Main) {
+-                    searchedBooks.value = response.body()
+-                }
+-            } else {
+-                errorMessage.value = response.errorBody().toString()
+-            }
+-        }
+-    }*/
++
+ 
+ 
+ }
+\ No newline at end of file

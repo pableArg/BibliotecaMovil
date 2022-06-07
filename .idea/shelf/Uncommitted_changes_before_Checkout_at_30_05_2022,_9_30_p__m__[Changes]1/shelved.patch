@@ -1,0 +1,114 @@
+Index: app/src/main/res/drawable/ic_baseline_search_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_baseline_search_24.xml b/app/src/main/res/drawable/ic_baseline_search_24.xml
+deleted file mode 100644
+--- a/app/src/main/res/drawable/ic_baseline_search_24.xml	
++++ /dev/null	
+@@ -1,5 +0,0 @@
+-<vector android:height="24dp" android:tint="#F3EFEF"
+-    android:viewportHeight="24" android:viewportWidth="24"
+-    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+-    <path android:fillColor="@android:color/white" android:pathData="M15.5,14h-0.79l-0.28,-0.27C15.41,12.59 16,11.11 16,9.5 16,5.91 13.09,3 9.5,3S3,5.91 3,9.5 5.91,16 9.5,16c1.61,0 3.09,-0.59 4.23,-1.57l0.27,0.28v0.79l5,4.99L20.49,19l-4.99,-5zM9.5,14C7.01,14 5,11.99 5,9.5S7.01,5 9.5,5 14,7.01 14,9.5 11.99,14 9.5,14z"/>
+-</vector>
+Index: app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bibliotecamovil.bibliotecamovil.ui.adapter\n\nimport android.content.Context\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.ImageView\nimport android.widget.TextView\nimport android.widget.Toast\nimport androidx.cardview.widget.CardView\nimport androidx.recyclerview.widget.RecyclerView\nimport com.example.bibliotecamovil.R\nimport com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book\nimport com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse\nimport com.example.bibliotecamovil.databinding.ItemCardBinding\nimport com.squareup.picasso.Picasso\n\n\nclass BookAdapter(var bookList: MutableList<Book>) :\n\n    RecyclerView.Adapter<BookViewHolder>() {\n    private var listBook = mutableListOf<Book>()\n\n\n    private lateinit var binding: ItemCardBinding\n\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {\n\n        val bookBinding =\n            ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)\n        return BookViewHolder(bookBinding)\n    }\n\n    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {\n        val book = bookList[position]\n\n        holder.binding.titleBook.text = book.libroInfo.titulo\n        holder.binding.author.text = book.libroInfo.autores[0]\n        val idLibro = book.id\n\n        Picasso.get()\n            .load(\"https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api\")\n            .placeholder(R.drawable.notfound)\n            .into(holder.binding.imageBook)\n\n\n        holder.binding.image.setOnClickListener {\n            val context: Context = holder.itemView.context\n            Toast.makeText(\n                context,\n                \"Este es el ${book.libroInfo.titulo}\",\n                Toast.LENGTH_SHORT\n            ).show()\n        }\n\n    }\n\n    override fun getItemCount(): Int = bookList.size\n\n}\n\nclass BookViewHolder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt
+--- a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt	
++++ b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt	
+@@ -38,10 +38,17 @@
+         holder.binding.author.text = book.libroInfo.autores[0]
+         val idLibro = book.id
+ 
+-        Picasso.get()
+-            .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
+-            .placeholder(R.drawable.notfound)
+-            .into(holder.binding.imageBook)
++
++        try{
++            Picasso.get()
++                .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
++                .placeholder(R.drawable.notfound)
++                .into(holder.binding.imageBook)
++        }
++        catch (e: Exception){
++            e.printStackTrace()
++        }
++
+ 
+ 
+         holder.binding.image.setOnClickListener {
+Index: app/src/main/res/layout/fragment_search.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<layout xmlns:tools=\"http://schemas.android.com/tools\"\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\">\n    <androidx.constraintlayout.widget.ConstraintLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        tools:context=\".RecyclerCardsFragment\">\n\n        <androidx.appcompat.widget.SearchView\n\n            android:id=\"@+id/sv\"\n            android:layout_marginEnd=\"20dp\"\n            android:layout_marginStart=\"20dp\"\n            app:layout_constraintTop_toTopOf=\"parent\"\n            android:layout_marginTop=\"30dp\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:defaultQueryHint=\"Buscar libro\"\n\n\n            app:iconifiedByDefault=\"false\"\n\n            android:layout_height=\"wrap_content\"\n            android:layout_width=\"match_parent\"\n\n            android:background=\"@drawable/super_background\"\n            />\n\n        <androidx.recyclerview.widget.RecyclerView\n            android:id=\"@+id/rv\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"0dp\"\n            android:layout_marginStart=\"10dp\"\n            android:layout_marginTop=\"30dp\"\n            android:layout_marginEnd=\"10dp\"\n            android:scrollbars=\"vertical\"\n            app:layout_constraintBottom_toBottomOf=\"parent  \"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toBottomOf=\"@+id/sv\" />\n\n\n\n\n    </androidx.constraintlayout.widget.ConstraintLayout>\n</layout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_search.xml b/app/src/main/res/layout/fragment_search.xml
+--- a/app/src/main/res/layout/fragment_search.xml	
++++ b/app/src/main/res/layout/fragment_search.xml	
+@@ -17,8 +17,6 @@
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:defaultQueryHint="Buscar libro"
+-
+-
+             app:iconifiedByDefault="false"
+ 
+             android:layout_height="wrap_content"
+Index: app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/fragments/SearchFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bibliotecamovil.bibliotecamovil.ui.fragments\n\nimport android.content.Context\nimport android.os.Bundle\nimport androidx.fragment.app.Fragment\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.view.inputmethod.InputMethodManager\nimport androidx.appcompat.widget.SearchView\nimport androidx.fragment.app.activityViewModels\nimport androidx.lifecycle.Observer\nimport androidx.lifecycle.ViewModel\nimport androidx.lifecycle.liveData\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport com.example.bibliotecamovil.R\nimport com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book\nimport com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter\nimport com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel\nimport com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard\nimport com.example.bibliotecamovil.databinding.FragmentSearchBinding\n\n\nclass SearchFragment : Fragment() {\n    private lateinit var bookAdapter: BookAdapter\n    private lateinit var searchBinding: FragmentSearchBinding\n    private val bookList = mutableListOf<Book>()\n\n    private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n    }\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ): View? {\n        return inflater.inflate(R.layout.fragment_search, container, false)\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        searchBinding = FragmentSearchBinding.bind(view)\n        setSearchViewListener()\n        initRecyclerView()\n        setupObservers()\n    }\n\n\n    private fun initRecyclerView() {\n        searchBinding.rv.layoutManager =\n            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)\n        bookAdapter = BookAdapter(bookList)\n        searchBinding.rv.adapter = bookAdapter\n\n    }\n\n\n    private fun setSearchViewListener() {\n        searchBinding.sv.setOnQueryTextListener(\n            object : SearchView.OnQueryTextListener {\n                override fun onQueryTextSubmit(query: String?): Boolean {\n                    query?.run {\n                        model.getBooks(this)\n                    }\n                    hideKeyboard()\n                    return true\n                }\n\n                override fun onQueryTextChange(newText: String?): Boolean {\n                    return false\n                }\n            })\n    }\n\n\n    private fun setupObservers() {\n        model.getSearchedBooks().observe(viewLifecycleOwner) {\n            bookAdapter.bookList = it\n            bookAdapter.notifyDataSetChanged()\n        }\n    }\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/fragments/SearchFragment.kt b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/fragments/SearchFragment.kt
+--- a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/fragments/SearchFragment.kt	
++++ b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/fragments/SearchFragment.kt	
+@@ -25,7 +25,6 @@
+     private lateinit var bookAdapter: BookAdapter
+     private lateinit var searchBinding: FragmentSearchBinding
+     private val bookList = mutableListOf<Book>()
+-
+     private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"DesignSurface\">\n    <option name=\"filePathToZoomLevelMap\">\n      <map>\n        <entry key=\"..\\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/activity_main.xml\" value=\"0.13903985507246377\" />\n        <entry key=\"..\\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml\" value=\"0.36666666666666664\" />\n        <entry key=\"..\\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml\" value=\"0.17831813576494426\" />\n        <entry key=\"..\\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/item_card.xml\" value=\"0.5\" />\n      </map>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\" />\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -7,6 +7,19 @@
+         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.36666666666666664" />
+         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.17831813576494426" />
+         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.5" />
++        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/ic_baseline_library_books_24.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.201" />
++        <entry key="app/src/main/res/drawable/super_background.xml" value="0.201" />
++        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18115942028985507" />
++        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.18115942028985507" />
++        <entry key="app/src/main/res/layout/item_card.xml" value="0.19322916666666667" />
++        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.25" />
++        <entry key="app/src/main/res/menu/options_menu.xml" value="0.19322916666666667" />
+       </map>
+     </option>
+   </component>

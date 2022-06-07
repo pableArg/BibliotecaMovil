@@ -1,6 +1,8 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import kotlinx.coroutines.CoroutineScope
@@ -8,13 +10,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FavViewModel(private val bookRepository: BookRepository) {
+class FavViewModel(private val bookRepository: BookRepository) : ViewModel(){
     val booksFavLiveData = MutableLiveData<MutableList<Book>>()
     private var booksList: MutableList<Book> = emptyList<Book>().toMutableList()
     val errorMessage = MutableLiveData<String>()
 
+
+    fun getFavBooks(): MutableLiveData<MutableList<Book>>{
+        return this.booksFavLiveData
+    }
+
     fun updateBooksLiveData(bookIDList: List<String>) {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             for (bookId in bookIDList) {
                 val response = bookRepository.getBooksById(bookId)
                 if (response.isSuccessful && response.body() != null) {

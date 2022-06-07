@@ -13,15 +13,16 @@ import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Bo
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
+import org.koin.android.ext.android.inject
 import kotlin.reflect.KProperty
 
 
-class FavouriteFragment : Fragment() {
+class FavouriteFragment(private val model : FavViewModel, private var bookFavAdapter : BookFavAdapter) : Fragment() {
 
-    private lateinit var bookFavAdapter: BookFavAdapter
+    //private lateinit var bookFavAdapter: BookFavAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
     private val bookFavList = mutableListOf<Book>()
-    private val model: FavViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,11 +52,12 @@ class FavouriteFragment : Fragment() {
         favBinding.rv.adapter = bookFavAdapter
     }
 
+
     private fun setupObservers() {
-        model.booksFavLiveData.observe(this, {
-            favBinding.rv.adapter = BookFavAdapter(it)
+        model.getFavBooks().observe(viewLifecycleOwner) {
+            bookFavAdapter.bookFavList = it
             bookFavAdapter.notifyDataSetChanged()
-        })
+        }
     }
     private fun getBooks() {
         if (model.getBooksFavIDList().isEmpty()) {
@@ -69,8 +71,7 @@ class FavouriteFragment : Fragment() {
     }
 }
 
-private operator fun Any.getValue(favouriteFragment: FavouriteFragment, property: KProperty<*>): FavViewModel {
-}
+
 
 
 
