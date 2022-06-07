@@ -5,7 +5,7 @@ import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 
 class VerificarEnFavoritos(private val bookRepository: BookRepository) {
 
-    private fun intoFavs(idBook: String): Boolean{
+    fun intoFavs(idBook: String): Boolean{
         var result = false
         if(bookRepository.getAllBooksFromDatabase().contains(idBook)){
             result = true
