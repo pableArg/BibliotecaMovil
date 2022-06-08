@@ -10,7 +10,8 @@ import com.example.bibliotecamovil.databinding.ItemCardFavBinding
 import com.squareup.picasso.Picasso
 
 
-class BookFavAdapter(var bookFavList: List<Book>, private val validacion: VerificarEnFavoritos) :
+
+class BookFavAdapter(var bookFavList: List<Book>) :
     RecyclerView.Adapter<BookFavViewHolder>() {
 
     private lateinit var binding: ItemCardFavBinding
@@ -33,14 +34,17 @@ class BookFavAdapter(var bookFavList: List<Book>, private val validacion: Verifi
             .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
             .into(holder.binding.imageBook)
-        if (validacion.intoFavs(book.id)) {
-            holder.binding.deleteBook// seteo image si esta
-        } else {
-            holder.binding.deleteBook // seteo image no esta
+
+
+
+
+        /*
+        holder.binding.deleteBook.setOnClickListener{
+
+            //delete from database
+            // mantener position al eliminar item
         }
-//        holder.binding.deleteBook.setOnClickListener{
-//            validacion.addOrDeleteNewMovieFav(book.id)
-//        }
+*/
 
 
     }
