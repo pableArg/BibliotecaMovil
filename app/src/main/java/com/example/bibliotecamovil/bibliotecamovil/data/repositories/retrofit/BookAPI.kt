@@ -17,7 +17,8 @@ interface BookAPI {
 
     //Obtengo los datos de los libros listados por el nombre
     @GET("volumes")
-    suspend fun getLibros(@Query("q") nombre: String): Response<BookResponse>
+    suspend fun getLibros(@Query("q") nombre: String,
+                          @Query("maxResults") resultados : String = "35") : Response<BookResponse>
 
     //Obtengo los datos de un solo libro por id
     @GET("volumes/{id}?&key=$API_KEY")

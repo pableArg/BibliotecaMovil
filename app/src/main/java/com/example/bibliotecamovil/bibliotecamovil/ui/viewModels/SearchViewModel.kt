@@ -40,6 +40,7 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
                     val books = response.body()!!
                     if(books.items != null) {
                         searchedBooks.value = books.items
+
                     }else{
                         searchedBooks.value = mutableListOf()
                     }

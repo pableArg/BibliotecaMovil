@@ -27,7 +27,17 @@
 
             android:background="@drawable/super_background"
             />
-
+        <TextView
+            android:id="@+id/query"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="LIBROS POPULARES"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/sv"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"

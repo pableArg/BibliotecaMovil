@@ -61,6 +61,7 @@ class SearchFragment : Fragment() {
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run {
+                        searchBinding.query.visibility = View.GONE
                         model.getBooks(this)
                     }
                     hideKeyboard()
@@ -79,6 +80,10 @@ class SearchFragment : Fragment() {
             bookAdapter.bookList = it
             bookAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun setLibros(){
+
     }
 }
 

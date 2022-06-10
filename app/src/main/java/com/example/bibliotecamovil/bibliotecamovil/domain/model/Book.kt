@@ -18,7 +18,7 @@ data class VolumeInfo(
     @SerializedName("title")
     var titulo : String,
     @SerializedName("authors")
-    var autores : ArrayList<String>,
+    var autores : ArrayList<String> ,
     @SerializedName("publisher")
     var editorial : String,
     @SerializedName("publishedDate")

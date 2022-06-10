@@ -22,6 +22,7 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragment
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections
 import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 
 class BookAdapter(var bookList: MutableList<Book>) :
@@ -42,8 +43,19 @@ class BookAdapter(var bookList: MutableList<Book>) :
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
 
-        holder.binding.titleBook.text = book.libroInfo.titulo
-        holder.binding.author.text = book.libroInfo.autores[0]
+        try {
+            holder.binding.titleBook.text = book.libroInfo.titulo
+        }
+        catch (e : Exception){
+            holder.binding.titleBook.text = "Titulo no disponible"
+        }
+        try {
+            holder.binding.author.text = book.libroInfo.autores[0]
+        }
+        catch (e : Exception){
+
+            holder.binding.author.text = "Autor no disponible"
+        }
         val idLibro = book.id
 
         Picasso.get()
@@ -60,7 +72,7 @@ class BookAdapter(var bookList: MutableList<Book>) :
                 Toast.LENGTH_SHORT
             ).show()
         }
-
+        holder.binding.favouriteBook.visibility = View.GONE
         holder.binding.cv.setOnClickListener{view ->
         val searchFragmentDirections = SearchFragmentDirections.actionSearchFragmentToInfoFragment(idLibro)
             Navigation.findNavController(view).navigate(searchFragmentDirections)
