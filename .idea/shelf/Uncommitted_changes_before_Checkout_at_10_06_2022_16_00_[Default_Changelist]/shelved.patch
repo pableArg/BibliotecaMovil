@@ -1,0 +1,59 @@
+Index: app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bibliotecamovil.bibliotecamovil.ui.adapter\r\n\r\nimport android.view.LayoutInflater\r\nimport android.view.ViewGroup\r\nimport androidx.navigation.findNavController\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.example.bibliotecamovil.R\r\nimport com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase\r\nimport com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity\r\nimport com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book\r\nimport com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections\r\nimport com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel\r\nimport com.example.bibliotecamovil.databinding.ItemCardBinding\r\nimport com.squareup.picasso.Picasso\r\nimport org.koin.androidx.compose.inject\r\nimport org.koin.java.KoinJavaComponent.inject\r\n\r\n\r\nclass BookAdapter(var bookList: MutableList<Book>) :\r\n\r\n    RecyclerView.Adapter<BookViewHolder>() {\r\n    private lateinit var databse: LibraryFavDatabase\r\n\r\n    private val detailViewModel: DetailViewModel by inject(DetailViewModel::class.java)\r\n\r\n\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {\r\n\r\n        val bookBinding =\r\n            ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)\r\n        return BookViewHolder(bookBinding)\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {\r\n        val book = bookList[position]\r\n\r\n        holder.binding.titleBook.text = book.libroInfo.titulo\r\n        holder.binding.author.text = book.libroInfo.autores[0]\r\n        val idLibro = book.id\r\n\r\n        Picasso.get()\r\n            .load(\"https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api\")\r\n            .placeholder(R.drawable.notfound)\r\n            .into(holder.binding.imageBook)\r\n\r\n        holder.binding.imageBook.setOnClickListener { fabView ->\r\n            detailViewModel.bookDetail.value = book\r\n            fabView.findNavController().navigate(\r\n                SearchFragmentDirections\r\n                    .actionSearchFragmentToDetailFragment()\r\n\r\n            )\r\n\r\n\r\n        }\r\n        holder.binding.favouriteBook.setOnClickListener {\r\n            databse.bookFavDao().insert(BookFavEntity(idLibro))\r\n        }\r\n\r\n    }\r\n\r\n    override fun getItemCount(): Int = bookList.size\r\n\r\n}\r\n\r\nclass BookViewHolder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt
+--- a/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt	(revision 00dd74bfdebe80488b7f393e68973d3d906675da)
++++ b/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/ui/adapter/BookAdapter.kt	(date 1654887249899)
+@@ -14,6 +14,7 @@
+ import com.squareup.picasso.Picasso
+ import org.koin.androidx.compose.inject
+ import org.koin.java.KoinJavaComponent.inject
++import java.lang.Exception
+ 
+ 
+ class BookAdapter(var bookList: MutableList<Book>) :
+@@ -35,7 +36,12 @@
+     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
+         val book = bookList[position]
+ 
+-        holder.binding.titleBook.text = book.libroInfo.titulo
++        try {
++            holder.binding.titleBook.text = book.libroInfo.titulo
++        }
++        catch (e : Exception){
++            holder.binding.titleBook.text = "Titulo no disponible"
++        }
+         holder.binding.author.text = book.libroInfo.autores[0]
+         val idLibro = book.id
+ 
+@@ -54,6 +60,8 @@
+ 
+ 
+         }
++
++
+         holder.binding.favouriteBook.setOnClickListener {
+             databse.bookFavDao().insert(BookFavEntity(idLibro))
+         }
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n            <option value=\"$PROJECT_DIR$/app/mylibrary\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 00dd74bfdebe80488b7f393e68973d3d906675da)
++++ b/.idea/gradle.xml	(date 1654887318216)
+@@ -14,6 +14,7 @@
+             <option value="$PROJECT_DIR$/app/mylibrary" />
+           </set>
+         </option>
++        <option name="resolveModulePerSourceSet" value="false" />
+       </GradleProjectSettings>
+     </option>
+   </component>
