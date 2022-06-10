@@ -28,7 +28,7 @@ data class VolumeInfo(
     @SerializedName("pageCount")
     val paginas : Int,
     @SerializedName("imageLinks")
-    var Imagenes : ImageLink
+    var imagenes : ImageLink
 )
 
 data class SaleInfo(
