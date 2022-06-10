@@ -15,8 +15,8 @@ import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-    //private lateinit var navController : NavController
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,11 +24,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*navController = Navigation.findNavController(this,R.id.nav_host)
-        setupWithNavController(binding.bottomNavigationView,navController)*/
+        navController = Navigation.findNavController(this, R.id.nav_host)
+        setupWithNavController(binding.bottomNavigationView, navController)
 
 
-        val navHostFragment =
+        /*val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.findNavController()
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -47,6 +47,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+*/
     }
 }

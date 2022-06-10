@@ -5,8 +5,7 @@
     android:id="@+id/mainConstraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     android:background="@color/black"
     tools:context=".bibliotecamovil.ui.activities.MainActivity">
     <com.google.android.material.appbar.MaterialToolbar
@@ -23,12 +22,11 @@
         android:background="@color/color_application"
         app:title="Bibiloteca"
         app:titleCentered="true" />
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

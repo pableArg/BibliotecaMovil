@@ -6,6 +6,7 @@ import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatab
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.VerificarEnFavoritos
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
+import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragment
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
@@ -30,10 +31,12 @@ class BooksApp : Application() {
 
 val appModule = module {
     single { BookAdapter(get()) }
-    single { BookFavAdapter(get(), get()) }
+    single { BookFavAdapter(get()) }
     single { LibraryFavDatabase }
     single { BookRepository(get(), get()) }
     single { VerificarEnFavoritos(get()) }
+    single { SearchFragment(get()) }
+
 
     //VIEWS MODELS
     viewModel { FavViewModel(get()) }

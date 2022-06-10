@@ -12,7 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 
-    private val vmDetail : DetailViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
