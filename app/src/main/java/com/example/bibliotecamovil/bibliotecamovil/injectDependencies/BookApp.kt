@@ -46,7 +46,7 @@ val appModule = module {
 
     //VIEWS MODELS
     viewModel { FavViewModel(get()) }
-    viewModel { SearchViewModel(get()) }
+    viewModel { SearchViewModel(get(), get()) }
     viewModel { DetailViewModel() }
 }
 

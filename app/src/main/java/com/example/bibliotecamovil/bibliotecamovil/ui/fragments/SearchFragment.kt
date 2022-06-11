@@ -12,13 +12,21 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BestSellerAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 class SearchFragment : Fragment() {
@@ -37,13 +45,17 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchBinding = FragmentSearchBinding.bind(view)
+
         setSearchViewListener()
         initRecyclerView()
+        model.setBooks()
         setupObservers()
+
     }
 
 
@@ -76,14 +88,32 @@ class SearchFragment : Fragment() {
 
 
     private fun setupObservers() {
+
         model.getSearchedBooks().observe(viewLifecycleOwner) {
             bookAdapter.bookList = it
             bookAdapter.notifyDataSetChanged()
         }
     }
-
+/*
     private fun setLibros(){
+         CoroutineScope(Dispatchers.Main).launch{
+                val response = BestSellerAPIClient().getBestSeller("hardcover-fiction")
+                if (response.isSuccessful && response.body() != null) {
+                    val books = response.body()!!
 
+                    if(books.results.libros != null) {
+                        for(book in books.results.libros) {
+
+                            BookAPIClient().getLibros(book.titulo).body()?.items?.get(1)
+                                ?.let { bookAdapter.bookList.add(it) }
+                        }
+                        bookAdapter.notifyDataSetChanged()
+                    }
+                }
+
+        }
     }
+    */
+
 }
 

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import com.example.bibliotecamovil.databinding.ItemCardBinding
@@ -44,8 +43,18 @@ class BookAdapter(var bookList: MutableList<Book>) :
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
 
+        try {
         holder.binding.titleBook.text = book.libroInfo.titulo
-        holder.binding.author.text = book.libroInfo.autores[0]
+        } catch (e : Exception){
+        holder.binding.titleBook.text = "Titulo no disponible"
+        }
+
+        try {
+            holder.binding.author.text = book.libroInfo.autores[0]
+        } catch (e : Exception) {
+            holder.binding.author.text = "Autor no disponible"
+        }
+
         val idLibro = book.id
 
         Picasso.get()
@@ -62,11 +71,13 @@ class BookAdapter(var bookList: MutableList<Book>) :
                 Toast.LENGTH_SHORT
             ).show()
         }
-
+/*
         holder.binding.cv.setOnClickListener{view ->
             val searchFragmentDirections = SearchFragmentDirections.actionSearchFragmentToInfoFragment(idLibro)
             Navigation.findNavController(view).navigate(searchFragmentDirections)
         }
+        */
+
 
         holder.binding.favouriteBook.setOnClickListener {
             databse.bookFavDao().insert(BookFavEntity(idLibro))

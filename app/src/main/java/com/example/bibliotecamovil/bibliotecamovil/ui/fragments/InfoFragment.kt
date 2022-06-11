@@ -27,12 +27,5 @@ class InfoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        infoBinding = FragmentInfoBinding.bind(view)
-
-        val idBook = args.id
-
-        infoBinding.tittleInfo.setText(idBook)
-    }
 
 }

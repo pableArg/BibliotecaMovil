@@ -1,6 +1,7 @@
 package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.ArticleResponse
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BestSellerResponse
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -12,6 +13,7 @@ interface BookAPI {
 
     companion object{
     const val API_KEY : String = "AIzaSyBoE2iyzGrxpXZ0USCZbSzFUmRhKM224B4"
+        const val API_KEY_NY : String = "I1L48Z5qAJdSdgOiLL5YJfjf8oadEb6c"
     const val SITE_ID : String = "MLA"
     }
 
@@ -28,4 +30,6 @@ interface BookAPI {
     @GET("sites/$SITE_ID/search")
     suspend fun getArticulos(@Query("q") nombreArt: String): Response<ArticleResponse>
 
+    @GET("{name}.json?api-key=$API_KEY_NY")
+    suspend fun getBestSellers(@Path("name") nombreLista : String):Response<BestSellerResponse>
 }
