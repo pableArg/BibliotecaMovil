@@ -8,18 +8,17 @@ import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections
+//import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.squareup.picasso.Picasso
-import org.koin.androidx.compose.inject
-import org.koin.java.KoinJavaComponent.inject
+
 
 
 class BookAdapter(var bookList: MutableList<Book>) :
 
     RecyclerView.Adapter<BookViewHolder>() {
-    private lateinit var databse: LibraryFavDatabase
+    //private lateinit var databse: LibraryFavDatabase
 
     private val detailViewModel: DetailViewModel by inject(DetailViewModel::class.java)
 
@@ -54,10 +53,6 @@ class BookAdapter(var bookList: MutableList<Book>) :
 
 
         }
-        /*holder.binding.favouriteBook.setOnClickListener {
-            databse.bookFavDao().insert(BookFavEntity(idLibro))
-        }*/
-
     }
 
     override fun getItemCount(): Int = bookList.size

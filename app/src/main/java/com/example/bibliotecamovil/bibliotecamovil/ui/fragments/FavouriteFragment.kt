@@ -47,16 +47,16 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun setupObservers() {
-       /* model.getFavBooks().observe(viewLifecycleOwner) {
+       favModel.getFavBooks().observe(viewLifecycleOwner) {
             bookFavAdapter.bookFavList = it
             bookFavAdapter.notifyDataSetChanged()
-        }*/
+        }
     }
 
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookFavAdapter = BookFavAdapter(bookFavList)
+        bookFavAdapter= BookFavAdapter(bookFavList)
         favBinding.rv.adapter = bookFavAdapter
     }
     private fun setupBook(){

@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso
 class DetailFragment (): Fragment() {
     private lateinit var detailBinding : FragmentDetailBinding
     private val detailModel : DetailViewModel by activityViewModels() {DetailViewModel.Factory()}
+    //INYECCIÓN CheckFavourite
+    //private val checkFavourite: CheckFavourite by injected()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,9 @@ class DetailFragment (): Fragment() {
             .load("https://books.google.com/books/content?id=$imagenDetail&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
             .into(detailBinding.imageBook)*/
+        // SETEO EL LOGO DE FAVOTIOS Y EL LISTENER
+        // CHEQUEO CON val esFav: Boolean = checkFavourite.intoFavs(detailModel.bookDetail.value?.idBook)
+        // inserto/elimino con checkFavourite.addOrDeleteNewMovieFav(detailModel.bookDetail.value?.idBook)
     }
 
 

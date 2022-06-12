@@ -42,8 +42,8 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     fun setupBookDataBase() {
         viewModelScope.launch {
             idFavoritos = bookRepository.getAllBooksFromDatabase()
+            updateBooksLiveData(idFavoritos)
         }
-
     }
 
     fun deleteOrInsert(idBook: String) {
