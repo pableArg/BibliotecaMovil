@@ -36,7 +36,7 @@ class BookAdapter(var bookList: MutableList<Book>) :
         val book = bookList[position]
 
         holder.binding.titleBook.text = book.libroInfo.titulo
-        holder.binding.author.text = book.libroInfo.autores[0]
+        //holder.binding.author.text = book.libroInfo.autores[0]
         val idLibro = book.id
 
         Picasso.get()
@@ -54,9 +54,9 @@ class BookAdapter(var bookList: MutableList<Book>) :
 
 
         }
-        holder.binding.favouriteBook.setOnClickListener {
+        /*holder.binding.favouriteBook.setOnClickListener {
             databse.bookFavDao().insert(BookFavEntity(idLibro))
-        }
+        }*/
 
     }
 

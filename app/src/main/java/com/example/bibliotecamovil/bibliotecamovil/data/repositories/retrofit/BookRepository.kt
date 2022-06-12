@@ -6,7 +6,7 @@ import retrofit2.Response
 
 class BookRepository (private val api: BookAPIClient, private val bookDao: BookFavDAO) {
 
-    fun getAllBooksFromDatabase(): List<String> {
+   suspend fun getAllBooksFromDatabase(): MutableList<String> {
         val idList = mutableListOf<String>()
         for (BookFavEntity in bookDao.getAllBoksFavs()) {
             idList.add(BookFavEntity.id_book)

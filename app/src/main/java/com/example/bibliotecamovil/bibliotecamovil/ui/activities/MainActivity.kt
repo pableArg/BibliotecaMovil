@@ -2,6 +2,8 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -40,5 +42,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
     }
 }

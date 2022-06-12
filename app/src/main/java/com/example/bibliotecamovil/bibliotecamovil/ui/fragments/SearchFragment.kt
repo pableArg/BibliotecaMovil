@@ -1,13 +1,17 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
@@ -27,14 +31,15 @@ class SearchFragment() : Fragment() {
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
     private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
-
+    private val randomBooks = "s1gVAAAAYAAJ"
 
 
     //private val detailViewModel by sharedViewModel<DetailViewModel>()
-   // private val model by sharedViewModel<SearchViewModel>()
+    // private val model by sharedViewModel<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -47,15 +52,19 @@ class SearchFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchBinding = FragmentSearchBinding.bind(view)
+        getRandomBooks(randomBooks)
         setSearchViewListener()
         initRecyclerView()
         setupObservers()
+
+        /*Handler(Looper.getMainLooper()).postDelayed({
+        searchBinding.sv.isVisible = true
+        },5000)*/
     }
 
 
     private fun initRecyclerView() {
-        searchBinding.rv.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
         bookAdapter = BookAdapter(bookList)
         searchBinding.rv.adapter = bookAdapter
 
@@ -79,6 +88,11 @@ class SearchFragment() : Fragment() {
             })
     }
 
+        private fun getRandomBooks (randomBooks: String){
+            model.getBooks(randomBooks)
+
+        }
+
 
     private fun setupObservers() {
         model.getSearchedBooks().observe(viewLifecycleOwner) {
@@ -86,6 +100,7 @@ class SearchFragment() : Fragment() {
             bookAdapter.notifyDataSetChanged()
         }
     }
+
 
 }
 

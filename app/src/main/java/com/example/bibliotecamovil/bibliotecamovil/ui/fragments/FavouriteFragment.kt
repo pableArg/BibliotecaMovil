@@ -11,6 +11,7 @@ import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
@@ -21,6 +22,7 @@ class FavouriteFragment : Fragment() {
     private lateinit var bookFavAdapter: BookFavAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
     private val bookFavList = mutableListOf<Book>()
+    private val favModel : FavViewModel by activityViewModels()
 
     //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
@@ -56,6 +58,9 @@ class FavouriteFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         bookFavAdapter = BookFavAdapter(bookFavList)
         favBinding.rv.adapter = bookFavAdapter
+    }
+    private fun setupBook(){
+        favModel.setupBookDataBase()
     }
 
 
