@@ -6,11 +6,16 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
@@ -20,6 +25,8 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import com.facebook.shimmer.ShimmerFrameLayout
+import kotlinx.coroutines.delay
 
 
 class SearchFragment() : Fragment() {
@@ -28,6 +35,8 @@ class SearchFragment() : Fragment() {
     private val bookList = mutableListOf<Book>()
     private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
     private val randomBooks = "s1gVAAAAYAAJ"
+    private lateinit var llContenedor: LinearLayout
+    private lateinit var llCargando: LinearLayout
 
 
     //private val detailViewModel by sharedViewModel<DetailViewModel>()
@@ -53,11 +62,17 @@ class SearchFragment() : Fragment() {
         initRecyclerView()
         setupObservers()
 
-        /*Handler(Looper.getMainLooper()).postDelayed({
-        searchBinding.sv.isVisible = true
-        },5000)*/
-    }
+      /*  llContenedor = searchBinding.llContenedor
+        llCargando = searchBinding.llCargando
+        Handler(Looper.getMainLooper()).postDelayed({
+            llCargando.isVisible = false
+            llContenedor.isVisible = true
 
+        }, 3000)
+            llCargando.isVisible=true*/
+
+
+    }
 
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
@@ -65,7 +80,6 @@ class SearchFragment() : Fragment() {
         searchBinding.rv.adapter = bookAdapter
 
     }
-
 
     private fun setSearchViewListener() {
         searchBinding.sv.setOnQueryTextListener(
@@ -84,10 +98,9 @@ class SearchFragment() : Fragment() {
             })
     }
 
-        private fun getRandomBooks (randomBooks: String){
-            model.getBooks(randomBooks)
-
-        }
+    private fun getRandomBooks(randomBooks: String) {
+        model.getBooks(randomBooks)
+    }
 
 
     private fun setupObservers() {
@@ -96,7 +109,5 @@ class SearchFragment() : Fragment() {
             bookAdapter.notifyDataSetChanged()
         }
     }
-
-
 }
 

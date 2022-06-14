@@ -6,9 +6,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.FavouriteFragmentDirections
+import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.databinding.ItemCardFavBinding
 import com.squareup.picasso.Picasso
+import org.koin.java.KoinJavaComponent.inject
 
 
 class BookFavAdapter(var bookFavList: MutableList<Book>) :
@@ -36,9 +39,9 @@ class BookFavAdapter(var bookFavList: MutableList<Book>) :
             .into(holder.binding.imageBook)
 
         holder.binding.imageBook.setOnClickListener { favView ->
-            detailViewModel.bookDetail.value = book
+            //detailViewModel.bookDetail.value = book
             favView.findNavController().navigate(
-                SearchFragmentDirections
+                FavouriteFragmentDirections
                     .actionFavouriteFragmentToDetailFragment()
 
             )

@@ -43,15 +43,16 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         favBinding = FragmentFavouriteBinding.bind(view)
         initRecyclerView()
-        setupObservers()
+       // setupObservers()
+        setupBook()
     }
 
-    private fun setupObservers() {
+    /*private fun setupObservers() {
        favModel.getFavBooks().observe(viewLifecycleOwner) {
             bookFavAdapter.bookFavList = it
             bookFavAdapter.notifyDataSetChanged()
         }
-    }
+    }*/
 
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =

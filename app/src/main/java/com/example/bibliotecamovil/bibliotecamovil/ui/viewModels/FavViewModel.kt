@@ -50,8 +50,10 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         viewModelScope.launch {
             if (idFavoritos.contains(idBook)) {
                 bookRepository.deleteBookFromDatabase(BookFavEntity(idBook))
+                idFavoritos.remove(idBook)
             } else {
                 bookRepository.insertBookFav(BookFavEntity(idBook))
+                idFavoritos.add(idBook)
             }
         }
         this.setupBookDataBase()
