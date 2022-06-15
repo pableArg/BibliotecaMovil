@@ -1,32 +1,20 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.compose.ui.modifier.modifierLocalOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
-import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
-import com.facebook.shimmer.ShimmerFrameLayout
-import kotlinx.coroutines.delay
 
 
 class SearchFragment() : Fragment() {
@@ -70,15 +58,12 @@ class SearchFragment() : Fragment() {
 
         }, 3000)
             llCargando.isVisible=true*/
-
-
     }
 
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
         bookAdapter = BookAdapter(bookList)
         searchBinding.rv.adapter = bookAdapter
-
     }
 
     private fun setSearchViewListener() {
@@ -86,12 +71,11 @@ class SearchFragment() : Fragment() {
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run {
-                        model.getBooks(this)
+                        model.retrieveBooks(this)
                     }
                     hideKeyboard()
                     return true
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
                     return false
                 }
@@ -99,15 +83,13 @@ class SearchFragment() : Fragment() {
     }
 
     private fun getRandomBooks(randomBooks: String) {
-        model.getBooks(randomBooks)
+        model.retrieveBooks(randomBooks)
     }
 
-
     private fun setupObservers() {
-        model.getSearchedBooks().observe(viewLifecycleOwner) {
+        model.getBooks().observe(viewLifecycleOwner) {
             bookAdapter.bookList = it
             bookAdapter.notifyDataSetChanged()
         }
     }
 }
-

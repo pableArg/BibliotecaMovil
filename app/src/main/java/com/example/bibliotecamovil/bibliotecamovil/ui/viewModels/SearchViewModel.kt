@@ -8,18 +8,11 @@ import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Bo
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import kotlinx.coroutines.*
 import java.lang.Exception
-import java.util.concurrent.Callable
 
-class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
+class SearchViewModel(private val bookAPIClient: BookAPIClient) : ViewModel() {
     private val searchedBooks = MutableLiveData<MutableList<Book>>()
-    val errorMessage = MutableLiveData<String>()
-    val loadingMovies = MutableLiveData<Boolean>()
-
-
-
-    fun getSearchedBooks(): MutableLiveData<MutableList<Book>> {
-        return this.searchedBooks
-    }
+    private val errorMessage = MutableLiveData<String>()
+    private val loadingMovies = MutableLiveData<Boolean>()
 
     class Factory() : ViewModelProvider.NewInstanceFactory() {
         // Disclaimer esto es medio termidor
@@ -28,20 +21,19 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
         }
     }
 
+    fun getBooks(): MutableLiveData<MutableList<Book>> {
+        return this.searchedBooks
+    }
 
-    fun getBooks(query: String) {
+    fun retrieveBooks(bookName: String) {
         loadingMovies.value = true
         viewModelScope.launch {
             try {
-                val response = bookList.getLibros(query)
+                val response = bookAPIClient.getLibros(bookName)
                 if (response.isSuccessful && response.body() != null) {
                     val books = response.body()!!
-                    if (books.items != null) {
-                        searchedBooks.value = books.items
-                        loadingMovies.value = false
-                    } else {
-                        searchedBooks.value = mutableListOf()
-                    }
+                    searchedBooks.value = books.items
+                    loadingMovies.value = false
                 } else {
                     val error = response.errorBody().toString()
                     errorMessage.value = error
@@ -49,7 +41,6 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
             } catch (e: Exception) {
                 errorMessage.value = e.message
             }
-
         }
     }
 
