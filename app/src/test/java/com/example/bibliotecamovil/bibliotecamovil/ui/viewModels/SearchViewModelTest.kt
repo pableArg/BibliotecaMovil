@@ -13,12 +13,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import okhttp3.ResponseBody
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import retrofit2.Response
-import javax.security.auth.Subject
 
 @ExperimentalCoroutinesApi
 class SearchViewModelTest {
@@ -69,6 +69,43 @@ class SearchViewModelTest {
         subject.retrieveBooks(givenBookName)
         // then
         coVerify(exactly = 1) { bookAPIClient.getLibros(givenBookName) }
+        coVerify(exactly = 0) { bookResponse.errorBody() }
+    }
+
+    @Test
+    fun givenBookName_retrieveBooks_willSetErrorOnFailure() {
+        // Given
+        val expectedErrorString = "x.x"
+        val errorBody = mockk<ResponseBody>(relaxed = true) {
+            // every { toString() } returns expectedErrorString
+        }
+        val givenBookName = "El señor de los Anillos"
+        val volumeInfo = mockk<VolumeInfo>(relaxed = true)
+        val saleInfoMock = mockk<SaleInfo>(relaxed = true)
+        val bookResponseBody = BookResponse(
+            items = mutableListOf(
+                Book(
+                    kind = "Novela",
+                    id = "1",
+                    libroInfo = volumeInfo,
+                    libroVenta = saleInfoMock
+                )
+            )
+        )
+        val bookResponse = mockk<Response<BookResponse>>(relaxed = true) {
+            every { body() } returns bookResponseBody
+            every { errorBody() } returns errorBody
+            every { isSuccessful } returns false
+        }
+        bookAPIClient = mockk(relaxed = true) {
+            coEvery { getLibros(givenBookName) } returns bookResponse
+        }
+        val subject = SearchViewModel(bookAPIClient)
+        // when
+        subject.retrieveBooks(givenBookName)
+        // then
+        coVerify(exactly = 1) { bookAPIClient.getLibros(givenBookName) }
+        coVerify(exactly = 1) { bookResponse.errorBody() }
     }
 
     @Test
