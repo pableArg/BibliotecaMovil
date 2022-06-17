@@ -41,7 +41,7 @@ class DetailFragment (): Fragment() {
     private fun setupDetail (){
       //   detailBinding.imageBook =
              val imagenDetail = detailModel.bookDetail.value?.libroInfo?.imagenes?.imagen
-        detailBinding.txtTitle.text = detailModel.bookDetail.value?.libroInfo?.titulo ?: ""
+        detailBinding.tittleInfo.text = detailModel.bookDetail.value?.libroInfo?.titulo ?: ""
          /*Picasso.get()
             .load("https://books.google.com/books/content?id=$imagenDetail&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)

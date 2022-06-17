@@ -44,15 +44,15 @@ class BookAdapter(var bookList: MutableList<Book>) :
         val book = bookList[position]
 
         try {
-        holder.binding.titleBook.text = book.libroInfo.titulo
+        holder.binding.tittleBook.text = book.libroInfo.titulo
         } catch (e : Exception){
-        holder.binding.titleBook.text = "Titulo no disponible"
+        holder.binding.tittleBook.text = "Titulo no disponible"
         }
 
         try {
-            holder.binding.author.text = book.libroInfo.autores[0]
+            holder.binding.authorBook.text= book.libroInfo.autores[0]
         } catch (e : Exception) {
-            holder.binding.author.text = "Autor no disponible"
+            holder.binding.authorBook.text = "Autor no disponible"
         }
 
         val idLibro = book.id
@@ -77,12 +77,6 @@ class BookAdapter(var bookList: MutableList<Book>) :
             Navigation.findNavController(view).navigate(searchFragmentDirections)
         }
         */
-
-
-        holder.binding.favouriteBook.setOnClickListener {
-            holder.binding.favouriteBook.visibility = View.GONE
-            databse.bookFavDao().insert(BookFavEntity(idLibro))
-        }
     }
 
     override fun getItemCount(): Int = bookList.size

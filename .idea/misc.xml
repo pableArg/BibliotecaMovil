@@ -14,13 +14,17 @@
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_bookshelff.xml" value="0.2717391304347826" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_bookshelve.xml" value="0.2717391304347826" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_bookshelves.xml" value="0.2717391304347826" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_card.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.22" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_info.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_bookshelf.xml" value="0.2717391304347826" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.2717391304347826" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card_bookshelf.xml" value="0.2717391304347826" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.25" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card_bookshelf.xml" value="0.2627986348122867" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card_fav.xml" value="0.1" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/view_loading.xml" value="0.1" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2971359252929688" />

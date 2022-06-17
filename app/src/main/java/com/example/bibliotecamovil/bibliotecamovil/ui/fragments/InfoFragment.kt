@@ -12,7 +12,6 @@ import com.example.bibliotecamovil.databinding.FragmentInfoBinding
 
 class InfoFragment : Fragment() {
     private lateinit var infoBinding : FragmentInfoBinding
-    val args : InfoFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
