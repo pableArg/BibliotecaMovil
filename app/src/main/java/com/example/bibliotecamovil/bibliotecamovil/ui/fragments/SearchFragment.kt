@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
     private lateinit var bookAdapter: BookAdapter
     private lateinit var searchBinding: FragmentSearchBinding
     private val bookList = mutableListOf<Book>()
-
+    private val modal : StartBookShelfFragment = StartBookShelfFragment()
     private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +56,9 @@ class SearchFragment : Fragment() {
         model.setBooks()
         setupObservers()
 
+        searchBinding.add.setOnClickListener {
+            modal.show(parentFragmentManager, "hola")
+        }
     }
 
 
@@ -73,7 +76,7 @@ class SearchFragment : Fragment() {
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run {
-                        searchBinding.query.visibility = View.GONE
+                        searchBinding.textSearch.visibility = View.GONE
                         model.getBooks(this)
                     }
                     hideKeyboard()

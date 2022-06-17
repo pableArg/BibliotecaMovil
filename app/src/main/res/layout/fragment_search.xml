@@ -27,8 +27,9 @@
 
             android:background="@drawable/super_background"
             />
+
         <TextView
-            android:id="@+id/query"
+            android:id="@+id/textSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -38,18 +39,29 @@
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/sv"
             />
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:text="+"
+            android:textSize="35sp"
+            app:layout_constraintTop_toBottomOf="@+id/sv"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent  "
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sv" />
+            app:layout_constraintTop_toBottomOf="@+id/textSearch" />
 
 
 

@@ -80,6 +80,7 @@ class BookAdapter(var bookList: MutableList<Book>) :
 
 
         holder.binding.favouriteBook.setOnClickListener {
+            holder.binding.favouriteBook.visibility = View.GONE
             databse.bookFavDao().insert(BookFavEntity(idLibro))
         }
     }

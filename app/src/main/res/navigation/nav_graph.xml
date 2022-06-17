@@ -23,7 +23,7 @@
         android:id="@+id/favouriteFragment"
         android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.FavouriteFragment"
         android:label="fragment_favourite"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_bookshelf" />
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.InfoFragment"
