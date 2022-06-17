@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.108" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.166534423828125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2971359252929688" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.22871376811594202" />

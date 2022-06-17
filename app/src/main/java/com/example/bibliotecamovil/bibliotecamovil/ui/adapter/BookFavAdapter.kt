@@ -15,10 +15,10 @@ import org.koin.java.KoinJavaComponent.inject
 
 
 class BookFavAdapter(var bookFavList: MutableList<Book>) :
-    RecyclerView.Adapter<BookFavViewHolder>() {
+    RecyclerView.Adapter<BookFavAdapter.BookFavViewHolder>() {
 
     private val detailViewModel: DetailViewModel by inject(DetailViewModel::class.java)
-
+    class BookFavViewHolder(val binding: ItemCardFavBinding) : RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookFavViewHolder {
 
         val bookBinding =
@@ -53,4 +53,3 @@ class BookFavAdapter(var bookFavList: MutableList<Book>) :
 
 }
 
-class BookFavViewHolder(val binding: ItemCardFavBinding) : RecyclerView.ViewHolder(binding.root)

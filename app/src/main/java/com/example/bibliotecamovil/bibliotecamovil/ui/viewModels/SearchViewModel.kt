@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.concurrent.Callable
@@ -47,6 +49,8 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
                     errorMessage.value = error
                 }
             } catch (e: Exception) {
+                Firebase.crashlytics.recordException(e)
+                Firebase.crashlytics.log("No respondió la API")
                 errorMessage.value = e.message
             }
 

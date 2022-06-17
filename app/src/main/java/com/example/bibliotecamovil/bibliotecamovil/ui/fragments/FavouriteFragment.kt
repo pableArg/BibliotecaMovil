@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
@@ -17,12 +18,12 @@ import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 
 
-class FavouriteFragment : Fragment() {
-
+class FavouriteFragment() : Fragment() {
+    // private val favModel : FavViewModel by viewModels()
     private lateinit var bookFavAdapter: BookFavAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
     private val bookFavList = mutableListOf<Book>()
-    private val favModel : FavViewModel by activityViewModels()
+    private val favModel: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
     //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
@@ -42,25 +43,26 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favBinding = FragmentFavouriteBinding.bind(view)
-        initRecyclerView()
-       // setupObservers()
         setupBook()
+        initRecyclerView()
+        setupObservers()
     }
 
-    /*private fun setupObservers() {
-       favModel.getFavBooks().observe(viewLifecycleOwner) {
+    private fun setupObservers() {
+        favModel.getFavBooks().observe(viewLifecycleOwner) {
             bookFavAdapter.bookFavList = it
             bookFavAdapter.notifyDataSetChanged()
         }
-    }*/
+    }
 
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookFavAdapter= BookFavAdapter(bookFavList)
+        bookFavAdapter = BookFavAdapter(bookFavList)
         favBinding.rv.adapter = bookFavAdapter
     }
-    private fun setupBook(){
+
+    private fun setupBook() {
         favModel.setupBookDataBase()
     }
 
