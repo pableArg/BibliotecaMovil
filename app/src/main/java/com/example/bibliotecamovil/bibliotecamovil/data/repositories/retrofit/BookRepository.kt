@@ -1,5 +1,6 @@
 package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 
+import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
 import retrofit2.Response

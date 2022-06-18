@@ -8,16 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.CheckFavorite
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentDetailBinding
 import com.squareup.picasso.Picasso
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class DetailFragment() : Fragment() {
-    //private val detailModel : DetailViewModel by viewModels()
-    private lateinit var detailBinding: FragmentDetailBinding
-    private val detailModel: DetailViewModel by activityViewModels() { DetailViewModel.Factory() }
+class DetailFragment (private val checkFavourite: CheckFavorite): Fragment() {
+    private lateinit var detailBinding : FragmentDetailBinding
+    private val detailModel : DetailViewModel by sharedViewModel<DetailViewModel>()
+    /*activityViewModels() {DetailViewModel.Factory()}*/
     //INYECCIÓN CheckFavourite
     //private val checkFavourite: CheckFavourite by injected()
 
@@ -37,20 +39,23 @@ class DetailFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //etupDetail()
+        setupDetail()
     }
 
-    private fun setupDetail() {
-        //   detailBinding.imageBook =
-        val imagenDetail = detailModel.bookDetail.value?.libroInfo?.imagenes?.imagen
-        detailBinding.txtTitle.text = detailModel.bookDetail.value?.libroInfo?.titulo ?: ""
-        /*Picasso.get()
-           .load("https://books.google.com/books/content?id=$imagenDetail&printsec=frontcover&img=1&zoom=1&source=gbs_api")
-           .placeholder(R.drawable.notfound)
-           .into(detailBinding.imageBook)*/
+    private fun setupDetail (){
+        val book = detailModel.bookDetail.value
+        detailBinding.tittleInfo.text= book?.libroInfo?.titulo
+        Picasso.get()
+            .load("https://books.google.com/books/content?id=${book?.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api")
+            .placeholder(R.drawable.notfound)
+            .into(detailBinding.imagenInfo)
         // SETEO EL LOGO DE FAVOTIOS Y EL LISTENER
-        // CHEQUEO CON val esFav: Boolean = checkFavourite.intoFavs(detailModel.bookDetail.value?.idBook)
-        // inserto/elimino con checkFavourite.addOrDeleteNewMovieFav(detailModel.bookDetail.value?.idBook)
+        if(book != null && checkFavourite.intoFavs(book.id)){
+            //detailBinding./* imageFav*/ = setImageEstaEnFav
+        }else{
+            //detailBinding./* imageFav*/ = setImageEstaEnFav
+        }
+        /*detailBinding. /* imageFav */.setOnClickListener{*/ checkFavourite.addOrDeleteNewMovieFav(book!!) /*}*/
     }
 
 

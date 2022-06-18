@@ -18,12 +18,12 @@ import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 
 
-class FavouriteFragment() : Fragment() {
-    // private val favModel : FavViewModel by viewModels()
-    private lateinit var bookFavAdapter: BookFavAdapter
+class FavouriteFragment : Fragment() {
+
+    private lateinit var adapter: BookAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
-    private val bookFavList = mutableListOf<Book>()
-    private val favModel: FavViewModel by activityViewModels() { FavViewModel.Factory() }
+
+    private val favModel : FavViewModel by activityViewModels()
 
     //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
@@ -49,17 +49,17 @@ class FavouriteFragment() : Fragment() {
     }
 
     private fun setupObservers() {
-        favModel.getFavBooks().observe(viewLifecycleOwner) {
-            bookFavAdapter.bookFavList = it
-            bookFavAdapter.notifyDataSetChanged()
+       favModel.booksFavLiveData.observe(viewLifecycleOwner) {
+            adapter.bookList = it
+            adapter.notifyDataSetChanged()
         }
     }
 
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookFavAdapter = BookFavAdapter(bookFavList)
-        favBinding.rv.adapter = bookFavAdapter
+        adapter.bookList=favModel.booksFavLiveData.value!!
+        favBinding.rv.adapter = adapter
     }
 
     private fun setupBook() {
