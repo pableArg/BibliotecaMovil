@@ -40,38 +40,25 @@ class BookAdapter(
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
+        holder.binding.titleBook.text = book.libroInfo.titulo
+        val idLibro = book.id
         try {
-            holder.binding.titleBook.text = book.libroInfo.titulo
-            val idLibro = book.id
-            try {
-                Picasso.get()
-                    .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
-                    .placeholder(R.drawable.notfound)
-                    .into(holder.binding.imageBook)
-
-            } catch (e: Exception) {
-                Firebase.crashlytics.recordException(e)
+            Picasso.get()
+                .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
+                .placeholder(R.drawable.notfound)
+                .into(holder.binding.imageBook)
+            holder.binding.imageBook.setOnClickListener { fabView ->
+                //detailViewModel.bookDetail.value = book
+                fabView.findNavController().navigate(
+                    SearchFragmentDirections
+                        .actionSearchFragmentToDetailFragment()
+                )
             }
-            try {
-                holder.binding.imageBook.setOnClickListener { fabView ->
-                    //detailViewModel.bookDetail.value = book
-                    fabView.findNavController().navigate(
-                        SearchFragmentDirections
-                            .actionSearchFragmentToDetailFragment()
-                    )
-                }
-            } catch (e: Exception) {
-                Toast.makeText(context, "No se puede abrir el detalle", Toast.LENGTH_LONG).show()
-                Firebase.crashlytics.recordException(e)
-            }
-
         } catch (e: Exception) {
-            errorMessage.value = e.message
+            Toast.makeText(context, "No se puede abrir el detalle", Toast.LENGTH_LONG).show()
             Firebase.crashlytics.recordException(e)
         }
-
     }
-
 
     override fun getItemCount(): Int = bookList.size
 

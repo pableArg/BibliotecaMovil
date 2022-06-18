@@ -20,7 +20,6 @@ class BookAPIClient {
 
     suspend fun searchLibro(bookId: String): Response<Book> {
         return serviceGetBookByAPI.searchLibro(bookId)
-
     }
 
     suspend fun getLibros(nombreLibro: String): Response<BookResponse> {
