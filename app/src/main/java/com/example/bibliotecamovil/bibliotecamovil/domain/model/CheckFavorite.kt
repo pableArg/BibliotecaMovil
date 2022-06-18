@@ -9,7 +9,7 @@ class CheckFavorite (private val favViewModel: FavViewModel) {
     fun intoFavs(idBook: String): Boolean {
         return favViewModel.idFavoritos.contains(idBook)
     }
-     fun addOrDeleteNewMovieFav(idBook: String) {
+     fun addOrDeleteNewBookFav(idBook: String) {
         favViewModel.deleteOrInsert(idBook)
     }
     fun adOrDeleteNewMovieFav(book : Book) {

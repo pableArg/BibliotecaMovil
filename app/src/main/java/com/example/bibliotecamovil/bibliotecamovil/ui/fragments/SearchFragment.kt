@@ -20,12 +20,12 @@ import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 
 
-class SearchFragment() : Fragment() {
+class SearchFragment(private val model : SearchViewModel) : Fragment() {
 
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
-    private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
+    //private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
     private val randomBooks = "s1gVAAAAYAAJ"
     private lateinit var llContenedor: LinearLayout
     private lateinit var llCargando: LinearLayout

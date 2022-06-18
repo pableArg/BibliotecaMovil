@@ -67,25 +67,22 @@ class FavViewModel(/*BookRepository*/) : ViewModel() {
         }
     }
 
-    fun deleteOrInsert(idBook: String) : Boolean {
-        var returnn = false
+    fun deleteOrInsert(idBook: String): Boolean {
+        var result = false
         viewModelScope.launch {
-            try {
-                if (idFavoritos.contains(idBook)) {
-                    //bookRepository.deleteBookFromDatabase(BookFavEntity(idBook))
-                    idFavoritos.remove(idBook)
-                    returnn = false
-                } else {
-                    //bookRepository.insertBookFav(BookFavEntity(idBook))
-                    idFavoritos.add(idBook)
-                    returnn = true
-                }
-            } catch (e: Exception) {
-                    Firebase.crashlytics.recordException(e)
-                errorMessage.value = e.message
+
+            if (idFavoritos.contains(idBook)) {
+                //bookRepository.deleteBookFromDatabase(BookFavEntity(idBook))
+                idFavoritos.remove(idBook)
+                result = false
+            } else {
+                //bookRepository.insertBookFav(BookFavEntity(idBook))
+                idFavoritos.add(idBook)
+                result = true
             }
         }
-            return returnn
+        return result
         this.setupBookDataBase()
     }
+    //hacer las otras cosas.
 }

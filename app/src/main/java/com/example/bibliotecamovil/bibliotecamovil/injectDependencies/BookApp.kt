@@ -33,7 +33,7 @@ class BookApp : Application() {
         single { LibraryFavDatabase }
         single { BookRepository(get(), get()) }
         single { CheckFavorite(get()) }
-        single { SearchFragment() }
+        single { SearchFragment(get()) }
 
         single {  FavouriteFragment()}
 

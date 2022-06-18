@@ -16,9 +16,7 @@ abstract class LibraryFavDatabase : RoomDatabase() {
     companion object{
         private var INSTANCE : LibraryFavDatabase? = null
         fun getDatabase(context : Context) : LibraryFavDatabase{
-
             INSTANCE = INSTANCE ?: Room.databaseBuilder(context.applicationContext , LibraryFavDatabase::class.java , "cards").build()
-
             return INSTANCE!!
         }
 

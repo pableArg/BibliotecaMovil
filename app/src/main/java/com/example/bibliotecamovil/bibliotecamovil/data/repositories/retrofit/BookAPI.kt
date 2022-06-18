@@ -10,9 +10,9 @@ import retrofit2.http.Query
 
 interface BookAPI {
 
-    companion object{
-    const val API_KEY : String = "AIzaSyBoE2iyzGrxpXZ0USCZbSzFUmRhKM224B4"
-    const val SITE_ID : String = "MLA"
+    companion object {
+        const val API_KEY: String = "AIzaSyBoE2iyzGrxpXZ0USCZbSzFUmRhKM224B4"
+        const val SITE_ID: String = "MLA"
     }
 
     //Obtengo los datos de los libros listados por el nombre
