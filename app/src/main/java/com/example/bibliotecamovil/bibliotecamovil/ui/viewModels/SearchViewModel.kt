@@ -53,7 +53,6 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
                 Firebase.crashlytics.log("No respondió la API")
                 errorMessage.value = e.message
             }
-
         }
     }
 

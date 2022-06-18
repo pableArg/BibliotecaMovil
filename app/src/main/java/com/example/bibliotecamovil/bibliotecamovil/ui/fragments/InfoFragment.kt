@@ -23,5 +23,4 @@ class InfoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
-
 }
