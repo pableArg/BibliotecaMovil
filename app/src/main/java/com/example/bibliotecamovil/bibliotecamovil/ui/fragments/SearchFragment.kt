@@ -18,9 +18,10 @@ import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class SearchFragment(private val model : SearchViewModel) : Fragment() {
+class SearchFragment() : Fragment() {
 
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
@@ -31,7 +32,7 @@ class SearchFragment(private val model : SearchViewModel) : Fragment() {
     private lateinit var llCargando: LinearLayout
 
     //private val detailViewModel by sharedViewModel<DetailViewModel>()
-    // private val model by sharedViewModel<SearchViewModel>()
+     private val model by sharedViewModel<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
