@@ -42,11 +42,11 @@ val appModule = module {
     single { CheckFavorite(get()) }
     single { SearchFragment() }
 
-    factory { BookAdapter() }
+    factory { BookAdapter(get()) }
 
     //VIEWS MODELS
     viewModel { FavViewModel(get()) }
     viewModel { SearchViewModel(get(), get()) }
-    viewModel { DetailViewModel() }
+    viewModel { DetailViewModel(get()) }
 }
 

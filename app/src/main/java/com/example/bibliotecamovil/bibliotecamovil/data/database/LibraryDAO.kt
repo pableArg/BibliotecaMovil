@@ -10,10 +10,10 @@ interface LibraryDAO {
 
     @Query("SELECT * FROM libraries")
     fun getLibraries() : List<LibraryEntity>
-
-    @Query("SELECT B.id_book FROM libraries L JOIN favs_books B ON L.id = B.libraryId")
+/*
+    @Query("SELECT B.id_book FROM libraries L JOIN favs_books B ON L.id = B.libraryId GROUP BY B.id_book")
     fun getBookByLibrary() : List<BookFavEntity>
-
+*/
     @Insert
     fun insert(library : LibraryEntity)
 

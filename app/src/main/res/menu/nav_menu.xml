@@ -14,7 +14,7 @@
 
 
     <item
-        android:id="@+id/bookStoresFragment"
+        android:id="@+id/favouriteFragment"
         android:icon="@drawable/ic_baseline_library_books_24"
         android:title="MyLibrary"
         android:enabled="true"

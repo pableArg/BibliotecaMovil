@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/searchFragment"
+    >
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
         <action
-            android:id="@+id/action_searchFragment_to_bookStoresFragment"
-            app:destination="@id/bookStoresFragment" />
+            android:id="@+id/action_searchFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
         <action
             android:id="@+id/action_searchFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
@@ -19,13 +21,10 @@
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/bookStoresFragment"
-        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.BookstoresFragment"
-        android:label="fragment_bookstores"
-        tools:layout="@layout/fragment_bookstores" >
-        <action
-            android:id="@+id/action_bookStoresFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
@@ -35,12 +34,16 @@
 
         <action
             android:id="@+id/action_infoFragment_to_bookStoresFragment"
-            app:destination="@id/bookStoresFragment" />
+            app:destination="@id/favouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.bibliotecamovil.bibliotecamovil.ui.fragments.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="idBook"
+            app:argType="string" />
+    </fragment>
 </navigation>
 

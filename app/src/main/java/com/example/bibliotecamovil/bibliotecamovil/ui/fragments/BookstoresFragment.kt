@@ -1,6 +1,5 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookStoreAdapter
+
 import com.example.bibliotecamovil.databinding.FragmentBookstoresBinding
 
 class BookstoresFragment : Fragment(){
@@ -38,7 +38,7 @@ class BookstoresFragment : Fragment(){
                 it.applicationContext,LibraryFavDatabase::class.java, "library_database"
             ).build()
         }
-        val book = BookFavEntity( "10", "1")
+        val book = BookFavEntity( "10")
         val library = LibraryEntity("1", "libreria nueva")
         if (database != null) {
             database.libraryDao().insert(library)

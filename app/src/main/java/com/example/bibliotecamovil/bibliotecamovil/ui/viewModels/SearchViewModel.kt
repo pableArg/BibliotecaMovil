@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BestSellerAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import com.google.firebase.crashlytics.ktx.crashlytics
@@ -12,7 +13,7 @@ import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.concurrent.Callable
 
-class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
+class SearchViewModel(private val bookList: BookAPIClient, private val bestSellerList: BestSellerAPIClient) : ViewModel() {
     private val searchedBooks = MutableLiveData<MutableList<Book>>()
     val errorMessage = MutableLiveData<String>()
     val loadingMovies = MutableLiveData<Boolean>()
@@ -26,7 +27,7 @@ class SearchViewModel(private val bookList: BookAPIClient) : ViewModel() {
     class Factory() : ViewModelProvider.NewInstanceFactory() {
         // Disclaimer esto es medio termidor
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SearchViewModel(BookAPIClient()) as T
+            return SearchViewModel(BookAPIClient(), BestSellerAPIClient()) as T
         }
     }
 

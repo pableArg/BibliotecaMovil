@@ -9,6 +9,7 @@ import androidx.room.Query
 interface BookFavDAO {
     @Query ("SELECT * FROM favs_books")
     fun getAllBoksFavs(): List<BookFavEntity>
+
     @Query("SELECT * FROM favs_books WHERE favs_books.id_book = :bookBuscado")
     fun getBooksById (bookBuscado: Int): BookFavEntity
     @Delete

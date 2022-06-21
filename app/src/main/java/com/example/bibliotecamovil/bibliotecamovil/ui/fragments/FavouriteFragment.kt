@@ -6,16 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
-import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
-import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
-import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 
 
 class FavouriteFragment : Fragment() {
@@ -37,7 +32,7 @@ class FavouriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourite, container, false)
+        return inflater.inflate(R.layout.fragment_bookstores, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

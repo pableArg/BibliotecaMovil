@@ -19,11 +19,11 @@ class BookRepository (private val api: BookAPIClient, private val database : Lib
         database.bookFavDao().delete(book)
     }
 
-    suspend fun insertBookFav(bookFav: BookFavEntity) {
+    suspend fun insertBookInDatabase(bookFav: BookFavEntity) {
         database.bookFavDao().insert(bookFav)
     }
 
-    suspend fun getBooksById(idBook: String): Response<Book> {
+    suspend fun searchLibro(idBook: String): Response<Book> {
         return api.searchLibro(idBook)
     }
 }

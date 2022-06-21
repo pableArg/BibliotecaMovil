@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_card.xml" value="0.18297101449275363" />
-        <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.5" />
+        <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.2" />
         <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.18297101449275363" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/activity_main.xml" value="0.13903985507246377" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.36666666666666664" />
@@ -17,6 +17,7 @@
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_bookstores.xml" value="0.17760416666666667" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_card.xml" value="0.12395833333333334" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.14673913043478262" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_info.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.1" />
@@ -25,10 +26,11 @@
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/item_card_fav.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/view_loading.xml" value="0.1" />
         <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/menu/nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/menu/options_menu.xml" value="0.15416666666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.108" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.166534423828125" />
         <entry key="app/src/main/res/layout/fragment_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2971359252929688" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.22871376811594202" />
