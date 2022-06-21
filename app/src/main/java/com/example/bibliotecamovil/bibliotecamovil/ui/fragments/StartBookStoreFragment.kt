@@ -7,13 +7,14 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.bibliotecamovil.R
 
-class StartBookShelfFragment : DialogFragment() {
+class StartBookStoreFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
             builder.setMessage("hola")
+
                 .setPositiveButton("hola2",
                     DialogInterface.OnClickListener { dialog, id ->
                         // START THE GAME!

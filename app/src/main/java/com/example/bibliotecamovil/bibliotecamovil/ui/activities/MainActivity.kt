@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.detailFragment -> {
                     binding.bottomNavigationView.visibility = View.INVISIBLE
                 }
-                R.id.searchFragment, R.id.favouriteFragment, R.id.infoFragment -> {
+                R.id.searchFragment, R.id.bookStoresFragment, R.id.infoFragment -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
             }

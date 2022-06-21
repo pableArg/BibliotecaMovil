@@ -12,9 +12,7 @@ data class Book(
     @SerializedName("id")
     var id : String,
     @SerializedName("volumeInfo")
-    var libroInfo : VolumeInfo,
-    @SerializedName("saleInfo")
-    val libroVenta : SaleInfo
+    var libroInfo : VolumeInfo
 )
 
 data class VolumeInfo(
@@ -31,30 +29,6 @@ data class VolumeInfo(
     var descripcion : String,
     @SerializedName("pageCount")
     val paginas : Int,
-    @SerializedName("imageLinks")
-    var imagenes : ImageLink
 )
 
-data class SaleInfo(
-    @SerializedName("country")
-    var pais : String,
-    @SerializedName("list_price")
-    var precioLista : ListPrice,
-    @SerializedName("retail_price")
-    var precioMenor : RetailPrice
-)
-data class ListPrice(
-    @SerializedName("amount")
-    var monto : Double
-)
-data class RetailPrice(
-    @SerializedName("amount")
-    var monto : Double
-)
 
-data class ImageLink(
-    @SerializedName("smallThumbnail")
-    var icono : String,
-    @SerializedName("thumbnail")
-    var imagen : String
-)

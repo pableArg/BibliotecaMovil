@@ -9,10 +9,11 @@ import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 
 @Database(
     version = 1,
-    entities = [BookFavEntity::class]
+    entities = [BookFavEntity::class, LibraryEntity::class]
 )
 abstract class LibraryFavDatabase : RoomDatabase() {
     abstract fun bookFavDao(): BookFavDAO
+    abstract fun libraryDao():LibraryDAO
 
     companion object{
         private var INSTANCE : LibraryFavDatabase? = null

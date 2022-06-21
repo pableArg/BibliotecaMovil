@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BestSellerAPIClient
@@ -33,7 +34,6 @@ class SearchFragment : Fragment() {
     private lateinit var bookAdapter: BookAdapter
     private lateinit var searchBinding: FragmentSearchBinding
     private val bookList = mutableListOf<Book>()
-    private val modal : StartBookShelfFragment = StartBookShelfFragment()
     private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,18 +56,13 @@ class SearchFragment : Fragment() {
         model.setBooks()
         setupObservers()
 
-        searchBinding.add.setOnClickListener {
-            modal.show(parentFragmentManager, "hola")
-        }
     }
 
 
     private fun initRecyclerView() {
-        searchBinding.rv.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
         bookAdapter = BookAdapter(bookList)
         searchBinding.rv.adapter = bookAdapter
-
     }
 
 

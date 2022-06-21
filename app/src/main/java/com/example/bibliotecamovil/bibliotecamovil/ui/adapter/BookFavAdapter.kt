@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.FavouriteFragmentDirections
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.databinding.ItemCardFavBinding
@@ -40,11 +39,11 @@ class BookFavAdapter(var bookFavList: MutableList<Book>) :
 
         holder.binding.imageBook.setOnClickListener { favView ->
             //detailViewModel.bookDetail.value = book
-            favView.findNavController().navigate(
+            /*favView.findNavController().navigate(
                 FavouriteFragmentDirections
                     .actionFavouriteFragmentToDetailFragment()
 
-            )
+            )*/
         }
     }
 
