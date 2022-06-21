@@ -2,4 +2,13 @@
     <string name="app_name">BibliotecaMovil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="content_description_media"></string>
+    <string name="title">titulo</string>
+    <string name="secondary_text">texto secundario</string>
+    <string name="supporting_text">texto soporte</string>
+    <string name="action_1">accion 1</string>
+    <string name="action_2">accion 2</string>
+    <string name="description">Descripcion</string>
+    <string name="actuales_best_seller">ACTUALES BEST SELLER</string>
 </resources>

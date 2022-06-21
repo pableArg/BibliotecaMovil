@@ -3,6 +3,7 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +12,7 @@ import kotlinx.coroutines.withContext
 
 class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     val booksFavLiveData = MutableLiveData<MutableList<Book>>()
+    var idFavoritos: MutableList<String> = emptyList<String>().toMutableList()
     private var booksList: MutableList<Book> = emptyList<Book>().toMutableList()
     val errorMessage = MutableLiveData<String>()
 
@@ -37,7 +39,24 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         }
     }
 
-    fun getBooksFavIDList(): List<String> {
-        return bookRepository.getAllBooksFromDatabase()
+    fun setupBookDataBase() {
+        viewModelScope.launch {
+            idFavoritos = bookRepository.getAllBooksFromDatabase()
+            updateBooksLiveData(idFavoritos)
+        }
+    }
+
+    fun deleteOrInsert(idBook: String) {
+        viewModelScope.launch {
+            if (idFavoritos.contains(idBook)) {
+                bookRepository.deleteBookFromDatabase(BookFavEntity(idBook))
+                idFavoritos.remove(idBook)
+            } else {
+                bookRepository.insertBookFav(BookFavEntity(idBook))
+                idFavoritos.add(idBook)
+            }
+        }
+        this.setupBookDataBase()
+
     }
 }
