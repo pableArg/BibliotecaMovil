@@ -1,18 +1,12 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.text.format.DateFormat
 import android.view.View
-import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.databinding.ActivityMainBinding
@@ -24,11 +18,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-
-
-
+    setContentView(binding.root)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.findNavController()
@@ -48,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 
 }

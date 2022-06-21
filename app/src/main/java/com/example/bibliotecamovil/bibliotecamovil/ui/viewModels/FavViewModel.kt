@@ -16,25 +16,25 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     private var booksList: MutableList<Book> = emptyList<Book>().toMutableList()
     val errorMessage = MutableLiveData<String>()
 
-
-    fun getFavBooks(): MutableLiveData<MutableList<Book>> {
-        return this.booksFavLiveData
-    }
-
-    fun updateBooksLiveData(bookIDList: List<String>) {
+    private fun updateBooksLiveData(bookIDList: List<String>) {
         viewModelScope.launch {
-            for (bookId in bookIDList) {
-                val response = bookRepository.getBooksById(bookId)
-                if (response.isSuccessful && response.body() != null) {
-                    val book = response.body()!!
-                    booksList.add(book)
-                    withContext(Dispatchers.Main) {
+            try {
+                for (bookId in bookIDList) {
+                    val response = bookRepository.searchLibro(bookId)
+                    if (response.isSuccessful && response.body() != null) {
+                        val book = response.body()!!
+                        booksList.add(book)
                         booksFavLiveData.value = booksList
+
+                    } else {
+                        val error = response.errorBody().toString()
+                        errorMessage.value = error
                     }
-                } else {
-                    val error = response.errorBody().toString()
-                    errorMessage.value = error
                 }
+
+            } catch (e: Exception) {
+                Firebase.crashlytics.recordException(e)
+                errorMessage.value = e.message
             }
         }
     }
@@ -46,17 +46,18 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         }
     }
 
-    fun deleteOrInsert(idBook: String) {
+    fun deleteOrInsert(book: Book) {
         viewModelScope.launch {
-            if (idFavoritos.contains(idBook)) {
-                bookRepository.deleteBookFromDatabase(BookFavEntity(idBook))
-                idFavoritos.remove(idBook)
+            if (idFavoritos.contains(book.id)) {
+                bookRepository.deleteBookFromDatabase(book.id)
+                idFavoritos.remove(book.id)
+                booksFavLiveData.value?.remove(book)
             } else {
-                bookRepository.insertBookFav(BookFavEntity(idBook))
-                idFavoritos.add(idBook)
+                bookRepository.insertBookInDatabase(book.id)
+                idFavoritos.add(book.id)
+                booksFavLiveData.value?.add(book)
             }
         }
-        this.setupBookDataBase()
-
     }
+    //hacer las otras cosas.
 }

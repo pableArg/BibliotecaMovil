@@ -30,19 +30,19 @@ class BookApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@BookApp)
+            fragmentFactory()
             modules(appModule)
         }
     }
 }
 
 val appModule = module {
-    single { BookAdapter(get()) }
-    single { BookFavAdapter(get()) }
     single { LibraryFavDatabase }
     single { BookRepository(get(), get()) }
     single { CheckFavorite(get()) }
     single { SearchFragment() }
-    single {  }
+
+    factory { BookAdapter() }
 
     //VIEWS MODELS
     viewModel { FavViewModel(get()) }

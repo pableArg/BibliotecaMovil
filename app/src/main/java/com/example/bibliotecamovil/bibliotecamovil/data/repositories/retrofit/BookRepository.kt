@@ -2,24 +2,25 @@ package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
+import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
 import retrofit2.Response
 
-class BookRepository (private val api: BookAPIClient, private val bookDao: BookFavDAO) {
-
+class BookRepository (private val api: BookAPIClient, private val database : LibraryFavDatabase) {
+// prebuntar si eesta bien database.bookFavDao.getAlll o si directamente inyectamos el DAO.
    suspend fun getAllBooksFromDatabase(): MutableList<String> {
         val idList = mutableListOf<String>()
-        for (BookFavEntity in bookDao.getAllBoksFavs()) {
+        for (BookFavEntity in database.bookFavDao().getAllBoksFavs()) {
             idList.add(BookFavEntity.id_book)
         }
         return idList
     }
 
     suspend fun deleteBookFromDatabase(book: BookFavEntity) {
-        bookDao.delete(book)
+        database.bookFavDao().delete(book)
     }
 
     suspend fun insertBookFav(bookFav: BookFavEntity) {
-        bookDao.insert(bookFav)
+        database.bookFavDao().insert(bookFav)
     }
 
     suspend fun getBooksById(idBook: String): Response<Book> {

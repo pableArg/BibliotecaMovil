@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "299380174001",
+    "project_id": "biblioteca-287b0",
+    "storage_bucket": "biblioteca-287b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299380174001:android:9b5f05f3033a5f31c5c690",
+        "android_client_info": {
+          "package_name": "com.example.bibliotecamovil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299380174001-6a3k1j3a4lhjc3g7iqju1nnv21g4q6nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbb1IqX3jK-LvmGVGbAuiPMmpkGzcxcHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299380174001-6a3k1j3a4lhjc3g7iqju1nnv21g4q6nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
