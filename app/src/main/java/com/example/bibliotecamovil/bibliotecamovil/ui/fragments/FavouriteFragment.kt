@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
@@ -62,7 +63,9 @@ class FavouriteFragment: Fragment() {
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        adapter = BookAdapter(list , requireActivity(),detailViewModel,{})
+        adapter = BookAdapter(list , requireActivity(),detailViewModel) {view ->
+            view.findNavController()
+                .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())}
         favBinding.rv.adapter = adapter
     }
 

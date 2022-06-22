@@ -46,7 +46,7 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         }
     }
 
-    fun deleteOrInsert(book: Book) {
+    fun deleteOrInsert(book: Book){
          CoroutineScope(Dispatchers.IO).launch{
             if (idFavoritos.contains(book.id)) {
                 bookRepository.deleteBookFromDatabase(book.id)

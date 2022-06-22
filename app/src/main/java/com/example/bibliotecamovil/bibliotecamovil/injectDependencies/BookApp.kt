@@ -40,7 +40,7 @@ class BookApp : Application() {
         //single{ LibraryFavDatabase.getDatabase(get()) }
         single<BookFavDAO>{ LibraryFavDatabase.getDatabase(get()).bookFavDao()}
         factory { BookRepository(get(), get()) }
-        single { CheckFavorite(get()) }
+        single { CheckFavorite() }
         single { SearchFragment() }
         single { FavouriteFragment() }
         single { BookAPIClient() }

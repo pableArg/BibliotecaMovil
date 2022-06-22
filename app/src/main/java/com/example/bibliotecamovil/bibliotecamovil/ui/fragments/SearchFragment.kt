@@ -26,6 +26,7 @@ import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -68,9 +69,7 @@ class SearchFragment() : Fragment() {
         bookAdapter = BookAdapter(bookList, requireActivity(), detailViewModel
         ) { view ->
             view.findNavController()
-                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2());
-
-
+                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2())
         }
         searchBinding.rv.adapter = bookAdapter
 
