@@ -12,18 +12,18 @@ import com.example.bibliotecamovil.bibliotecamovil.domain.model.CheckFavorite
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentDetailBinding
+import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class DetailFragment (private val checkFavourite: CheckFavorite): Fragment() {
-    private lateinit var detailBinding : FragmentDetailBinding
-    private val detailModel : DetailViewModel by sharedViewModel<DetailViewModel>()
-    /*activityViewModels() {DetailViewModel.Factory()}*/
-    //INYECCIÓN CheckFavourite
-    //private val checkFavourite: CheckFavourite by injected()
+class DetailFragment/*(
+    private val checkFavourite: CheckFavorite
+)*/ : Fragment() {
+    private lateinit var detailBinding: FragmentDetailBinding
+    //private val detailModel by sharedViewModel<DetailViewModel>()
 
-
+    //private val checkFavourite: CheckFavorite
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,25 +38,25 @@ class DetailFragment (private val checkFavourite: CheckFavorite): Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupDetail()
+        //detailBinding = FragmentDetailBinding.bind(view)
+        //setupDetail()
     }
 
-    private fun setupDetail (){
-        val book = detailModel.bookDetail.value
-        detailBinding.tittleInfo.text= book?.libroInfo?.titulo
+    private fun setupDetail() {
+        /*val book = detailModel.bookDetail.value
+        detailBinding.tittleInfo.text = book?.libroInfo?.titulo
         Picasso.get()
             .load("https://books.google.com/books/content?id=${book?.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
-            .into(detailBinding.imagenInfo)
+            .into(detailBinding.imagenInfo)*/
         // SETEO EL LOGO DE FAVOTIOS Y EL LISTENER
-        if(book != null && checkFavourite.intoFavs(book.id)){
+        /* if(book != null && checkFavourite.intoFavs(book.id)){
             //detailBinding./* imageFav*/ = setImageEstaEnFav
         }else{
             //detailBinding./* imageFav*/ = setImageEstaEnFav
         }
-        /*detailBinding. /* imageFav */.setOnClickListener{*/ checkFavourite.addOrDeleteNewMovieFav(book!!) /*}*/
+        /*detailBinding. /* imageFav */.setOnClickListener{*/ //checkFavourite.addOrDeleteNewMovieFav(book!!) /*}*/
+    */
+
     }
-
-
 }

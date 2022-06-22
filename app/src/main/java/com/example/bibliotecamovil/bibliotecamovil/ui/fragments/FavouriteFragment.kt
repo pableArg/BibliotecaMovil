@@ -12,18 +12,22 @@ import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class FavouriteFragment : Fragment() {
+class FavouriteFragment: Fragment() {
 
     private lateinit var adapter: BookAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
+    private val favModel by sharedViewModel<FavViewModel>()
+    private val list = mutableListOf<Book>()
+    private val detailViewModel by sharedViewModel<DetailViewModel>()
 
-    private val favModel : FavViewModel by activityViewModels()
 
     //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
@@ -58,7 +62,7 @@ class FavouriteFragment : Fragment() {
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        adapter.bookList=favModel.booksFavLiveData.value!!
+        adapter = BookAdapter(list , requireActivity(),detailViewModel,{})
         favBinding.rv.adapter = adapter
     }
 

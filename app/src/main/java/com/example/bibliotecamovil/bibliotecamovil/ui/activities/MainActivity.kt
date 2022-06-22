@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.detailFragment -> {
+                R.id.detailFragment2 -> {
                     binding.bottomNavigationView.visibility = View.INVISIBLE
                 }
                 R.id.searchFragment, R.id.favouriteFragment, R.id.infoFragment -> {

@@ -12,12 +12,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
@@ -31,13 +34,13 @@ class SearchFragment() : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
-    //private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
     private val randomBooks = "s1gVAAAAYAAJ"
     private lateinit var llContenedor: LinearLayout
     private lateinit var llCargando: LinearLayout
 
-    //private val detailViewModel by sharedViewModel<DetailViewModel>()
+
     private val model by sharedViewModel<SearchViewModel>()
+    private val detailViewModel by sharedViewModel<DetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +65,13 @@ class SearchFragment() : Fragment() {
 
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
-        //bookAdapter = BookAdapter(bookList, requireActivity())
-        //bookAdapter.bookList = bookList
+        bookAdapter = BookAdapter(bookList, requireActivity(), detailViewModel
+        ) { view ->
+            view.findNavController()
+                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2());
+
+
+        }
         searchBinding.rv.adapter = bookAdapter
 
     }

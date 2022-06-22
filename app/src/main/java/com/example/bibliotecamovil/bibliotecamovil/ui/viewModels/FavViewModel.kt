@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.*
 
 class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     val booksFavLiveData = MutableLiveData<MutableList<Book>>()
@@ -20,7 +20,7 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 for (bookId in bookIDList) {
-                    val response = bookRepository.searchLibro(bookId)
+                    val response = bookRepository.getBooksById(bookId)
                     if (response.isSuccessful && response.body() != null) {
                         val book = response.body()!!
                         booksList.add(book)
@@ -40,14 +40,14 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     }
 
     fun setupBookDataBase() {
-        viewModelScope.launch {
+        CoroutineScope(Dispatchers.IO).launch{
             idFavoritos = bookRepository.getAllBooksFromDatabase()
             updateBooksLiveData(idFavoritos)
         }
     }
 
     fun deleteOrInsert(book: Book) {
-        viewModelScope.launch {
+         CoroutineScope(Dispatchers.IO).launch{
             if (idFavoritos.contains(book.id)) {
                 bookRepository.deleteBookFromDatabase(book.id)
                 idFavoritos.remove(book.id)
