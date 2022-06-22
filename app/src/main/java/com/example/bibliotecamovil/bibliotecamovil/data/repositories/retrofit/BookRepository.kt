@@ -3,10 +3,14 @@ package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BestSellerResponse
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import retrofit2.Response
 
-class BookRepository (private val api: BookAPIClient, private val database : BookFavDAO) {
-// prebuntar si eesta bien database.bookFavDao.getAlll o si directamente inyectamos el DAO.
+class BookRepository (private val apiBook: BookAPIClient,
+                      private val apiBestSeller : BestSellerAPIClient, private val database : BookFavDAO) {
+
+
    suspend fun getAllBooksFromDatabase(): MutableList<String> {
         val idList = mutableListOf<String>()
         for (BookFavEntity in database.getAllBoksFavs()) {
@@ -23,7 +27,14 @@ class BookRepository (private val api: BookAPIClient, private val database : Boo
         database.insert(BookFavEntity(idBook))
     }
 
-    suspend fun getBooksById(idBook: String): Response<Book> {
-        return api.searchLibro(idBook)
+    suspend fun searchBookById(idBook: String): Response<Book> {
+        return apiBook.searchLibro(idBook)
+    }
+
+    suspend fun searchBooksByName(nameBook : String) : Response<BookResponse>{
+        return apiBook.getLibros(nameBook)
+    }
+    suspend fun searchBestSeller(nameList : String) : Response<BestSellerResponse>{
+        return apiBestSeller.getBestSeller(nameList)
     }
 }

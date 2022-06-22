@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
@@ -17,6 +21,7 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,21 +32,16 @@ class SearchFragment() : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
-    private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
+    private lateinit var llContenedor: LinearLayout
+    private lateinit var llCargando: LinearLayout
 
 
-
-    //private val detailViewModel by sharedViewModel<DetailViewModel>()
-   // private val model by sharedViewModel<SearchViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val model by sharedViewModel<SearchViewModel>()
+    private val detailViewModel by sharedViewModel<DetailViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
@@ -49,19 +49,21 @@ class SearchFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchBinding = FragmentSearchBinding.bind(view)
         setSearchViewListener()
+        model.setBooks()
         initRecyclerView()
         setupObservers()
     }
 
-
     private fun initRecyclerView() {
-        searchBinding.rv.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookAdapter = BookAdapter(bookList)
+        searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
+        bookAdapter = BookAdapter(bookList, requireActivity(), detailViewModel
+        ) { view ->
+            view.findNavController()
+                    .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2())
+        }
         searchBinding.rv.adapter = bookAdapter
 
     }
-
 
     private fun setSearchViewListener() {
         try {
@@ -79,10 +81,13 @@ class SearchFragment() : Fragment() {
                             return false
                         }
                     })
-        }catch (e:Exception){
+
+        } catch (e: Exception) {
             Firebase.crashlytics.recordException(e)
         }
+
     }
+
 
 
     private fun setupObservers() {
@@ -91,6 +96,5 @@ class SearchFragment() : Fragment() {
             bookAdapter.notifyDataSetChanged()
         }
     }
-
 }
 

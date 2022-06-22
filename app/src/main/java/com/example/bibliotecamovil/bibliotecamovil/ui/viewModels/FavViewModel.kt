@@ -20,7 +20,7 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 for (bookId in bookIDList) {
-                    val response = bookRepository.getBooksById(bookId)
+                    val response = bookRepository.searchBookById(bookId)
                     if (response.isSuccessful && response.body() != null) {
                         val book = response.body()!!
                         booksList.add(book)
@@ -58,6 +58,10 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
                 booksFavLiveData.value?.add(book)
             }
         }
+    }
+
+    fun deleteListBooks(){
+        booksList = mutableListOf()
     }
     //hacer las otras cosas.
 }

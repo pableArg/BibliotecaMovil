@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.RoomDatabase
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BestSellerAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.CheckFavorite
@@ -39,10 +40,11 @@ class BookApp : Application() {
         single { BookFavAdapter(get()) }
         //single{ LibraryFavDatabase.getDatabase(get()) }
         single<BookFavDAO>{ LibraryFavDatabase.getDatabase(get()).bookFavDao()}
-        factory { BookRepository(get(), get()) }
+        factory { BookRepository(get(), get(), get()) }
         single { CheckFavorite() }
         single { SearchFragment() }
         single { FavouriteFragment() }
+        single { BestSellerAPIClient() }
         single { BookAPIClient() }
         single { DetailFragment() }
 

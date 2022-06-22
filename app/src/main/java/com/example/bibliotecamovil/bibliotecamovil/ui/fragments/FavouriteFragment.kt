@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
@@ -42,8 +43,11 @@ class FavouriteFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_favourite, container, false)
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,6 +55,11 @@ class FavouriteFragment: Fragment() {
         setupBook()
         initRecyclerView()
         setupObservers()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        deleteBooks()
     }
 
     private fun setupObservers() {
@@ -62,7 +71,7 @@ class FavouriteFragment: Fragment() {
 
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            GridLayoutManager(activity, 2)
         adapter = BookAdapter(list , requireActivity(),detailViewModel) {view ->
             view.findNavController()
                 .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())}
@@ -71,6 +80,10 @@ class FavouriteFragment: Fragment() {
 
     private fun setupBook() {
         favModel.setupBookDataBase()
+    }
+    private fun deleteBooks(){
+        favModel.deleteListBooks()
+
     }
 
 
