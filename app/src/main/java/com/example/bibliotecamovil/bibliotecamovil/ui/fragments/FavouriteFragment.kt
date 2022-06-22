@@ -6,21 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class FavouriteFragment : Fragment() {
+class FavouriteFragment: Fragment() {
 
-    private lateinit var bookFavAdapter: BookFavAdapter
+    private lateinit var adapter: BookAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
-    private val bookFavList = mutableListOf<Book>()
+    private val favModel by sharedViewModel<FavViewModel>()
+    private val list = mutableListOf<Book>()
+    private val detailViewModel by sharedViewModel<DetailViewModel>()
+
 
     //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
@@ -40,22 +47,27 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favBinding = FragmentFavouriteBinding.bind(view)
+        setupBook()
         initRecyclerView()
         setupObservers()
     }
 
     private fun setupObservers() {
-       /* model.getFavBooks().observe(viewLifecycleOwner) {
-            bookFavAdapter.bookFavList = it
-            bookFavAdapter.notifyDataSetChanged()
-        }*/
+       favModel.booksFavLiveData.observe(viewLifecycleOwner) {
+            adapter.bookList = it
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookFavAdapter = BookFavAdapter(bookFavList)
-        favBinding.rv.adapter = bookFavAdapter
+        adapter = BookAdapter(list , requireActivity(),detailViewModel,{})
+        favBinding.rv.adapter = adapter
+    }
+
+    private fun setupBook() {
+        favModel.setupBookDataBase()
     }
 
 

@@ -4,21 +4,35 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_card.xml" value="0.18297101449275363" />
-        <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.2" />
+        <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.5" />
         <entry key="..\:/Users/Aitor/AndroidStudioProjects/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.18297101449275363" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/activity_main.xml" value="0.13903985507246377" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.108" />
+        <entry key="app/src/main/res/drawable/rounded.xml" value="0.108" />
+        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.108" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_card.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2971359252929688" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2087227414330218" />
+        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.21920289855072464" />
-        <entry key="app/src/main/res/layout/item_card.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1828774062816616" />
+        <entry key="app/src/main/res/layout/item_card.xml" value="0.345458984375" />
         <entry key="app/src/main/res/layout/item_card_fav.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/view_loading.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/options_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.28229166666666666" />
+      </ProjectState>
+    </option>
+  </component>
 </project>

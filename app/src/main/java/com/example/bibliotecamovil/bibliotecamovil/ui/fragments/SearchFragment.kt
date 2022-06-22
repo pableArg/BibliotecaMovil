@@ -1,40 +1,50 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
-import org.koin.android.ext.android.inject
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SearchFragment() : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
-    private val model: SearchViewModel by activityViewModels() { SearchViewModel.Factory() }
+    private val randomBooks = "s1gVAAAAYAAJ"
+    private lateinit var llContenedor: LinearLayout
+    private lateinit var llCargando: LinearLayout
 
 
-
-    //private val detailViewModel by sharedViewModel<DetailViewModel>()
-   // private val model by sharedViewModel<SearchViewModel>()
+    private val model by sharedViewModel<SearchViewModel>()
+    private val detailViewModel by sharedViewModel<DetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -47,36 +57,54 @@ class SearchFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchBinding = FragmentSearchBinding.bind(view)
+        getRandomBooks(randomBooks)
         setSearchViewListener()
         initRecyclerView()
         setupObservers()
     }
 
-
     private fun initRecyclerView() {
-        searchBinding.rv.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookAdapter = BookAdapter(bookList)
+        searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
+        bookAdapter = BookAdapter(bookList, requireActivity(), detailViewModel
+        ) { view ->
+            view.findNavController()
+                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2());
+
+
+        }
         searchBinding.rv.adapter = bookAdapter
 
     }
 
-
     private fun setSearchViewListener() {
-        searchBinding.sv.setOnQueryTextListener(
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    query?.run {
-                        model.getBooks(this)
+        try {
+            searchBinding.sv.setOnQueryTextListener(
+                object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        query?.run {
+                            model.getBooks(this)
+                        }
+                        hideKeyboard()
+                        return true
                     }
-                    hideKeyboard()
-                    return true
-                }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return false
-                }
-            })
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return false
+                    }
+                })
+
+        } catch (e: Exception) {
+            Firebase.crashlytics.recordException(e)
+        }
+
+    }
+
+    private fun getRandomBooks(randomBooks: String) {
+        try {
+            model.getBooks(randomBooks)
+        } catch (e: Exception) {
+            Toast.makeText(context, "No se pudo recuperar los libros", Toast.LENGTH_LONG).show()
+        }
     }
 
 
@@ -86,6 +114,5 @@ class SearchFragment() : Fragment() {
             bookAdapter.notifyDataSetChanged()
         }
     }
-
 }
 
