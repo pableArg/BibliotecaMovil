@@ -46,6 +46,11 @@ class FavouriteFragment : Fragment() {
         setupObservers()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        deleteBooks()
+    }
+
     private fun setupObservers() {
         favModel.booksFavLiveData.observe(viewLifecycleOwner) {
             adapter.bookList = it
@@ -61,5 +66,10 @@ class FavouriteFragment : Fragment() {
                 .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())
         }
         favBinding.rv.adapter = adapter
+    }
+
+    private fun deleteBooks(){
+        favModel.deleteListBooks()
+
     }
 }

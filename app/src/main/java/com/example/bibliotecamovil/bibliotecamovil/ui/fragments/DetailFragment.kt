@@ -46,17 +46,21 @@ class DetailFragment : Fragment() {
             .load("https://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
             .into(detailBinding.imageView2)
+
         detailBinding.btnSelectFavourite.setOnClickListener {
             favModel.deleteOrInsert(book)
+            setIcon(detailModel.bookDetail.value!!.id)
         }
     }
 
     private fun setIcon(idBook: String) {
+
         favModel.idFavoritosLiveData.observe(viewLifecycleOwner) {
             if (it.contains(idBook)) {
                 detailBinding.btnSelectFavourite.background =
                     getDrawable(requireActivity(), R.drawable.ic_fav_pressed)
-            } else {
+            }
+            else{
                 detailBinding.btnSelectFavourite.background =
                     getDrawable(requireActivity(), R.drawable.ic_fav_default)
             }

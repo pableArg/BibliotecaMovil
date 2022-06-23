@@ -69,4 +69,7 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         idFavoritosLiveData.value?.remove(book.id)
         booksFavLiveData.value?.remove(book)
     }
+    fun deleteListBooks(){
+        booksList = mutableListOf()
+    }
 }

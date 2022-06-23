@@ -3,9 +3,10 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel() : ViewModel() {
     val bookDetail = MutableLiveData<Book>()
 
 
@@ -15,4 +16,5 @@ class DetailViewModel : ViewModel() {
             return DetailViewModel() as T
         }
     }
+
 }
