@@ -45,7 +45,6 @@ class SearchFragment() : Fragment() {
         initRecyclerView()
         setBooks()
     }
-
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
         bookAdapter = BookAdapter(bookList, requireActivity(), detailViewModel
@@ -63,8 +62,11 @@ class SearchFragment() : Fragment() {
                     object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
                             query?.run {
+
                                 model.getBooks(this)
                             }
+                            searchBinding.rv.visibility = View.GONE
+                            searchBinding.progressSearch.visibility = View.VISIBLE
                             hideKeyboard()
                             return true
                         }
@@ -92,8 +94,11 @@ class SearchFragment() : Fragment() {
 
     private fun setupObservers() {
         model.getSearchedBooks().observe(viewLifecycleOwner) {
+
             bookAdapter.bookList = it
             bookAdapter.notifyDataSetChanged()
+            searchBinding.rv.visibility = View.VISIBLE
+            searchBinding.progressSearch.visibility = View.GONE
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
@@ -19,16 +20,15 @@ class BookAdapter(
     var bookList: MutableList<Book>,
     private val context: Context,
     private val detailModel: DetailViewModel,
-    private val onClickListener: View.OnClickListener
+    private val onClickListener: View.OnClickListener,
 ) :
 
     RecyclerView.Adapter<BookViewHolder>() {
-    //    lateinit var context: Context
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
             val bookBinding =
                 ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
             return BookViewHolder(bookBinding)
 
     }
@@ -37,6 +37,7 @@ class BookAdapter(
         val book = bookList[position]
         holder.binding.titleBook.text = book.libroInfo.titulo
         val idLibro = book.id
+
         try {
             Picasso.get()
                 .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
@@ -64,7 +65,6 @@ class BookAdapter(
 
 class BookViewHolder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
 
-interface onClick {
 
-}
+
 

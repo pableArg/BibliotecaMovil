@@ -38,6 +38,17 @@
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@+id/sv"
             />
+
+        <ProgressBar
+            android:id="@+id/progressSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
