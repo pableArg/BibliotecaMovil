@@ -49,9 +49,8 @@ class SearchFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchBinding = FragmentSearchBinding.bind(view)
         setSearchViewListener()
-        model.setBooks()
         initRecyclerView()
-        setupObservers()
+        setBooks()
     }
 
     private fun initRecyclerView() {
@@ -88,6 +87,16 @@ class SearchFragment() : Fragment() {
 
     }
 
+    private fun setBooks(){
+        if(model.getSearchedBooks().value == null){
+            searchBinding.query.visibility = View.VISIBLE
+            model.setBooks()
+            setupObservers()
+        }
+        else{
+            setupObservers()
+        }
+    }
 
 
     private fun setupObservers() {
