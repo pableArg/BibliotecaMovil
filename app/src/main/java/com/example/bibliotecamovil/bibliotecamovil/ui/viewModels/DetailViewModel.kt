@@ -3,8 +3,7 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 
 class DetailViewModel : ViewModel() {
     val bookDetail = MutableLiveData<Book>()

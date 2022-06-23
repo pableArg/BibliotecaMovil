@@ -3,35 +3,35 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 
 class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     val booksFavLiveData = MutableLiveData<MutableList<Book>>()
-    var idFavoritos: MutableList<String> = emptyList<String>().toMutableList()
-    private var booksList: MutableList<Book> = emptyList<Book>().toMutableList()
+    var idFavoritosLiveData= MutableLiveData<MutableList<String>>()
+    private var booksList = mutableListOf<Book>()
+    var idFavoritos = mutableListOf<String>()
     val errorMessage = MutableLiveData<String>()
 
-    private fun updateBooksLiveData(bookIDList: List<String>) {
+
+    private fun updateBooksLiveData(bookIDList: MutableList<String>) {
         viewModelScope.launch {
             try {
+                idFavoritosLiveData.value=bookIDList
                 for (bookId in bookIDList) {
                     val response = bookRepository.searchBookById(bookId)
                     if (response.isSuccessful && response.body() != null) {
                         val book = response.body()!!
                         booksList.add(book)
                         booksFavLiveData.value = booksList
-
                     } else {
                         val error = response.errorBody().toString()
                         errorMessage.value = error
                     }
                 }
-
             } catch (e: Exception) {
                 Firebase.crashlytics.recordException(e)
                 errorMessage.value = e.message
@@ -49,18 +49,24 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     fun deleteOrInsert(book: Book){
          CoroutineScope(Dispatchers.IO).launch{
             if (idFavoritos.contains(book.id)) {
-                bookRepository.deleteBookFromDatabase(book.id)
-                idFavoritos.remove(book.id)
-                booksFavLiveData.value?.remove(book)
+                remove(book)
             } else {
-                bookRepository.insertBookInDatabase(book.id)
-                idFavoritos.add(book.id)
-                booksFavLiveData.value?.add(book)
+                insert(book)
             }
         }
     }
 
-    fun deleteListBooks(){
-        booksList = mutableListOf()
+    private suspend fun insert(book: Book){
+        bookRepository.insertBookInDatabase(book.id)
+        idFavoritos.add(book.id)
+        idFavoritosLiveData.value?.add(book.id)
+        booksFavLiveData.value?.add(book)
+    }
+
+    private suspend fun remove(book: Book){
+        bookRepository.deleteBookFromDatabase(book.id)
+        idFavoritos.remove(book.id)
+        idFavoritosLiveData.value?.remove(book.id)
+        booksFavLiveData.value?.remove(book)
     }
 }

@@ -5,16 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
@@ -22,10 +18,7 @@ import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.java.KoinJavaComponent.inject
 
 
 class SearchFragment() : Fragment() {
@@ -75,12 +68,10 @@ class SearchFragment() : Fragment() {
                             hideKeyboard()
                             return true
                         }
-
                         override fun onQueryTextChange(newText: String?): Boolean {
                             return false
                         }
                     })
-
         } catch (e: Exception) {
             Firebase.crashlytics.recordException(e)
         }

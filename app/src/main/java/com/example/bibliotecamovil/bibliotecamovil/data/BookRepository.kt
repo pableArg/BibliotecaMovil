@@ -1,15 +1,18 @@
-package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
+package com.example.bibliotecamovil.bibliotecamovil.data
 
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
-import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.BestSellerAPIClient
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.BookAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BestSellerResponse
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import retrofit2.Response
 
-class BookRepository (private val apiBook: BookAPIClient,
-                      private val apiBestSeller : BestSellerAPIClient, private val database : BookFavDAO) {
-
+class BookRepository (
+    private val apiBook: BookAPIClient,
+    private val apiBestSeller : BestSellerAPIClient,
+    private val database : BookFavDAO) {
 
    suspend fun getAllBooksFromDatabase(): MutableList<String> {
         val idList = mutableListOf<String>()

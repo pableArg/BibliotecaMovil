@@ -5,23 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragment
-import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragmentDirections
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
-import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import org.koin.androidx.compose.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class BookAdapter(

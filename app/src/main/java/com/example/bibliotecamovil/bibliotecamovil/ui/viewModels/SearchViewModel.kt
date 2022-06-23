@@ -2,16 +2,11 @@ package com.example.bibliotecamovil.bibliotecamovil.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BestSellerAPIClient
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
 import kotlinx.coroutines.*
 import java.lang.Exception
-import java.util.concurrent.Callable
 
 class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() {
     private val searchedBooks = MutableLiveData<MutableList<Book>>()

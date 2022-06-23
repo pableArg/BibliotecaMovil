@@ -1,4 +1,4 @@
-package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
+package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit
 
 import com.google.gson.annotations.SerializedName
 
