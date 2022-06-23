@@ -10,9 +10,8 @@
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.5" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_info.xml" value="0.1" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_fav_default.xml" value="0.149" />
+        <entry key="app/src/main/res/drawable/ic_fav_pressed.xml" value="0.219" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.108" />
@@ -29,9 +28,6 @@
         <entry key="app/src/main/res/menu/options_menu.xml" value="0.1" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/bibliotecamovil/bibliotecamovil/data/database/LibraryEntity.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
   <component name="VisualizationToolProject">

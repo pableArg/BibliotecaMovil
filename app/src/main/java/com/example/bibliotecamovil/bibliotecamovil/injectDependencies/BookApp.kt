@@ -8,6 +8,7 @@ import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Be
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.CheckFavorite
+import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookFavAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.DetailFragment
@@ -47,6 +48,7 @@ class BookApp : Application() {
         single { BestSellerAPIClient() }
         single { BookAPIClient() }
         single { DetailFragment() }
+        single { MainActivity() }
 
         //VIEWS MODELS
         viewModel { FavViewModel(get()) }

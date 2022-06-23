@@ -22,7 +22,7 @@ import com.example.bibliotecamovil.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class FavouriteFragment: Fragment() {
+class FavouriteFragment : Fragment() {
 
     private lateinit var adapter: BookAdapter
     private lateinit var favBinding: FragmentFavouriteBinding
@@ -48,22 +48,21 @@ class FavouriteFragment: Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favBinding = FragmentFavouriteBinding.bind(view)
-        setupBook()
+        //setupBook()
         initRecyclerView()
         setupObservers()
     }
 
-    override fun onDestroyView() {
+    /*override fun onDestroyView() {
         super.onDestroyView()
-        deleteBooks()
-    }
+        //deleteBooks()
+    }*/
 
     private fun setupObservers() {
-       favModel.booksFavLiveData.observe(viewLifecycleOwner) {
+        favModel.booksFavLiveData.observe(viewLifecycleOwner) {
             adapter.bookList = it
             adapter.notifyDataSetChanged()
         }
@@ -72,19 +71,20 @@ class FavouriteFragment: Fragment() {
     private fun initRecyclerView() {
         favBinding.rv.layoutManager =
             GridLayoutManager(activity, 2)
-        adapter = BookAdapter(list , requireActivity(),detailViewModel) {view ->
+        adapter = BookAdapter(list, requireActivity(), detailViewModel) { view ->
             view.findNavController()
-                .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())}
+                .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())
+        }
         favBinding.rv.adapter = adapter
     }
 
-    private fun setupBook() {
+    /*private fun setupBook() {
         favModel.setupBookDataBase()
     }
     private fun deleteBooks(){
         favModel.deleteListBooks()
 
-    }
+    }*/
 
 
 }
