@@ -11,6 +11,9 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.databinding.FragmentDetailBinding
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -39,6 +42,7 @@ class DetailFragment : Fragment() {
         setIcon(detailModel.bookDetail.value!!.id)
     }
 
+
     private fun setupDetail() {
         val book = detailModel.bookDetail.value
         detailBinding.txtTitleDetail.text = book!!.libroInfo.titulo
@@ -48,9 +52,25 @@ class DetailFragment : Fragment() {
             .into(detailBinding.imageView2)
 
         detailBinding.btnSelectFavourite.setOnClickListener {
-            favModel.deleteOrInsert(book)
-            setIcon(detailModel.bookDetail.value!!.id)
+
+            if(favModel.deleteOrInsert(book)) {
+                setIconTrue(detailModel.bookDetail.value!!.id)
+            }
+            else {
+                setIconFalse(detailModel.bookDetail.value!!.id)
+
+            }
         }
+    }
+
+    private fun setIconTrue(idBook: String) {
+        detailBinding.btnSelectFavourite.background =
+            getDrawable(requireActivity(), R.drawable.ic_fav_pressed)
+
+    }
+    private fun setIconFalse(idBook: String) {
+                    detailBinding.btnSelectFavourite.background =
+                        getDrawable(requireActivity(), R.drawable.ic_fav_default)
     }
 
     private fun setIcon(idBook: String) {
@@ -66,6 +86,7 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
 
     /*private fun setIcon(idBook: String) {
         if (favModel.idFavoritos.contains(idBook)) {
