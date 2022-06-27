@@ -23,7 +23,6 @@ class FavouriteFragment : Fragment() {
     private val favModel by sharedViewModel<FavViewModel>()
     private val list = mutableListOf<Book>()
     private val detailViewModel by sharedViewModel<DetailViewModel>()
-    //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +45,6 @@ class FavouriteFragment : Fragment() {
         setupObservers()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        deleteBooks()
-    }
-
     private fun setupObservers() {
         favModel.booksFavLiveData.observe(viewLifecycleOwner) {
             adapter.bookList = it
@@ -66,10 +60,5 @@ class FavouriteFragment : Fragment() {
                 .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())
         }
         favBinding.rv.adapter = adapter
-    }
-
-    private fun deleteBooks(){
-        favModel.deleteListBooks()
-
     }
 }

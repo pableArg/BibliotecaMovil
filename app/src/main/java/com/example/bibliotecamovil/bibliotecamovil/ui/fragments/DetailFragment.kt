@@ -50,15 +50,17 @@ class DetailFragment : Fragment() {
             .load("https://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api")
             .placeholder(R.drawable.notfound)
             .into(detailBinding.imageView2)
-
+        detailBinding.txtAuthorDetail.text="Autor: ${book.libroInfo.autores[0]}"
+        detailBinding.txtEditDetail.text="Editorial: ${book.libroInfo.editorial}"
+        detailBinding.txtCountPages.text="Páginas: ${book.libroInfo.paginas.toString()}"
+        detailBinding.txtKindDetail.text="Genero literario: ${book.kind}"
+        detailBinding.txtFechaPublicacionDetail.text="Fecha de publicaión: ${book.libroInfo.fechaPublicacion}"
         detailBinding.btnSelectFavourite.setOnClickListener {
-
             if(favModel.deleteOrInsert(book)) {
                 setIconTrue(detailModel.bookDetail.value!!.id)
             }
             else {
                 setIconFalse(detailModel.bookDetail.value!!.id)
-
             }
         }
     }
@@ -69,12 +71,11 @@ class DetailFragment : Fragment() {
 
     }
     private fun setIconFalse(idBook: String) {
-                    detailBinding.btnSelectFavourite.background =
-                        getDrawable(requireActivity(), R.drawable.ic_fav_default)
+        detailBinding.btnSelectFavourite.background =
+            getDrawable(requireActivity(), R.drawable.ic_fav_default)
     }
 
     private fun setIcon(idBook: String) {
-
         favModel.idFavoritosLiveData.observe(viewLifecycleOwner) {
             if (it.contains(idBook)) {
                 detailBinding.btnSelectFavourite.background =
@@ -86,15 +87,4 @@ class DetailFragment : Fragment() {
             }
         }
     }
-
-
-    /*private fun setIcon(idBook: String) {
-        if (favModel.idFavoritos.contains(idBook)) {
-            detailBinding.btnSelectFavourite.background =
-                getDrawable(requireActivity(), R.drawable.ic_fav_pressed)
-        } else {
-            detailBinding.btnSelectFavourite.background =
-                getDrawable(requireActivity(), R.drawable.ic_fav_default)
-        }
-    }*/
 }
