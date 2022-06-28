@@ -14,7 +14,7 @@ class BookRepository (
     private val apiBestSeller : BestSellerAPIClient,
     private val database : BookFavDAO) {
 
-   suspend fun getAllBooksFromDatabase(): MutableList<String> {
+   fun getAllBooksFromDatabase(): MutableList<String> {
         val idList = mutableListOf<String>()
         for (BookFavEntity in database.getAllBoksFavs()) {
             idList.add(BookFavEntity.id_book)
@@ -22,11 +22,11 @@ class BookRepository (
         return idList
     }
 
-    suspend fun deleteBookFromDatabase(idBook: String) {
+    fun deleteBookFromDatabase(idBook: String) {
         database.delete(BookFavEntity(idBook))
     }
 
-    suspend fun insertBookInDatabase(idBook: String) {
+    fun insertBookInDatabase(idBook: String) {
         database.insert(BookFavEntity(idBook))
     }
 

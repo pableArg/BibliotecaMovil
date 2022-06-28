@@ -4,11 +4,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="content_description_media"></string>
-    <string name="title">titulo</string>
+    <string name="title">Title</string>
     <string name="secondary_text">texto secundario</string>
     <string name="supporting_text">texto soporte</string>
     <string name="action_1">accion 1</string>
     <string name="action_2">accion 2</string>
     <string name="description">Descripcion</string>
     <string name="actuales_best_seller">ACTUALES BEST SELLER</string>
+    <string name="snackError">Ocurrio un error</string>
+    <string name="actionText">RETRY</string>
+    <string name="sinopsis">Sinopsis</string>
+    <string name="premiere">Premiere</string>
+    <string name="popularity">Popularity</string>
+    <string name="duration">Duration</string>
+    <string name="lenguaje">Lenguaje</string>
+
 </resources>

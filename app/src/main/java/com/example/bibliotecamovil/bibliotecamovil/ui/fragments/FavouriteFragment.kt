@@ -1,5 +1,6 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,7 +24,6 @@ class FavouriteFragment : Fragment() {
     private val favModel by sharedViewModel<FavViewModel>()
     private val list = mutableListOf<Book>()
     private val detailViewModel by sharedViewModel<DetailViewModel>()
-    //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +46,7 @@ class FavouriteFragment : Fragment() {
         setupObservers()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        deleteBooks()
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
         favModel.booksFavLiveData.observe(viewLifecycleOwner) {
             adapter.bookList = it
@@ -66,10 +62,5 @@ class FavouriteFragment : Fragment() {
                 .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())
         }
         favBinding.rv.adapter = adapter
-    }
-
-    private fun deleteBooks(){
-        favModel.deleteListBooks()
-
     }
 }

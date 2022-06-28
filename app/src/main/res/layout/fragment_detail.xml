@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,12 +7,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:id="@+id/end_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:transitionName="shared_element_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"  />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp">
+
+
 
 
         <ImageView
@@ -34,7 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="2"
-            android:text="Titulo de pelicula"
+            android:text="@string/title"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.627"
@@ -44,78 +58,91 @@
 
 
         <TextView
-            android:id="@+id/txtIdiomaDetail"
+            android:id="@+id/txtKindDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lenguaje "
+            android:text="@string/lenguaje"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintHorizontal_bias="0.036"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/txtTitleDetail"
-            app:layout_constraintVertical_bias="0.144" />
+            app:layout_constraintVertical_bias="0.06" />
 
         <TextView
-            android:id="@+id/txtDurationMovie"
+            android:id="@+id/txtAuthorDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Duration "
+            android:text="@string/duration"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.159"
+            app:layout_constraintHorizontal_bias="0.035"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/txtIdiomaDetail"
-            app:layout_constraintVertical_bias="0.141" />
+            app:layout_constraintTop_toBottomOf="@+id/txtKindDetail"
+            app:layout_constraintVertical_bias="0.137" />
 
         <TextView
-            android:id="@+id/txtPopularityDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/txtEditDetail"
+            android:layout_width="66dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="5dp"
-            android:text="Popularity "
+            android:text="@string/popularity"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintHorizontal_bias="0.012"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/txtDurationMovie"
-            app:layout_constraintVertical_bias="0.214" />
+            app:layout_constraintTop_toBottomOf="@+id/txtAuthorDetail"
+            app:layout_constraintVertical_bias="0.2" />
 
         <TextView
-            android:id="@+id/txtPremiereDetail"
+            android:id="@+id/txtFechaPublicacionDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Premiere "
+            android:layout_marginBottom="16dp"
+            android:text="@string/premiere"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/txtPopularityDetail"
-            app:layout_constraintVertical_bias="0.357" />
+            app:layout_constraintHorizontal_bias="0.036"
+            app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/txtSinopsis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Sinopsis"
+            android:text="@string/sinopsis"
+            style="@style/titleStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-        <TextView
-            android:id="@+id/txtSynopsisDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Un viaje al interior de las mentes del dúo ganador del premio GRAMMY Twenty One Pilots, con la épica celebración del lanzamiento del álbum Scaled And Icyde 2021, que llegará a los cines de todo el mundo el 19 de mayo, con reposiciones en salas exclusivas el 22 de mayo. Vuelve a disfrutar de la psicodélica reinvención del cine y la actuación en vivo, pero esta vez a gran escala. Con el sonido y video remasterizados para la gran pantalla, y con material inédito, la Experiencia cinematográfica deTwenty One Pilotste sumerge en el catálogo y la imaginación eclécticos de uno de los artistas más creativos de la música"
+
+        <ScrollView
+            android:layout_width="371dp"
+            android:layout_height="350dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtSinopsis"
-            app:layout_constraintVertical_bias="0.208" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp">
+
+            <TextView
+                android:id="@+id/txtSynopsisDetail"
+                android:layout_width="363dp"
+                android:layout_height="350dp"
+                android:text="Un viaje al interior de las mentes del dúo ganador del premio GRAMMY Twenty One Pilots, con la épica celebración del lanzamiento del álbum Scaled And Icyde 2021, que llegará a los cines de todo el mundo el 19 de mayo, con reposiciones en salas exclusivas el 22 de mayo. Vuelve a disfrutar de la psicodélica reinvención del cine y la actuación en vivo, pero esta vez a gran escala. Con el sonido y video remasterizados para la gran pantalla, y con material inédito, la Experiencia cinematográfica deTwenty One Pilotste sumerge en el catálogo y la imaginación eclécticos de uno de los artistas más creativos de la música"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.454"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSinopsis"
+                app:layout_constraintVertical_bias="0.743" />
+        </ScrollView>
 
         <ImageButton
             android:id="@+id/btnSelectFavourite"
@@ -127,8 +154,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
+
 
 
 

@@ -10,14 +10,6 @@
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/pablo/BibliotecaMovil/app/src/main/res/layout/item_card.xml" value="0.5" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/drawable/ic_fav_default.xml" value="0.1" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/drawable/ic_fav_pressed.xml" value="0.1" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_card.xml" value="0.1" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_detail.xml" value="0.15" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_info.xml" value="0.16203703703703703" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/fragment_search.xml" value="0.13240740740740742" />
-        <entry key="..\:/Users/usuario/Desktop/Programacion Movil II/TP/TrabajoPractico/BibliotecaMovil/app/src/main/res/layout/view_loading.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_fav_default.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/ic_fav_pressed.xml" value="0.219" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.108" />
@@ -25,11 +17,11 @@
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.108" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_card.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2087227414330218" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.48653846153846153" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.21920289855072464" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1828774062816616" />
-        <entry key="app/src/main/res/layout/item_card.xml" value="0.345458984375" />
+        <entry key="app/src/main/res/layout/item_card.xml" value="0.6497146606445312" />
         <entry key="app/src/main/res/layout/item_card_fav.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/view_loading.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.28229166666666666" />

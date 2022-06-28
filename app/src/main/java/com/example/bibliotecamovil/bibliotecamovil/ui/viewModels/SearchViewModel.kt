@@ -11,19 +11,11 @@ import java.lang.Exception
 class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() {
     private val searchedBooks = MutableLiveData<MutableList<Book>>()
 
-    val errorMessage = MutableLiveData<String>()
+    private val errorMessage = MutableLiveData<String>()
 
     fun getSearchedBooks(): MutableLiveData<MutableList<Book>>{
         return this.searchedBooks
     }
-/*
-    class Factory() : ViewModelProvider.NewInstanceFactory() {
-        // Disclaimer esto es medio termidor
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return SearchViewModel(BookRepository(BookAPIClient(), BestSellerAPIClient(),)) as T
-        }
-    }
-*/
 
     fun getBooks(nameBook: String) {
         viewModelScope.launch {
@@ -31,11 +23,7 @@ class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() 
                 val response = bookRepository.searchBooksByName(nameBook)
                 if (response.isSuccessful && response.body() != null) {
                     val books = response.body()!!
-                    if(books.items != null) {
-                        searchedBooks.value = books.items
-                    }else{
-                        searchedBooks.value = mutableListOf()
-                    }
+                    searchedBooks.value = books.items
                 } else {
                     val error = response.errorBody().toString()
                     errorMessage.value = error
@@ -54,18 +42,14 @@ class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() 
                  val response = bookRepository.searchBestSeller("hardcover-fiction")
                  if (response.isSuccessful && response.body() != null) {
                      val books = response.body()!!
-                     if (books.results.libros != null) {
 
-                             for (book in books.results.libros) {
-                                 bookRepository.searchBooksByName(book.titulo).body()?.items?.get(0)
-                                     ?.let { lista.add(it) }
-                             }
-
-                         searchedBooks.value = lista
-
-                     } else {
-                         searchedBooks.value = mutableListOf()
+                     for (book in books.results.libros) {
+                         bookRepository.searchBooksByName(book.titulo).body()?.items?.get(0)
+                             ?.let { lista.add(it) }
                      }
+
+                     searchedBooks.value = lista
+
                  } else {
                      val error = response.errorBody().toString()
                      errorMessage.value = error
