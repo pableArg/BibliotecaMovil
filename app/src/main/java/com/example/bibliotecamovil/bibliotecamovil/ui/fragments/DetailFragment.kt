@@ -56,6 +56,7 @@ class DetailFragment : Fragment() {
         detailBinding.txtKindDetail.text="Genero literario: ${book.kind}"
         detailBinding.txtFechaPublicacionDetail.text="Fecha de publicaión: ${book.libroInfo.fechaPublicacion}"
         detailBinding.btnSelectFavourite.setOnClickListener {
+
             if(favModel.deleteOrInsert(book)) {
                 setIconTrue(detailModel.bookDetail.value!!.id)
             }
