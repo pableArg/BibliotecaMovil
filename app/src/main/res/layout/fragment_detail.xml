@@ -7,12 +7,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:id="@+id/end_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:transitionName="shared_element_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"  />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp">
+
+
 
 
         <ImageView
@@ -35,8 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="2"
-            android:text="Titulo de pelicula"
-            android:textStyle="bold"
+            android:text="@string/title"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.627"
@@ -49,8 +61,8 @@
             android:id="@+id/txtKindDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lenguaje "
-            android:textStyle="bold"
+            android:text="@string/lenguaje"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.036"
@@ -63,8 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Duration "
-            android:textStyle="bold"
+            android:text="@string/duration"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.035"
@@ -78,8 +90,8 @@
             android:layout_height="20dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="5dp"
-            android:text="Popularity "
-            android:textStyle="bold"
+            android:text="@string/popularity"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.012"
@@ -92,8 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Premiere "
-            android:textStyle="bold"
+            android:text="@string/premiere"
+            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.036"
@@ -104,8 +116,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Sinopsis"
-            android:textStyle="bold"
+            android:text="@string/sinopsis"
+            style="@style/titleStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />

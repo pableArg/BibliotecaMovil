@@ -1,13 +1,17 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager.TAG
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
@@ -16,6 +20,7 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -82,11 +87,10 @@ class SearchFragment() : Fragment() {
 
     private fun setBooks() {
         if (model.getSearchedBooks().value == null) {
-            searchBinding.query.visibility = View.VISIBLE
             model.setBooks()
             setupObservers()
         } else {
-            setupObservers()
+            snackBar()
         }
     }
 
@@ -98,6 +102,18 @@ class SearchFragment() : Fragment() {
             searchBinding.rv.visibility = View.VISIBLE
             searchBinding.progressSearch.visibility = View.GONE
         }
+    }
+
+    private fun snackBar() {
+        Snackbar.make(searchBinding.constraint, R.string.snackError, Snackbar.LENGTH_LONG)
+            .setAction(R.string.actionText) {
+                setupObservers()
+            }
+            .show()
+    }
+    private fun motion (){
+        val extras = FragmentNavigatorExtras((view to "") as Pair<View, String>)
+        findNavController().navigate(R.id.action_searchFragment_to_detailFragment2, null, null, extras)
     }
 }
 

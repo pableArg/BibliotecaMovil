@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
@@ -45,13 +44,7 @@ class BookAdapter(
                 .into(holder.binding.imageBook)
             holder.binding.cardView.setOnClickListener { view ->
                 detailModel.bookDetail.value = book
-                /* .navigate(
-                SearchFragmentDirections
-                    .actionSearchFragmentToDetailFragment()
-            )*/
                 onClickListener.onClick(view);
-                //findNavController(view).navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment())
-
             }
         } catch (e: Exception) {
             Toast.makeText(context, "No se puede abrir el detalle", Toast.LENGTH_LONG).show()
