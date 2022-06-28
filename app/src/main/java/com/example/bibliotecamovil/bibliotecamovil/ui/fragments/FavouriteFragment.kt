@@ -1,5 +1,6 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,6 +46,7 @@ class FavouriteFragment : Fragment() {
         setupObservers()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
         favModel.booksFavLiveData.observe(viewLifecycleOwner) {
             adapter.bookList = it

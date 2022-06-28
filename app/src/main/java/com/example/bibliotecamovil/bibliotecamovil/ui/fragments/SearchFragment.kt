@@ -1,10 +1,10 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -20,21 +20,18 @@ import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
 class SearchFragment() : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
-    private lateinit var llContenedor: LinearLayout
-    private lateinit var llCargando: LinearLayout
 
 
     private val model by sharedViewModel<SearchViewModel>()
     private val detailViewModel by sharedViewModel<DetailViewModel>()
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
@@ -45,12 +42,14 @@ class SearchFragment() : Fragment() {
         initRecyclerView()
         setBooks()
     }
+
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
-        bookAdapter = BookAdapter(bookList, requireActivity(), detailViewModel
+        bookAdapter = BookAdapter(
+            bookList, requireActivity(), detailViewModel
         ) { view ->
             view.findNavController()
-                    .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2())
+                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2())
         }
         searchBinding.rv.adapter = bookAdapter
 
@@ -59,42 +58,41 @@ class SearchFragment() : Fragment() {
     private fun setSearchViewListener() {
         try {
             searchBinding.sv.setOnQueryTextListener(
-                    object : SearchView.OnQueryTextListener {
-                        override fun onQueryTextSubmit(query: String?): Boolean {
-                            query?.run {
+                object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        query?.run {
 
-                                model.getBooks(this)
-                            }
-                            searchBinding.rv.visibility = View.GONE
-                            searchBinding.progressSearch.visibility = View.VISIBLE
-                            hideKeyboard()
-                            return true
+                            model.getBooks(this)
                         }
-                        override fun onQueryTextChange(newText: String?): Boolean {
-                            return false
-                        }
-                    })
+                        searchBinding.rv.visibility = View.GONE
+                        searchBinding.progressSearch.visibility = View.VISIBLE
+                        hideKeyboard()
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return false
+                    }
+                })
         } catch (e: Exception) {
             Firebase.crashlytics.recordException(e)
         }
 
     }
 
-    private fun setBooks(){
-        if(model.getSearchedBooks().value == null){
+    private fun setBooks() {
+        if (model.getSearchedBooks().value == null) {
             searchBinding.query.visibility = View.VISIBLE
             model.setBooks()
             setupObservers()
-        }
-        else{
+        } else {
             setupObservers()
         }
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
         model.getSearchedBooks().observe(viewLifecycleOwner) {
-
             bookAdapter.bookList = it
             bookAdapter.notifyDataSetChanged()
             searchBinding.rv.visibility = View.VISIBLE
