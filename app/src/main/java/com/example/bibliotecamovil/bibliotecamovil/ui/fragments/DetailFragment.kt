@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.databinding.FragmentDetailBinding
@@ -54,9 +53,11 @@ class DetailFragment : Fragment() {
             .into(detailBinding.imageView2)
         detailBinding.txtAuthorDetail.text="Autor: ${book.libroInfo.autores[0]}"
         detailBinding.txtEditDetail.text="Editorial: ${book.libroInfo.editorial}"
-        detailBinding.txtKindDetail.text="Genero literario: ${book.kind}"
+        detailBinding.txtKindDetail.text="Origen: ${book.libroVenta.pais}"
         detailBinding.txtSynopsisDetail.text =  book.libroInfo.descripcion
-        detailBinding.txtFechaPublicacionDetail.text="Fecha de publicaión: ${book.libroInfo.fechaPublicacion}"
+        detailBinding.txtFechaPublicacionDetail.text="Publicaión: ${book.libroInfo.fechaPublicacion}"
+        (activity as MainActivity).supportActionBar?.title = book.libroInfo.titulo
+
         detailBinding.btnSelectFavourite.setOnClickListener {
 
             if(favModel.deleteOrInsert(book)) {

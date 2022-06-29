@@ -40,7 +40,7 @@ class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() 
              try {
                  val lista = mutableListOf<Book>()
                  val response = bookRepository.searchBestSeller("hardcover-fiction")
-                 if (response.isSuccessful && response.body() != null) {
+                     if (response.isSuccessful && response.body() != null) {
                      val books = response.body()!!
 
                      for (book in books.results.libros) {

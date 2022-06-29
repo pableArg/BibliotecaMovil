@@ -8,6 +8,4 @@ class DetailViewModel() : ViewModel() {
     val bookDetail = MutableLiveData<Book>()
 
 
-
-
 }

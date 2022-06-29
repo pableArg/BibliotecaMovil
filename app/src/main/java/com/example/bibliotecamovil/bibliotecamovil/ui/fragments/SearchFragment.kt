@@ -1,20 +1,19 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager.TAG
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
@@ -24,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class SearchFragment() : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
@@ -46,6 +46,9 @@ class SearchFragment() : Fragment() {
         setSearchViewListener()
         initRecyclerView()
         setBooks()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.betseller)
+
+
     }
 
     private fun initRecyclerView() {
@@ -71,6 +74,8 @@ class SearchFragment() : Fragment() {
                         }
                         searchBinding.rv.visibility = View.GONE
                         searchBinding.progressSearch.visibility = View.VISIBLE
+                        (activity as MainActivity).supportActionBar?.title = query
+
                         hideKeyboard()
                         return true
                     }
@@ -86,12 +91,8 @@ class SearchFragment() : Fragment() {
     }
 
     private fun setBooks() {
-        if (model.getSearchedBooks().value == null) {
             model.setBooks()
             setupObservers()
-        } else {
-            snackBar()
-        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -105,15 +106,16 @@ class SearchFragment() : Fragment() {
     }
 
     private fun snackBar() {
-        Snackbar.make(searchBinding.constraint, R.string.snackError, Snackbar.LENGTH_LONG)
+        Snackbar.make(searchBinding.constraint,R.string.snackError, Snackbar.LENGTH_LONG)
             .setAction(R.string.actionText) {
                 setupObservers()
+                searchBinding.progressSearch.visibility = View.GONE
             }
             .show()
     }
     private fun motion (){
         val extras = FragmentNavigatorExtras((view to "") as Pair<View, String>)
-        findNavController().navigate(R.id.action_searchFragment_to_detailFragment2, null, null, extras)
+        findNavController().navigate(com.example.bibliotecamovil.R.id.action_searchFragment_to_detailFragment2, null, null, extras)
     }
 }
 

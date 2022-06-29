@@ -18,5 +18,9 @@
     <string name="popularity">Popularity</string>
     <string name="duration">Duration</string>
     <string name="lenguaje">Lenguaje</string>
+    <string name="betseller">Betseller</string>
+    <string name="favourite">Favourite</string>
+    <string name="infoApp">Info App</string>
+
 
 </resources>

@@ -6,6 +6,7 @@ import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatab
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.BestSellerAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.BookAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.ArticleAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.DetailFragment
@@ -33,15 +34,17 @@ class BookApp : Application() {
     }
 
     val appModule = module {
-        factory { BookAdapter(get(),get(),get(),get()) }
-        single { LibraryFavDatabase.getDatabase(get()).bookFavDao()}
-        single { BookRepository(get(), get(), get()) }
+        factory { BookAdapter(get(), get(), get(), get()) }
+        single { LibraryFavDatabase.getDatabase(get()).bookFavDao() }
+        single { BookRepository(get(), get(), get(),get()) }
         single { SearchFragment() }
         single { FavouriteFragment() }
         single { BestSellerAPIClient() }
         single { BookAPIClient() }
+        single { ArticleAPIClient() }
         single { DetailFragment() }
         single { MainActivity() }
+
 
         //VIEWS MODELS
         viewModel { FavViewModel(get()) }

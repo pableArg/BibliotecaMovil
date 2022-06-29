@@ -42,6 +42,7 @@ class BookAdapter(
                 .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
                 .placeholder(R.drawable.notfound)
                 .into(holder.binding.imageBook)
+
             holder.binding.cardView.setOnClickListener { view ->
                 detailModel.bookDetail.value = book
                 onClickListener.onClick(view);

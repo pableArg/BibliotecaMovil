@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
@@ -44,6 +45,13 @@ class FavouriteFragment : Fragment() {
         favBinding = FragmentFavouriteBinding.bind(view)
         initRecyclerView()
         setupObservers()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.favourite)
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter.bookList= mutableListOf()
     }
 
     @SuppressLint("NotifyDataSetChanged")

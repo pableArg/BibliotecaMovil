@@ -11,7 +11,7 @@ import kotlinx.coroutines.*
 
 class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     val booksFavLiveData = MutableLiveData<MutableList<Book>>()
-    var idFavoritosLiveData= MutableLiveData<MutableList<String>>()
+    var idFavoritosLiveData = MutableLiveData<MutableList<String>>()
     private var booksList = mutableListOf<Book>()
     private var idFavoritos = mutableListOf<String>()
     private val errorMessage = MutableLiveData<String>()
@@ -19,7 +19,7 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     private fun updateBooksLiveData(bookIDList: MutableList<String>) {
         viewModelScope.launch {
             try {
-                idFavoritosLiveData.value=bookIDList
+                idFavoritosLiveData.value = bookIDList
                 for (bookId in bookIDList) {
                     val response = bookRepository.searchBookById(bookId)
                     if (response.isSuccessful && response.body() != null) {
@@ -45,9 +45,9 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         }
     }
 
-    fun deleteOrInsert(book: Book) : Boolean{
-        return if (idFavoritos.contains(book.id)) {
-            remove(book)
+    fun deleteOrInsert(book: Book): Boolean {
+        return if (idFavoritosLiveData.value?.contains(book.id) == true) {
+            removeS(book)
             false
         } else {
             insert(book)
@@ -55,27 +55,22 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         }
     }
 
-    private fun insert(book: Book){
+    private fun insert(book: Book) {
         CoroutineScope(Dispatchers.IO).launch {
             bookRepository.insertBookInDatabase(book.id)
         }
-        viewModelScope.launch {
-            idFavoritos.add(book.id)
-            idFavoritosLiveData.value=idFavoritos
-            booksList.add(book)
-            booksFavLiveData.value=booksList
-        }
+        idFavoritos.add(book.id)
+        idFavoritosLiveData.value = idFavoritos
+        booksList.add(book)
+        booksFavLiveData.value = booksList
     }
-
-    private fun remove(book: Book){
+    private fun removeS(book: Book) {
         CoroutineScope(Dispatchers.IO).launch {
             bookRepository.deleteBookFromDatabase(book.id)
         }
-        viewModelScope.launch {
-            idFavoritos.remove(book.id)
-            idFavoritosLiveData.value=idFavoritos
-            booksList.remove(book)
-            booksFavLiveData.value=booksList
-        }
+        idFavoritos.remove(book.id)
+        idFavoritosLiveData.value = idFavoritos
+        booksList.remove(book)
+        booksFavLiveData.value = booksList
     }
 }
