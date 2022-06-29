@@ -59,6 +59,8 @@ class FavouriteFragment : Fragment() {
         favModel.booksFavLiveData.observe(viewLifecycleOwner) {
             adapter.bookList = it
             adapter.notifyDataSetChanged()
+            //favBinding.rv.visibility = View.VISIBLE
+            //favBinding.progressSearch.visibility = View.GONE
         }
     }
 
