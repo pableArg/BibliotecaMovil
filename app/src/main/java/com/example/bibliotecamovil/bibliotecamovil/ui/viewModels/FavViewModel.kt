@@ -78,4 +78,11 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
             booksFavLiveData.value=booksList
         }
     }
+
+    fun cleanLists() {
+        idFavoritosLiveData.value?.clear()
+        idFavoritos.clear()
+        booksList.clear()
+        booksFavLiveData.value?.clear()
+    }
 }

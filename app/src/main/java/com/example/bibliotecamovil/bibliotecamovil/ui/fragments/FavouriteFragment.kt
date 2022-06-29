@@ -49,8 +49,10 @@ class FavouriteFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
         favModel.booksFavLiveData.observe(viewLifecycleOwner) {
+            favBinding.rv.visibility = View.VISIBLE
             adapter.bookList = it
             adapter.notifyDataSetChanged()
+            favBinding.progressSearch.visibility = View.GONE
         }
     }
 

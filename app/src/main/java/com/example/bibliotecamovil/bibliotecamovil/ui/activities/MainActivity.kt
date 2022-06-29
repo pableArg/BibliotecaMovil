@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         favModel.setupBookDataBase()
     }
 
-
+    override fun onStop() {
+        super.onStop()
+        favModel.cleanLists()
+    }
 
 }
