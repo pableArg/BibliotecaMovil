@@ -29,8 +29,6 @@ class SearchFragment() : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
-
-
     private val model by sharedViewModel<SearchViewModel>()
     private val detailViewModel by sharedViewModel<DetailViewModel>()
 
@@ -45,11 +43,12 @@ class SearchFragment() : Fragment() {
         searchBinding = FragmentSearchBinding.bind(view)
         setSearchViewListener()
         initRecyclerView()
-        setBooks()
+        setupObservers()
         (activity as MainActivity).supportActionBar?.title = getString(R.string.betseller)
 
 
     }
+
 
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
@@ -70,12 +69,11 @@ class SearchFragment() : Fragment() {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         query?.run {
 
-                            model.getBooks(this)
+                            model.setBooks(this)
                         }
                         searchBinding.rv.visibility = View.GONE
                         searchBinding.progressSearch.visibility = View.VISIBLE
                         (activity as MainActivity).supportActionBar?.title = query
-
                         hideKeyboard()
                         return true
                     }
@@ -90,11 +88,6 @@ class SearchFragment() : Fragment() {
 
     }
 
-    private fun setBooks() {
-            model.setBooks()
-            setupObservers()
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
         model.getSearchedBooks().observe(viewLifecycleOwner) {
@@ -106,16 +99,24 @@ class SearchFragment() : Fragment() {
     }
 
     private fun snackBar() {
-        Snackbar.make(searchBinding.constraint,R.string.snackError, Snackbar.LENGTH_LONG)
+        Snackbar.make(searchBinding.constraint, R.string.snackError, Snackbar.LENGTH_LONG)
             .setAction(R.string.actionText) {
                 setupObservers()
                 searchBinding.progressSearch.visibility = View.GONE
             }
             .show()
     }
-    private fun motion (){
+
+    private fun motion() {
         val extras = FragmentNavigatorExtras((view to "") as Pair<View, String>)
-        findNavController().navigate(com.example.bibliotecamovil.R.id.action_searchFragment_to_detailFragment2, null, null, extras)
+        findNavController().navigate(
+            com.example.bibliotecamovil.R.id.action_searchFragment_to_detailFragment2,
+            null,
+            null,
+            extras
+        )
     }
+
+
 }
 
