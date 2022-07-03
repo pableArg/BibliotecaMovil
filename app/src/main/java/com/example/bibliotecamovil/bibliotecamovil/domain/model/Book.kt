@@ -28,33 +28,10 @@ data class VolumeInfo(
     @SerializedName("publishedDate")
     var fechaPublicacion : String,
     @SerializedName("description")
-    var descripcion : String,
-    @SerializedName("pageCount")
-    val paginas : Int,
-    @SerializedName("imageLinks")
-    var imagenes : ImageLink
+    var descripcion : String
 )
 
 data class SaleInfo(
     @SerializedName("country")
-    var pais : String,
-    @SerializedName("list_price")
-    var precioLista : ListPrice,
-    @SerializedName("retail_price")
-    var precioMenor : RetailPrice
-)
-data class ListPrice(
-    @SerializedName("amount")
-    var monto : Double
-)
-data class RetailPrice(
-    @SerializedName("amount")
-    var monto : Double
-)
-
-data class ImageLink(
-    @SerializedName("smallThumbnail")
-    var icono : String,
-    @SerializedName("thumbnail")
-    var imagen : String
+    var pais : String
 )
