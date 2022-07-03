@@ -32,12 +32,12 @@ class ArticleAdapter(var articleList : MutableList<Article>, val context : Conte
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = articleList[position]
         val url = article.urlArticulo
-
+        val imagenId = article.imagen_id
         holder.binding.price.text = article.precio.toString()
 
         try{
             Picasso.get()
-                .load("https://http2.mlstatic.com/D_896200-MLA31453103659_072019-I.jpg")
+                .load("https://http2.mlstatic.com/D_$imagenId-I.jpg")
                 .placeholder(R.drawable.notfound)
                 .into(holder.binding.imageArticle)
 
