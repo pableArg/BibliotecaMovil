@@ -15,25 +15,9 @@ data class Article(
     var cantidadDisponible : Int,
     @SerializedName("thumbnail")
     var imagen : String,
+    @SerializedName("thumbnail_id")
+    var imagen_id : String,
     @SerializedName("permalink")
-    var urlArticulo : String,
-    @SerializedName("category_id")
-    var categoria_id : String,
-    @SerializedName("currency_id")
-    var moneda_id : String,
-    @SerializedName("shipping")
-    var envio : Shipping
+    var urlArticulo : String
 )
 
-data class Shipping(
-    @SerializedName("free_shipping")
-    var envio_gratis : Boolean,
-    @SerializedName("mode")
-    var modo : String,
-    @SerializedName("tags")
-    var etiquetas : ArrayList<String>,
-    @SerializedName("logistic_type")
-    var logistica : String,
-    @SerializedName("store_pick_up")
-    var buscarEnLocal : Boolean
-)
