@@ -58,7 +58,7 @@ class DetailFragment : Fragment() {
         detailBinding.txtEditDetail.text="Editorial: ${book.libroInfo.editorial}"
         detailBinding.txtKindDetail.text="Origen: ${book.libroVenta.pais}"
         detailBinding.txtSynopsisDetail.text =  book.libroInfo.descripcion
-        detailBinding.txtFechaPublicacionDetail.text="Publicaión: ${book.libroInfo.fechaPublicacion}"
+        detailBinding.txtFechaPublicacionDetail.text="Fecha de publicación: ${book.libroInfo.fechaPublicacion}"
         (activity as MainActivity).supportActionBar?.title = book.libroInfo.titulo
 
         detailBinding.btnSelectFavourite.setOnClickListener {
