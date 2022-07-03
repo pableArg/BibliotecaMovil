@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.navigation.fragment.findNavController
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
+import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.ArticleViewHolder
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.ArticlesViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.load
@@ -23,7 +26,7 @@ class DetailFragment : Fragment() {
     private lateinit var detailBinding: FragmentDetailBinding
     private val detailModel by sharedViewModel<DetailViewModel>()
     private val favModel by sharedViewModel<FavViewModel>()
-
+    private val articleModel by sharedViewModel<ArticlesViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +69,9 @@ class DetailFragment : Fragment() {
             else {
                 setIconFalse()
             }
+        }
+        detailBinding.buttonML.setOnClickListener {
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragment2ToArticlesFragment(book.libroInfo.titulo))
         }
     }
 

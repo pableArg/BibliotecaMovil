@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Article(
     @SerializedName("id")
-    var id : Int,
+    var id : String,
     @SerializedName("title")
     var titulo : String,
     @SerializedName("price")
@@ -15,6 +15,8 @@ data class Article(
     var cantidadDisponible : Int,
     @SerializedName("thumbnail")
     var imagen : String,
+    @SerializedName("permalink")
+    var urlArticulo : String,
     @SerializedName("category_id")
     var categoria_id : String,
     @SerializedName("currency_id")

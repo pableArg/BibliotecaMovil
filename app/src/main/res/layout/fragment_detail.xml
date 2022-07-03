@@ -150,8 +150,24 @@
             app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginBottom="50dp"
+            card_view:cardElevation="7dp"
+            card_view:cardCornerRadius="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+        <ImageButton
+            android:id="@+id/buttonML"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon_meli"
+            />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 

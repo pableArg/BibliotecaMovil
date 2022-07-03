@@ -27,8 +27,9 @@ interface BookAPI {
     @GET("volumes/{id}?&key=$API_KEY")
     suspend fun searchLibro(@Path("id") id: String): Response<Book>
 
+    //&category=MLA3025
     //Obtengo el listado de los articulos por nombre
-    @GET("sites/$SITE_ID/search")
+    @GET("sites/$SITE_ID/search?q=&category=MLA3025")
     suspend fun getArticulos(@Query("q") nombreArt: String): Response<ArticleResponse>
 
     @GET("{name}.json?api-key=$API_KEY_NY")

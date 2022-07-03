@@ -8,10 +8,13 @@ import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Boo
 import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.ArticleAPIClient
 import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
+import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.ArticleAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
+import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.ArticlesFragment
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.DetailFragment
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.FavouriteFragment
 import com.example.bibliotecamovil.bibliotecamovil.ui.fragments.SearchFragment
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.ArticlesViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
@@ -35,6 +38,7 @@ class BookApp : Application() {
 
     val appModule = module {
         factory { BookAdapter(get(), get(), get(), get()) }
+        factory {  ArticleAdapter(get(), get()) }
         single { LibraryFavDatabase.getDatabase(get()).bookFavDao() }
         single { BookRepository(get(), get(), get(),get()) }
         single { SearchFragment() }
@@ -43,6 +47,7 @@ class BookApp : Application() {
         single { BookAPIClient() }
         single { ArticleAPIClient() }
         single { DetailFragment() }
+        single{ArticlesFragment()}
         single { MainActivity() }
 
 
@@ -50,6 +55,7 @@ class BookApp : Application() {
         viewModel { FavViewModel(get()) }
         viewModel { SearchViewModel(get()) }
         viewModel { DetailViewModel() }
+        viewModel{ ArticlesViewModel(get())}
     }
 }
 
