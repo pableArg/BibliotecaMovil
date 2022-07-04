@@ -21,6 +21,7 @@
     <string name="betseller">Betseller</string>
     <string name="favourite">Favourite</string>
     <string name="infoApp">Info App</string>
+    <string name="txtRetry">Retry</string>
 
 
 </resources>

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
+import com.example.bibliotecamovil.bibliotecamovil.utils.load
+import com.example.bibliotecamovil.bibliotecamovil.utils.tost
 import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
@@ -24,31 +26,30 @@ class BookAdapter(
 
     RecyclerView.Adapter<BookViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-            val bookBinding =
-                ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-            return BookViewHolder(bookBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+        val bookBinding =
+            ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return BookViewHolder(bookBinding)
 
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
+
         val book = bookList[position]
         holder.binding.titleBook.text = book.libroInfo.titulo
         val idLibro = book.id
-
+        val image = holder.binding.imageBook
         try {
-            Picasso.get()
-                .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
-                .placeholder(R.drawable.notfound)
-                .into(holder.binding.imageBook)
+            image.load(idLibro)
 
             holder.binding.cardView.setOnClickListener { view ->
                 detailModel.bookDetail.value = book
                 onClickListener.onClick(view);
             }
         } catch (e: Exception) {
-            Toast.makeText(context, "No se puede abrir el detalle", Toast.LENGTH_LONG).show()
+            context.tost(R.string.snackError)
             Firebase.crashlytics.recordException(e)
         }
     }
