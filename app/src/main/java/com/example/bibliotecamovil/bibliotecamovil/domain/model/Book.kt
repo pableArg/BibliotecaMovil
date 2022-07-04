@@ -1,4 +1,4 @@
-package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
+package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit
 
 import com.google.gson.annotations.SerializedName
 
@@ -12,7 +12,9 @@ data class Book(
     @SerializedName("id")
     var id : String,
     @SerializedName("volumeInfo")
-    var libroInfo : VolumeInfo
+    var libroInfo : VolumeInfo,
+    @SerializedName("saleInfo")
+    val libroVenta : SaleInfo
 )
 
 data class VolumeInfo(
@@ -26,9 +28,10 @@ data class VolumeInfo(
     @SerializedName("publishedDate")
     var fechaPublicacion : String,
     @SerializedName("description")
-    var descripcion : String,
-    @SerializedName("pageCount")
-    val paginas : Int,
+    var descripcion : String
 )
 
-
+data class SaleInfo(
+    @SerializedName("country")
+    var pais : String
+)

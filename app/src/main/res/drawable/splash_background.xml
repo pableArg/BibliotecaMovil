@@ -5,8 +5,8 @@
     <item android:drawable="@color/black"/>
 
     <item
-        android:width="150dp"
-        android:height="150dp"
+        android:width="@dimen/widthSplash"
+        android:height="@dimen/heightSplash"
         android:gravity="center"
         >
             <bitmap android:src="@drawable/books"/>

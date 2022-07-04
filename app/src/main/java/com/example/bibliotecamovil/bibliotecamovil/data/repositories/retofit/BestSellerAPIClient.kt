@@ -1,7 +1,6 @@
-package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit
+package com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit
 
 import com.example.bibliotecamovil.bibliotecamovil.domain.model.BestSellerResponse
-import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

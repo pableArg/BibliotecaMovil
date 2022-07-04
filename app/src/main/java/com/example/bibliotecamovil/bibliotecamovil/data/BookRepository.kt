@@ -2,45 +2,49 @@ package com.example.bibliotecamovil.bibliotecamovil.data
 
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavDAO
 import com.example.bibliotecamovil.bibliotecamovil.data.database.BookFavEntity
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.ArticleAPIClient
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.BestSellerAPIClient
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.BookAPIClient
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.Article
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.ArticleResponse
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BestSellerResponse
+import com.example.bibliotecamovil.bibliotecamovil.domain.model.BookResponse
+import retrofit2.Response
 
-class BookRepository (private val api: BookAPIClient, private val bookDao: BookFavDAO){
+class BookRepository (
+    private val apiBook: BookAPIClient,
+    private val apiBestSeller : BestSellerAPIClient,
+    private val apiArticle : ArticleAPIClient,
+    private val database : BookFavDAO) {
 
-    //Traigo lo que tengo en la Database y lo tranformo al modelo de dominio
-    /* Hay que ver como hacer xq tenemos que pasar los ids por la API para traer
-    los demas datos de cada libro
-    */
-    suspend fun getAllBooksFromDatabase():List<Book>{
-        return formatResponse(bookDao.getAllBoksFavs())
-    }
-
-    suspend fun deleteBookFromDatabase(book: BookFavEntity){
-         bookDao.delete(book)
-    }
-
-    private fun formatResponse(response: List<BookFavEntity>): List<Book> {
-        val books= mutableListOf<Book>()
-        for (bookFavEntity in response) {
-            //corrutina
-            CoroutineScope(Dispatchers.IO).launch {
-                ///CREO QUE FALTA UNA VALIDACION DEL RESPONSE DEL API.SEARCH(...)
-                api.searchLibro((bookFavEntity.id_book.toString())).body()?.let { books.add(it) }
-            }
+   fun getAllBooksFromDatabase(): MutableList<String> {
+        val idList = mutableListOf<String>()
+        for (BookFavEntity in database.getAllBoksFavs()) {
+            idList.add(BookFavEntity.id_book)
         }
-        return books
+        return idList
     }
 
-    suspend fun insertBookFav(bookFav: BookFavEntity){
-        bookDao.insert(bookFav)
+    fun deleteBookFromDatabase(idBook: String) {
+        database.delete(BookFavEntity(idBook))
     }
-    /*
-    TRAIGO DE LA API Y LO TRANSFORMO AL MODELO DE DOMAIN
-    suspend fun getAllBooksFromApi(): List<Book/*book_model_domain*/> {
-        val response: List<QuoteModel> = api.getQuotes()
-        return response.map { it.toDomain() }
-    }*/
+
+    fun insertBookInDatabase(idBook: String) {
+        database.insert(BookFavEntity(idBook))
+    }
+
+    suspend fun searchBookById(idBook: String): Response<Book> {
+        return apiBook.searchLibro(idBook)
+    }
+
+    suspend fun searchBooksByName(nameBook : String) : Response<BookResponse>{
+        return apiBook.getLibros(nameBook)
+    }
+    suspend fun searchBestSeller(nameList : String) : Response<BestSellerResponse>{
+        return apiBestSeller.getBestSeller(nameList)
+    }
+    suspend fun searchArticleByName(nameArticle : String) : Response<ArticleResponse>{
+        return apiArticle.getArticulos(nameArticle)
+    }
 }

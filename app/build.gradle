@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
-
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -12,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.example.bibliotecamovil"
         minSdk 24
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -33,13 +34,14 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding{
+    dataBinding {
         enabled = true
     }
     buildFeatures {
-        viewBinding  true
+        viewBinding true
 
     }
+    buildToolsVersion '33.0.0'
 
 
 }
@@ -54,10 +56,12 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.firebase:firebase-common-ktx:20.1.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation "androidx.cardview:cardview:1.0.0"
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -102,4 +106,16 @@ dependencies {
 
     //Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //FIREBASE
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    //Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    //Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // Auth
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
 }

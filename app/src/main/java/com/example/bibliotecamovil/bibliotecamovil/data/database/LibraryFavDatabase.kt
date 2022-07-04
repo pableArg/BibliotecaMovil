@@ -15,16 +15,18 @@ abstract class LibraryFavDatabase : RoomDatabase() {
     abstract fun bookFavDao(): BookFavDAO
     abstract fun libraryDao():LibraryDAO
 
-    companion object{
-        private var INSTANCE : LibraryFavDatabase? = null
-        fun getDatabase(context : Context) : LibraryFavDatabase{
-
-            INSTANCE = INSTANCE ?: Room.databaseBuilder(context.applicationContext , LibraryFavDatabase::class.java , "cards").build()
-
+    companion object {
+        private var INSTANCE: LibraryFavDatabase? = null
+        fun getDatabase(context: Context): LibraryFavDatabase {
+            INSTANCE = INSTANCE ?: Room.databaseBuilder(
+                context.applicationContext,
+                LibraryFavDatabase::class.java,
+                "cards"
+            ).build()
             return INSTANCE!!
         }
 
-        fun destroyInstance(){
+        fun destroyInstance() {
             INSTANCE = null
         }
     }

@@ -15,4 +15,5 @@ interface BookFavDAO {
     fun delete(entity: BookFavEntity)
     @Insert
     fun insert(entity: BookFavEntity)
+
 }

@@ -1,6 +1,6 @@
 package com.example.bibliotecamovil.bibliotecamovil.domain.model
 
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 import com.google.gson.annotations.SerializedName
 
 class BestSellerResponse(val results : BestSellers)

@@ -1,91 +1,77 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bibliotecamovil.R
-import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryFavDatabase
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.Book
-import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retrofit.BookAPIClient
+import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
+import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
-import com.example.bibliotecamovil.databinding.FragmentBookstoreBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
+import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
+import com.example.bibliotecamovil.databinding.FragmentFavouriteBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class FavouriteFragment : Fragment() {
 
-    private lateinit var bookAdapter: BookAdapter
-    private lateinit var favBinding: FragmentBookstoreBinding
-    private val bookList = mutableListOf<Book>()
-    private lateinit var database : LibraryFavDatabase
-    val errorMessage = MutableLiveData<String>()
-    //private val model: FavViewModel by activityViewModels() { FavViewModel.Factory() }
+    private lateinit var adapter: BookAdapter
+    private lateinit var favBinding: FragmentFavouriteBinding
+    private val favModel by sharedViewModel<FavViewModel>()
+    private val list = mutableListOf<Book>()
+    private val detailViewModel by sharedViewModel<DetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bookstore, container, false)
+        return inflater.inflate(R.layout.fragment_favourite, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        favBinding = FragmentBookstoreBinding.bind(view)
+        favBinding = FragmentFavouriteBinding.bind(view)
         initRecyclerView()
         setupObservers()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.favourite)
+
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter.bookList= mutableListOf()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
-       /* model.getFavBooks().observe(viewLifecycleOwner) {
-            bookFavAdapter.bookFavList = it
-            bookFavAdapter.notifyDataSetChanged()
-        }*/
-    }
-
-
-    private fun initRecyclerView() {
-        favBinding.rv.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        bookAdapter = BookAdapter(bookList)
-        favBinding.rv.adapter = bookAdapter
-
-    }
-
-    private fun mostrarLibros(){
-
-    val books = database.bookFavDao().getAllBoksFavs()
-
-        for(book in books){
-            CoroutineScope(Dispatchers.IO).launch {
-            try {
-                    val response = BookAPIClient().searchLibro(book.id_book)
-                    if(response.isSuccessful && response.body() != null){
-                        bookList.add(response.body()!!)
-                    }
-                    else{
-                        val error = response.errorBody().toString()
-                        errorMessage.value = error
-                    }
-                }
-            catch (e : Exception) {
-                errorMessage.value = e.message
-            }
-            }
-            }
-
+        favModel.booksFavLiveData.observe(viewLifecycleOwner) {
+            adapter.bookList = it
+            adapter.notifyDataSetChanged()
+            //favBinding.rv.visibility = View.VISIBLE
+            //favBinding.progressSearch.visibility = View.GONE
         }
     }
 
+    private fun initRecyclerView() {
+        favBinding.rv.layoutManager =
+            GridLayoutManager(activity, 2)
+        adapter = BookAdapter(list, requireActivity(), detailViewModel) { view ->
+            view.findNavController()
+                .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())
+        }
+        favBinding.rv.adapter = adapter
+    }
 
+
+}
