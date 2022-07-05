@@ -14,6 +14,7 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
 import com.example.bibliotecamovil.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -26,16 +27,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         setAppBar()
         getBetseller()
         validationInDataBase()
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.findNavController()
         appBarConfiguration(navController)
         navigateInFragment(navController)
-
-
 
 
     }
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.detailFragment2 -> {
                     binding.bottomNavigationView.visibility = View.INVISIBLE
                 }
-                R.id.searchFragment, R.id.favouriteFragment, R.id.infoFragment, R.id.articlesFragment-> {
+                R.id.searchFragment, R.id.favouriteFragment, R.id.infoFragment, R.id.articlesFragment -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
             }
