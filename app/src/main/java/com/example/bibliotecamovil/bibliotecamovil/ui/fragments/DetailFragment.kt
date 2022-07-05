@@ -49,13 +49,12 @@ class DetailFragment : Fragment() {
     private fun setupDetail() {
         val image : ImageView = detailBinding.imageView2
         val book = detailModel.bookDetail.value
-        detailBinding.txtTitleDetail.text = book!!.libroInfo.titulo
+        detailBinding.txtTitleDetail.text= book!!.libroInfo.titulo
         image.loadBooks(book.id)
         detailBinding.txtAuthorDetail.text="Autor: ${book.libroInfo.autores[0]}"
         detailBinding.txtEditDetail.text="Editorial: ${book.libroInfo.editorial}"
         detailBinding.txtKindDetail.text="Origen: ${book.libroVenta.pais}"
         detailBinding.txtSynopsisDetail.text =  book.libroInfo.descripcion
-        detailBinding.txtFechaPublicacionDetail.text="Fecha de publicación: ${book.libroInfo.fechaPublicacion}"
         (activity as MainActivity).supportActionBar?.title = book.libroInfo.titulo
 
         detailBinding.btnSelectFavourite.setOnClickListener {

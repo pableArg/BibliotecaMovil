@@ -44,7 +44,7 @@ class SearchFragment() : Fragment() {
         setSearchViewListener()
         initRecyclerView()
         setupObservers()
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.betseller)
+        (activity as MainActivity).supportActionBar?.title = model.text
 
 
     }
