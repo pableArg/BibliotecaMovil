@@ -34,7 +34,7 @@ class BookAdapter(
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = bookList[position]
-        holder.binding.titleBook.text = book.libroInfo.titulo
+        holder.binding.tittleBook.text = book.libroInfo.titulo
         val idLibro = book.id
 
         try {

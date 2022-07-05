@@ -44,7 +44,7 @@ class SearchFragment() : Fragment() {
         setSearchViewListener()
         initRecyclerView()
         setupObservers()
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.betseller)
+        (activity as MainActivity).supportActionBar?.title = model.getText()
 
 
     }
@@ -52,6 +52,7 @@ class SearchFragment() : Fragment() {
 
     private fun initRecyclerView() {
         searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
+
         bookAdapter = BookAdapter(
             bookList, requireActivity(), detailViewModel
         ) { view ->
@@ -71,6 +72,7 @@ class SearchFragment() : Fragment() {
 
                             model.setBooks(this)
                         }
+                        (activity as MainActivity).supportActionBar
                         searchBinding.rv.visibility = View.GONE
                         searchBinding.progressSearch.visibility = View.VISIBLE
                         (activity as MainActivity).supportActionBar?.title = query

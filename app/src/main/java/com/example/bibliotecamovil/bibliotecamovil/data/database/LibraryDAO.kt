@@ -9,10 +9,13 @@ import androidx.room.Query
 interface LibraryDAO {
 
     @Query("SELECT * FROM libraries")
-    fun getLibraries() : List<LibraryEntity>
+    fun getLibraries() : MutableList<LibraryEntity>
 
-    @Query("SELECT B.id_book FROM libraries L JOIN favs_books B ON L.id = B.libraryId")
-    fun getBookByLibrary() : List<BookFavEntity>
+    @Query("SELECT fv.id_book FROM libraries l join include i on l.id_library = i.id_library "+
+            "join favs_books fv on i.id_book = fv.id_book " +
+            "where i.id_library = :idLibrary"
+    )
+    fun getBooksByLibrary(idLibrary : String) : MutableList<BookFavEntity>
 
     @Insert
     fun insert(library : LibraryEntity)

@@ -11,14 +11,20 @@ import java.lang.Exception
 class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() {
     private val searchedBooks = MutableLiveData<MutableList<Book>>()
     private val errorMessage = MutableLiveData<String>()
+    private var text = "Best Seller"
 
     fun getSearchedBooks(): MutableLiveData<MutableList<Book>>{
         return this.searchedBooks
     }
 
+    fun getText() : String{
+        return text
+    }
 
     fun setBooks(nameBook: String) {
         viewModelScope.launch {
+                text = nameBook
+
             try {
                 val response = bookRepository.searchBooksByName(nameBook)
                 if (response.isSuccessful && response.body() != null) {
@@ -34,6 +40,7 @@ class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() 
 
         }
     }
+
     fun setBetseller() {
         viewModelScope.launch {
             try {
