@@ -13,20 +13,21 @@
     <string name="snackError">Ocurrio un error</string>
     <string name="actionText">RETRY</string>
     <string name="sinopsis">Sinopsis</string>
-    <string name="premiere">Premiere</string>
-    <string name="popularity">Popularity</string>
-    <string name="duration">Duration</string>
-    <string name="lenguaje">Lenguaje</string>
+    <string name="f_publicacion">Fecha de publicacion</string>
+    <string name="editorial">Editorial</string>
+    <string name="author">Author</string>
+    <string name="origen">Origen</string>
     <string name="betseller">Betseller</string>
     <string name="favourite">Favourite</string>
     <string name="infoApp">Info App</string>
     <string name="txtRetry">Retry</string>
-    <string name="errorOpenMeli">No se pudo abrir Mercalo Libre</string>
-    <string name="buyInMeli">Compra en Mercado Libre</string>
-    <string name="pesos">Pesos</string>
-    <string name="searchMeli">Busca en Mercado Libre</string>
+    <string name="errorOpenMeli">No se pudo abrir Mercado Libre</string>
+    <string name="buyInMeli">Comprar en Mercado Libre</string>
+    <string name="pesos">$</string>
+    <string name="searchMeli">Busqueda en Mercado Libre</string>
     <string name="image">Image</string>
     <string name="exampleSynopsis">Un viaje al interior de las mentes del dúo ganador del premio GRAMMY Twenty One Pilots, con la épica celebración del lanzamiento del álbum Scaled And Icyde 2021, que llegará a los cines de todo el mundo el 19 de mayo, con reposiciones en salas exclusivas el 22 de mayo. Vuelve a disfrutar de la psicodélica reinvención del cine y la actuación en vivo, pero esta vez a gran escala. Con el sonido y video remasterizados para la gran pantalla, y con material inédito, la Experiencia cinematográfica deTwenty One Pilotste sumerge en el catálogo y la imaginación eclécticos de uno de los artistas más creativos de la música</string>
+    <string name="precio">Precio</string>
 
 
 </resources>
