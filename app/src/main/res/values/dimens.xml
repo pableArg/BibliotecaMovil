@@ -2,4 +2,5 @@
 <resources>
     <dimen name="widthSplash"> 150dp</dimen>
     <dimen name="heightSplash"> 150dp</dimen>
+    <dimen name="corner"> 14dp</dimen>
 </resources>

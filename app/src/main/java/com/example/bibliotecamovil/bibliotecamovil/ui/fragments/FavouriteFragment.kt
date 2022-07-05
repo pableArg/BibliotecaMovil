@@ -1,7 +1,7 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,10 +41,10 @@ class FavouriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.favourite)
         favBinding = FragmentFavouriteBinding.bind(view)
         initRecyclerView()
         setupObservers()
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.favourite)
 
     }
 
@@ -62,8 +62,23 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
+
+        val orientation = resources.configuration.orientation
+        when (orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                setSpanCount(4)
+                (activity as MainActivity).supportActionBar?.hide()
+            }
+            Configuration.ORIENTATION_PORTRAIT -> {
+                setSpanCount(2)
+            }
+
+        }
+    }
+
+    private fun setSpanCount(spanCount: Int) {
         favBinding.rv.layoutManager =
-            GridLayoutManager(activity, 2)
+            GridLayoutManager(activity, spanCount)
         adapter = BookAdapter(list, requireActivity(), detailViewModel) { view ->
             view.findNavController()
                 .navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment())

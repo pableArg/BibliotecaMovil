@@ -33,19 +33,19 @@ class BookApp : Application() {
 
     val appModule = module {
         factory { BookAdapter(get(), get(), get(), get()) }
-        factory {  ArticleAdapter(get(), get()) }
+        factory { ArticleAdapter(get(), get()) }
         single { LibraryFavDatabase.getDatabase(get()).bookFavDao() }
         single { LibraryFavDatabase.getDatabase(get()).libraryDao() }
         single { BookRepository(get(), get(), get(),get(), get()) }
         single { SearchFragment() }
-        single { LibraryAdapter(get())}
+        single { LibraryAdapter(get()) }
         single { FavouriteFragment() }
         single { BestSellerAPIClient() }
         single { BookAPIClient() }
         single { ArticleAPIClient() }
         single { DetailFragment() }
-        single { LibraryFragment()}
-        single{ArticlesFragment()}
+        single { LibraryFragment() }
+        single { ArticlesFragment() }
         single { MainActivity() }
 
 
@@ -53,8 +53,8 @@ class BookApp : Application() {
         viewModel { FavViewModel(get()) }
         viewModel { SearchViewModel(get()) }
         viewModel { DetailViewModel() }
-        viewModel{ ArticlesViewModel(get())}
-        viewModel { LibraryViewModel(get())}
+        viewModel{ ArticlesViewModel(get()) }
+        viewModel { LibraryViewModel(get()) }
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.bibliotecamovil.bibliotecamovil.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
@@ -17,9 +16,10 @@ import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.BookAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.SearchViewModel
+import com.example.bibliotecamovil.bibliotecamovil.utils.action
 import com.example.bibliotecamovil.bibliotecamovil.utils.hideKeyboard
+import com.example.bibliotecamovil.bibliotecamovil.utils.showSnackbar
 import com.example.bibliotecamovil.databinding.FragmentSearchBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -44,24 +44,28 @@ class SearchFragment() : Fragment() {
         setSearchViewListener()
         initRecyclerView()
         setupObservers()
-        (activity as MainActivity).supportActionBar?.title = model.getText()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.betseller)
 
 
     }
 
 
     private fun initRecyclerView() {
-        searchBinding.rv.layoutManager = GridLayoutManager(this.context, 2)
+        val orientation = resources.configuration.orientation
+        when (orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                setSpanCount(4)
+                (activity as MainActivity).supportActionBar?.hide()
+            }
+            Configuration.ORIENTATION_PORTRAIT -> {
+                setSpanCount(2)
 
-        bookAdapter = BookAdapter(
-            bookList, requireActivity(), detailViewModel
-        ) { view ->
-            view.findNavController()
-                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2())
+            }
         }
-        searchBinding.rv.adapter = bookAdapter
+
 
     }
+
 
     private fun setSearchViewListener() {
         try {
@@ -72,7 +76,6 @@ class SearchFragment() : Fragment() {
 
                             model.setBooks(this)
                         }
-                        (activity as MainActivity).supportActionBar
                         searchBinding.rv.visibility = View.GONE
                         searchBinding.progressSearch.visibility = View.VISIBLE
                         (activity as MainActivity).supportActionBar?.title = query
@@ -85,10 +88,12 @@ class SearchFragment() : Fragment() {
                     }
                 })
         } catch (e: Exception) {
+            snackBar()
             Firebase.crashlytics.recordException(e)
         }
 
     }
+
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
@@ -101,24 +106,24 @@ class SearchFragment() : Fragment() {
     }
 
     private fun snackBar() {
-        Snackbar.make(searchBinding.constraint, R.string.snackError, Snackbar.LENGTH_LONG)
-            .setAction(R.string.actionText) {
+        val context = searchBinding.constraint
+        context.showSnackbar(R.string.snackError) {
+            action(R.string.txtRetry) {
                 setupObservers()
-                searchBinding.progressSearch.visibility = View.GONE
             }
-            .show()
+        }
     }
 
-    private fun motion() {
-        val extras = FragmentNavigatorExtras((view to "") as Pair<View, String>)
-        findNavController().navigate(
-            com.example.bibliotecamovil.R.id.action_searchFragment_to_detailFragment2,
-            null,
-            null,
-            extras
-        )
+    private fun setSpanCount(spanCount: Int) {
+        searchBinding.rv.layoutManager = GridLayoutManager(this.context, spanCount)
+        bookAdapter = BookAdapter(
+            bookList, requireActivity(), detailViewModel
+        ) { view ->
+            view.findNavController()
+                .navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment2())
+        }
+        searchBinding.rv.adapter = bookAdapter
+
     }
-
-
 }
 

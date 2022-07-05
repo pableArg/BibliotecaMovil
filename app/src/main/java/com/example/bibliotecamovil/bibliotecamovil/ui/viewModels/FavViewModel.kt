@@ -13,7 +13,7 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
     val booksFavLiveData = MutableLiveData<MutableList<Book>>()
     var idFavoritosLiveData = MutableLiveData<MutableList<String>>()
     private var booksList = mutableListOf<Book>()
-    private var idFavoritos = mutableListOf<String>()
+     var idFavorite = mutableListOf<String>()
     private val errorMessage = MutableLiveData<String>()
 
     private fun updateBooksLiveData(bookIDList: MutableList<String>) {
@@ -40,8 +40,8 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
 
     fun setupBookDataBase() {
         CoroutineScope(Dispatchers.IO).launch {
-            idFavoritos = bookRepository.getAllBooksFromDatabase()
-            updateBooksLiveData(idFavoritos)
+            idFavorite = bookRepository.getAllBooksFromDatabase()
+            updateBooksLiveData(idFavorite)
         }
     }
 
@@ -59,8 +59,8 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             bookRepository.insertBookInDatabase(book.id)
         }
-        idFavoritos.add(book.id)
-        idFavoritosLiveData.value = idFavoritos
+        idFavorite.add(book.id)
+        idFavoritosLiveData.value = idFavorite
         booksList.add(book)
         booksFavLiveData.value = booksList
     }
@@ -68,15 +68,15 @@ class FavViewModel(private val bookRepository: BookRepository) : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             bookRepository.deleteBookFromDatabase(book.id)
         }
-        idFavoritos.remove(book.id)
-        idFavoritosLiveData.value = idFavoritos
+        idFavorite.remove(book.id)
+        idFavoritosLiveData.value = idFavorite
         booksList.remove(book)
         booksFavLiveData.value = booksList
     }
 
     fun cleanLists() {
         idFavoritosLiveData.value?.clear()
-        idFavoritos.clear()
+        idFavorite.clear()
         booksList.clear()
         booksFavLiveData.value?.clear()
     }
