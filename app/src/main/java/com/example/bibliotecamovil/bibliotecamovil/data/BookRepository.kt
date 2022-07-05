@@ -36,8 +36,12 @@ class BookRepository (
     fun insertBookInDatabase(idBook: String) {
         databaseBook.insert(BookFavEntity(idBook))
     }
-    fun getAllLibraries() : MutableList<LibraryEntity> {
-        return databaseLibrary.getLibraries()
+    fun getAllLibrariesFromDatabase() : MutableList<String> {
+        val idLibrary = mutableListOf<String>()
+        for(library in databaseLibrary.getLibraries()){
+            idLibrary.add(library.idLibrary)
+        }
+        return idLibrary
     }
     fun booksByLibraries(idLibrary : String) : MutableList<String>{
         val idList = mutableListOf<String>()
@@ -46,11 +50,11 @@ class BookRepository (
         }
         return idList
     }
-    fun insertLibraryInDatabase(idLibrary: String, name : String){
-        databaseLibrary.insert(LibraryEntity(idLibrary, name))
+    fun insertLibraryInDatabase(idLibrary: String){
+        databaseLibrary.insert(LibraryEntity(idLibrary))
     }
-    fun deleteLibraryInDatabase(idLibrary: String, name : String){
-        databaseLibrary.delete(LibraryEntity(idLibrary, name))
+    fun deleteLibraryInDatabase(idLibrary: String){
+        databaseLibrary.delete(LibraryEntity(idLibrary))
     }
 
     suspend fun searchBookById(idBook: String): Response<Book> {

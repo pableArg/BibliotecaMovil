@@ -10,7 +10,5 @@ import androidx.room.PrimaryKey
 data class LibraryEntity(
     @PrimaryKey
     @ColumnInfo(name = "id_library")
-    val idLibrary : String,
-    @ColumnInfo(name = "name")
-    val name: String
+    val idLibrary : String
 )

@@ -11,31 +11,22 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LibraryViewModel(private val bookRepository: BookRepository) : ViewModel() {
-    val librariesLiveData = MutableLiveData<MutableList<LibraryEntity>>()
+class LibraryViewModel(val bookRepository: BookRepository) : ViewModel() {
+    val librariesLiveData = MutableLiveData<MutableList<String>>()
     private val errorMessage = MutableLiveData<String>()
-
+    private var idLibraries = mutableListOf<String>()
 
     fun updateLibrariesLiveData(){
-        viewModelScope.launch {
-            try{
-                val libraryList = bookRepository.getAllLibraries()
-                if(libraryList.isEmpty()){
-                    throw ( Exception("Ha ocurrido un error"))
-                }
-                else{
-                    librariesLiveData.value = libraryList
-                }
-            } catch (e : Exception){
-                Firebase.crashlytics.recordException(e)
-                errorMessage.value = e.message
-            }
-        }
-    }
-
-    fun insertLibrary(idLibrary : String, name : String){
         CoroutineScope(Dispatchers.IO).launch {
-            bookRepository.insertLibraryInDatabase(idLibrary, name)
+            idLibraries = bookRepository.getAllLibrariesFromDatabase()
+        }
+        librariesLiveData.value = idLibraries
+        }
+
+
+    fun insertLibrary(idLibrary : String){
+        CoroutineScope(Dispatchers.IO).launch {
+            bookRepository.insertLibraryInDatabase(idLibrary)
         }
     }
 }

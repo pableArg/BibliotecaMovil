@@ -58,7 +58,7 @@ private fun bind(
     holder: BookViewHolder,
     book: Book
 ) {
-    holder.binding.titleBook.text = book.libroInfo.titulo
+    holder.binding.tittleBook.text = book.libroInfo.titulo
     val idLibro = book.id
     val image = holder.binding.imageBook
     image.loadBooks(idLibro)

@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardBackgroundColor="@color/white"
-    card_view:cardCornerRadius="30dp"
+    card_view:cardCornerRadius="20dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:id="@+id/cv_bookshelf">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +17,7 @@
         android:padding="10dp">
 
         <LinearLayout
-            android:id="@+id/image_bookshelf"
+            android:id="@+id/imageLibrary"
             android:layout_width="100dp"
             android:layout_height="120dp"
             android:layout_marginStart="8dp"
@@ -30,7 +33,7 @@
 
                 <ImageView
                     android:id="@+id/image_book1"
-                    android:layout_width="66dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent" />
                 <ImageView
                     android:id="@+id/image_book2"
@@ -57,7 +60,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tittleBookStore"
+            android:id="@+id/tittlelibrary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -68,7 +71,7 @@
             android:layout_marginStart="10dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/image_bookshelf"
+            card_view:layout_constraintStart_toEndOf="@+id/imageLibrary"
             card_view:layout_constraintEnd_toEndOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliotecamovil.R
+import com.example.bibliotecamovil.bibliotecamovil.data.BookRepository
 import com.example.bibliotecamovil.bibliotecamovil.data.database.LibraryEntity
 import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.LibraryAdapter
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.LibraryViewModel
@@ -18,7 +19,7 @@ class LibraryFragment : Fragment() {
 
     private lateinit var libraryAdapter : LibraryAdapter
     private lateinit var libraryBinding: FragmentLibraryBinding
-    private val libraryList = mutableListOf<LibraryEntity>()
+    private val libraryList = mutableListOf<String>()
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onCreateView(
@@ -33,7 +34,6 @@ class LibraryFragment : Fragment() {
         libraryBinding = FragmentLibraryBinding.bind(view)
         initRecyclerView()
         setupObservers()
-
         libraryBinding.add.setOnClickListener {
             StartLibraryFragment().show(parentFragmentManager, "hola")
         }
@@ -49,11 +49,11 @@ class LibraryFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers(){
-        libraryViewModel.insertLibrary("HOLA4", "Libreria 2")
         libraryViewModel.updateLibrariesLiveData()
         libraryViewModel.librariesLiveData.observe(viewLifecycleOwner){
             libraryAdapter.librariesList = it
             libraryAdapter.notifyDataSetChanged()
         }
     }
+
 }
