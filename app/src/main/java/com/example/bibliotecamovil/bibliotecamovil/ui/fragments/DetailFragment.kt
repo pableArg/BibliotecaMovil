@@ -11,14 +11,12 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.navigation.fragment.findNavController
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
-import com.example.bibliotecamovil.bibliotecamovil.ui.adapter.ArticleViewHolder
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.ArticlesViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
-import com.example.bibliotecamovil.bibliotecamovil.utils.load
+import com.example.bibliotecamovil.bibliotecamovil.utils.loadBooks
 import com.example.bibliotecamovil.databinding.FragmentDetailBinding
 import com.google.android.material.transition.MaterialContainerTransform
-import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -26,7 +24,6 @@ class DetailFragment : Fragment() {
     private lateinit var detailBinding: FragmentDetailBinding
     private val detailModel by sharedViewModel<DetailViewModel>()
     private val favModel by sharedViewModel<FavViewModel>()
-    private val articleModel by sharedViewModel<ArticlesViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +50,7 @@ class DetailFragment : Fragment() {
         val image : ImageView = detailBinding.imageView2
         val book = detailModel.bookDetail.value
         detailBinding.txtTitleDetail.text = book!!.libroInfo.titulo
-        image.load(book.id)
+        image.loadBooks(book.id)
         detailBinding.txtAuthorDetail.text="Autor: ${book.libroInfo.autores[0]}"
         detailBinding.txtEditDetail.text="Editorial: ${book.libroInfo.editorial}"
         detailBinding.txtKindDetail.text="Origen: ${book.libroVenta.pais}"

@@ -2,7 +2,6 @@ package com.example.bibliotecamovil.bibliotecamovil.utils
 
 import android.content.Context
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -11,17 +10,23 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 
-fun ImageView.load(idLibro: String) {
+fun ImageView.loadBooks(idLibro: String) {
     Picasso.get()
         .load("https://books.google.com/books/content?id=$idLibro&printsec=frontcover&img=1&zoom=1&source=gbs_api")
         .placeholder(R.drawable.notfound)
         .into(this)
 }
 
-fun Context.tost(text: Int, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, text, length).show()
+fun ImageView.loadArticle(imageId: String) {
+    Picasso.get()
+        .load("https://http2.mlstatic.com/D_$imageId-I.jpg")
+        .placeholder(R.drawable.notfound)
+        .into(this)
 }
 
+fun Context.toast(text: Int, length: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, text, length).show()
+}
 
 fun View.showSnackbar(
     @StringRes messageRes: Int,
@@ -37,5 +42,6 @@ fun Snackbar.action(@StringRes actionRes: Int, color: Int? = null, listener: (Vi
     setAction(actionRes, listener)
     color?.let { setActionTextColor(color) }
 }
+
 
 

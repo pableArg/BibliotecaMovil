@@ -4,17 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.data.repositories.retofit.Book
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
-import com.example.bibliotecamovil.bibliotecamovil.utils.load
-import com.example.bibliotecamovil.bibliotecamovil.utils.tost
+import com.example.bibliotecamovil.bibliotecamovil.utils.loadBooks
+import com.example.bibliotecamovil.bibliotecamovil.utils.toast
 import com.example.bibliotecamovil.databinding.ItemCardBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
 
 
 class BookAdapter(
@@ -36,23 +34,19 @@ class BookAdapter(
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-
         val book = bookList[position]
-        holder.binding.titleBook.text = book.libroInfo.titulo
-        val idLibro = book.id
-        val image = holder.binding.imageBook
+        bind(holder, book)
         try {
-            image.load(idLibro)
-
             holder.binding.cardView.setOnClickListener { view ->
                 detailModel.bookDetail.value = book
                 onClickListener.onClick(view);
             }
         } catch (e: Exception) {
-            context.tost(R.string.snackError)
+            context.toast(R.string.snackError)
             Firebase.crashlytics.recordException(e)
         }
     }
+
 
     override fun getItemCount(): Int = bookList.size
 
@@ -60,6 +54,14 @@ class BookAdapter(
 
 class BookViewHolder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
 
-
+private fun bind(
+    holder: BookViewHolder,
+    book: Book
+) {
+    holder.binding.titleBook.text = book.libroInfo.titulo
+    val idLibro = book.id
+    val image = holder.binding.imageBook
+    image.loadBooks(idLibro)
+}
 
 

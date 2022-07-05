@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detailCardView"
@@ -9,13 +11,13 @@
 
     <View
         android:id="@+id/end_view"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:transitionName="shared_element_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,15 +39,16 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            android:contentDescription="@string/image"/>
 
         <TextView
             android:id="@+id/txtTitleDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/titleStyle"
+            android:layout_width="204dp"
+            android:layout_height="55dp"
             android:lines="2"
             android:text="@string/title"
-            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.627"
@@ -56,10 +59,10 @@
 
         <TextView
             android:id="@+id/txtKindDetail"
+            style="@style/titleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lenguaje"
-            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.036"
@@ -69,11 +72,11 @@
 
         <TextView
             android:id="@+id/txtAuthorDetail"
+            style="@style/titleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/duration"
-            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.035"
@@ -83,12 +86,12 @@
 
         <TextView
             android:id="@+id/txtEditDetail"
+            style="@style/titleStyle"
             android:layout_width="66dp"
             android:layout_height="20dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="5dp"
             android:text="@string/popularity"
-            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.012"
@@ -98,41 +101,43 @@
 
         <TextView
             android:id="@+id/txtFechaPublicacionDetail"
+            style="@style/titleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/premiere"
-            style="@style/titleStyle"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.036"
+            app:layout_constraintHorizontal_bias="0.037"
             app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/txtSinopsis"
+            style="@style/titleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/sinopsis"
-            style="@style/titleStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
         <ScrollView
-            android:layout_width="371dp"
-            android:layout_height="350dp"
+            android:id="@+id/scrollView2"
+            android:layout_width="372dp"
+            android:layout_height="287dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtSinopsis"
+            app:layout_constraintVertical_bias="0.257"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="8dp">
+            tools:layout_editor_absoluteX="7dp">
 
             <TextView
                 android:id="@+id/txtSynopsisDetail"
                 android:layout_width="363dp"
                 android:layout_height="350dp"
-                android:text="Un viaje al interior de las mentes del dúo ganador del premio GRAMMY Twenty One Pilots, con la épica celebración del lanzamiento del álbum Scaled And Icyde 2021, que llegará a los cines de todo el mundo el 19 de mayo, con reposiciones en salas exclusivas el 22 de mayo. Vuelve a disfrutar de la psicodélica reinvención del cine y la actuación en vivo, pero esta vez a gran escala. Con el sonido y video remasterizados para la gran pantalla, y con material inédito, la Experiencia cinematográfica deTwenty One Pilotste sumerge en el catálogo y la imaginación eclécticos de uno de los artistas más creativos de la música"
+                android:text="@string/exampleSynopsis"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.454"
@@ -149,44 +154,38 @@
             android:layout_marginTop="10dp"
             app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-        <androidx.cardview.widget.CardView
-            android:layout_width="200dp"
-            android:id="@+id/buttonML"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="50dp"
-            app:cardElevation="7dp"
-            app:cardCornerRadius="7dp"
-            app:cardBackgroundColor="@color/yellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            android:contentDescription="@string/image"/>
 
-            <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/buttonML"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            app:cardBackgroundColor="@color/yellow"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/icon_meli" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comprar"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="3dp"
-                    android:textColor="@color/black"
-                    android:textSize="30dp"
-
-                    />
-            </LinearLayout>
+                    android:background="@drawable/icon_meli"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:contentDescription="@string/image" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
+
 
 
 
