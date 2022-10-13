@@ -50,9 +50,9 @@ class SearchFragment() : Fragment() {
     }
 
 
+    @SuppressLint("SwitchIntDef")
     private fun initRecyclerView() {
-        val orientation = resources.configuration.orientation
-        when (orientation) {
+        when (resources.configuration.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> {
                 setSpanCount(4)
                 (activity as MainActivity).supportActionBar?.hide()

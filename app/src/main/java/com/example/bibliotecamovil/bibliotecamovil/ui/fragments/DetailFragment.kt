@@ -11,7 +11,6 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.navigation.fragment.findNavController
 import com.example.bibliotecamovil.R
 import com.example.bibliotecamovil.bibliotecamovil.ui.activities.MainActivity
-import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.ArticlesViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.DetailViewModel
 import com.example.bibliotecamovil.bibliotecamovil.ui.viewModels.FavViewModel
 import com.example.bibliotecamovil.bibliotecamovil.utils.loadBooks

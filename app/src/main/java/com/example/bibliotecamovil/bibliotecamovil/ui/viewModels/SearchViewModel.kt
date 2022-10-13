@@ -11,7 +11,7 @@ import java.lang.Exception
 class SearchViewModel(private val bookRepository: BookRepository) : ViewModel() {
     private val searchedBooks = MutableLiveData<MutableList<Book>>()
     private val errorMessage = MutableLiveData<String>()
-    var text = "Best Seller"
+    var text = "Best Sellers"
 
     fun getSearchedBooks(): MutableLiveData<MutableList<Book>>{
         return this.searchedBooks
